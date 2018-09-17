@@ -1,0 +1,421 @@
+html{
+    height: 100%;
+}
+
+
+body{
+
+    background: url(images/BG_2.png) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    height: 100%;
+}
+
+
+
+
+.container{
+    height: 100%;
+}
+
+.container-fluid{
+    height: 100%;
+}
+
+
+
+.heading{
+    height:100%;
+
+
+}
+
+.heading .name{
+    height: 50%;
+    font-size: calc(4vw + 4vh + 2vmin);
+    color: white;
+font-family: "OleoScript-Bold";
+    text-shadow: 4px 4px 4px rgb(48,48,48);
+    margin: 1%;
+
+}
+
+.heading .slogan{
+    padding: 2%;
+    height: 20%;
+    font-size: calc(1vw + 1vh + 1vmin);
+    color: white;
+    font-family: "Yrsa-Bold";
+    text-shadow: 4px 4px 4px rgb(48,48,48);
+    margin: 1%;
+}
+
+.heading .last{
+    height: 10%;
+
+
+}
+
+
+.contactInfo{
+    height: 100%;
+    padding: 3%;
+
+
+
+}
+
+.contactInfo .empty{
+    height: 30%;
+}
+
+.contactInfo .imgIcon{
+    min-height: 2vh;
+    padding-right: 10%;
+    width: 3vw;
+
+
+
+}
+.contactInformation{
+    padding: 3%;
+    margin: 3%;
+}
+
+ .address{
+    height: 20%;
+    font-size: 2vh;
+    padding: 3%;
+    margin: 2%;
+    font-family: "Yrsa-Bold";
+
+}
+
+ .email{
+    height: 20%;
+    font-size: 2vh;
+    padding: 3%;
+    margin: 2%;
+    font-family: "Yrsa-Bold";
+}
+
+.phone{
+    height: 20%;
+    font-size: 2vh;
+    padding: 3%;
+    margin: 2%;
+    font-family: "Yrsa-Bold";
+
+}
+
+
+.destinationBtn {
+    font-size: 3vh;
+    color: white;
+    background-color: rgb(48, 48, 48);
+    font-family: "Yrsa-Bold";
+    border-color: rgb(48, 48, 48);
+    outline: none !important;
+
+
+
+}
+
+
+.destinationBtn:focus{
+    outline: 0;
+    border-size: 0;
+    outline: none !important;
+}
+.galleryBtn{
+    font-size: 3vh;
+    color: white;
+    background-color: rgb(48,48,48);
+    font-family: "Yrsa-Bold";
+    border-color: rgb(48,48,48);
+
+}
+
+.reviewsBtn{
+    font-size: 3vh;
+    color: white;
+    background-color: rgb(48,48,48);
+    font-family: "Yrsa-Bold";
+    border-color: rgb(48,48,48);
+}
+
+
+
+.contactsBtn{
+    font-size: 3vh;
+    color:white;
+    background-color: rgb(48,48,48);
+    font-family: "Yrsa-Bold";
+    border-color: rgb(48,48,48);
+}
+
+.selfPic{
+
+}
+
+.bannerInfo{
+padding: 5%;
+    font-family: "Yrsa-Bold";
+}
+
+.destinationHeader{
+
+    height: 20%;
+    background-color: rgb(48,48,48);
+    opacity: .8;
+}
+
+.destinationName{
+    font-size: calc(4vw + 4vh + 2vmin);
+    color: white;
+    font-family: "OleoScript-Bold";
+    text-shadow: 4px 4px 4px rgb(0,0,0);
+    margin: 2%;
+
+}
+.destinationBtn{
+    width: 25%;
+
+
+}
+.destinationImages{
+    width: 50px;
+    height:  50px;
+}
+
+
+#modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
+}
+
+
+.modal-content {
+    margin: auto;
+    width: 80%;
+    max-width: 700px;
+}
+
+.close {
+    position: absolute;
+    top: 15px;
+    right: 35px;
+    color: #f1f1f1;
+    font-size: 40px;
+    font-weight: bold;
+    transition: 0.3s;
+
+}
+
+.close:hover,
+.close:focus {
+    color: #bbb;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+
+.galleryHeader{
+    padding: 2%;
+    height: 20%;
+    background-color: rgb(48,48,48);
+    opacity: .8;
+}
+.galleryName{
+    font-size: 12vh;
+    color: white;
+font-family: "OleoScript-Bold";
+    text-shadow: 4px 4px 4px rgb(0,0,0);
+}
+
+.infoSection{
+    background: url(images/beach.jpg) no-repeat center center;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+
+    height: 75%;
+
+}
+
+.infoBox{
+    background-color: rgb(48,48,48);
+    opacity: .8;
+    height: 60%;
+
+    margin-top: 30% ;
+    margin-bottom: 20% ;
+
+}
+
+.info{
+
+    height:80%;
+    overflow: scroll;
+    font-family: "Yrsa-Bold";
+
+}
+
+.galleryNav{
+    padding: 3%;
+
+}
+
+.wantBtn{
+    height: 10%;
+    width: 40%;
+    font-family: "Yrsa-Bold";
+
+}
+
+.gallerySection .empty{
+    height: 5%;
+    background-color: rgb(48,48,48);
+    opacity: .8;
+}
+.reviewSection{
+
+    height: 100%;
+ }
+
+
+.reviewTitle{
+    font-size: calc(5vw + 5vh + 2vmin);
+    height: 10%;
+    color: white;
+font-family: "OleoScript-Bold";
+    text-shadow: 4px 4px 4px rgb(48,48,48);
+    padding: 2%;
+
+
+}
+
+.reviewNav{
+    height:10%;
+
+    margin:3%;
+}
+
+.reviewName{
+    font-size: 4vh;
+    color: white;
+    font-family: "Yrsa-Bold";
+
+
+}
+.reviewNavRow{
+    height: 10%;
+}
+
+.reviewInfo{
+    height: 90%;
+
+}
+
+.reviewBox{
+    height: 40%;
+    background-color: blanchedalmond;
+    box-shadow: 2px 2px 9px rgb(48,48,48);
+    padding: 3%;
+    margin: 3%;
+}
+.quoteImg{
+    height: 20vh;
+    width: 20vw;
+}
+.aboveQuote{
+    height: 25%;
+}
+.clientPic{
+    height: 30%;
+    background-color: black;
+}
+
+.clientName{
+    font-size: 3vh;
+    font-family: "Yrsa-Bold";
+}
+
+.reviewText{
+    font-size: 2vh;
+    background-color: blanchedalmond;
+}
+
+
+
+.contactSection{
+    background-color: rgba(128,128,128,.5);
+    height: 100%;
+
+}
+.grey{
+    background-color: rgb(48,48,48);
+    height: 10%;
+
+
+}
+
+.contactArea{
+    height: 80%;
+}
+
+.contactWith{
+
+    color: white;
+font-family: "OleoScript-Bold";
+    text-shadow: 4px 4px 4px rgb(48,48,48);
+}
+
+.christy{
+
+    color: white;
+    font-family: "OleoScript-Bold";
+    text-shadow: 4px 4px 4px rgb(48,48,48);
+
+}
+
+.form{
+    height:80%;
+    background-color: blanchedalmond;
+    opacity: 1;
+    width: 50%;
+    margin-top: 3%;
+    padding: 3%;
+
+
+}
+
+.form-control{
+    font-size: 2vw;
+}
+
+.first{
+    height: 20%;
+}
+.contactInformation{
+    height: 50%;
+}
+
+.contactInformation .imgIcon{
+    min-height: 2vh;
+padding-right: 1%;
+    width: 1vw;
+    color: white;
+}
