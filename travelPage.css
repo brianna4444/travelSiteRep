@@ -258,28 +258,37 @@ font-family: "OleoScript-Bold";
 .infoBox{
     background-color: rgb(48,48,48);
     opacity: .8;
-    height: 60%;
+    height: 70%;
 
-    margin-top: 30% ;
+    margin-top: 20% ;
     margin-bottom: 20% ;
 
 }
 
-.info{
+.navDots{
 
-    height:80%;
-    overflow: scroll;
-    font-family: "Yrsa-Bold";
-
+    width: 2vw;
+    height: 2vh;
 }
 
-.galleryNav{
-    padding: 3%;
 
+
+#info{
+    height: 70%
 }
 
-.wantBtn{
+
+
+.nav{
     height: 10%;
+
+}
+
+.want{
+    height: 20%;
+}
+.wantBtn{
+    height: 80%;
     width: 40%;
     font-family: "Yrsa-Bold";
 

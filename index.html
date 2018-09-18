@@ -5,6 +5,7 @@
     <title>Travel</title>
     <link rel="stylesheet" href="fonts.css">
     <link rel="stylesheet" href="travelPage.css" >
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
@@ -101,15 +102,26 @@
         <div class="col-5">
             <div class="container-fluid infoBox">
 
-                <div id="info" class="row info"></div>
-                <div class="row galleryNav">
-                    <div class="col-3"></div>
-                    <div class="col-1 btn" onclick="previousTrip()"><</div>
-                    <div class="col-4 wantBtn btn-danger text-center">I WANT</div>
-                    <div class="col-1 btn" onclick="nextTrip()">></div>
-                    <div class="col-3"></div>
+                <div id="info" class="row"></div>
 
+                <div class="row nav">
+                    <div class="col-3"></div>
+                    <div class="col-6">
+                        <div id="dot1" class="navDots"><i class="fa fa-circle" onclick="changeInfo(dot1)"></i></div>
+                        <div id="dot1" class="navDots"><i class="fa fa-circle" onclick="changeInfo(dot2)"></i></div>
+                        <div id="dot1" class="navDots"><i class="fa fa-circle" onclick="changeInfo(dot3)"></i></div>
+                        <div id="dot1" class="navDots"><i class="fa fa-circle" onclick="changeInfo(dot4)"></i></div>
+                    </div>
+                <div class="col-3"></div>
+            </div>
+
+
+                <div class="row want">
+                    <div class="col-3"></div>
+                    <button class="col-6 wantBtn btn-danger text-center">I WANT</button>
+                    <div class="col-3"></div>
                 </div>
+
             </div>
         </div>
         <div class="col-2"></div>
