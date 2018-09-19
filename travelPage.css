@@ -253,11 +253,12 @@ font-family: "OleoScript-Bold";
 
     height: 75%;
 
+
 }
 
 .infoBox{
     background-color: rgb(48,48,48);
-    opacity: .8;
+    opacity: .9;
     height: 70%;
 
     margin-top: 20% ;
@@ -274,10 +275,14 @@ font-family: "OleoScript-Bold";
 
 
 #info{
-    height: 70%
+    height: 70%;
+    width: 100%;
 }
 
-
+#info h1, p{
+    width: 100%;
+    color: white;
+}
 
 .nav{
     height: 10%;
@@ -316,25 +321,26 @@ font-family: "OleoScript-Bold";
 
 }
 
-.reviewNav{
-    height:10%;
 
-    margin:3%;
-}
 
 .reviewName{
-    font-size: 4vh;
+    font-size: 5vh;
     color: white;
     font-family: "Yrsa-Bold";
+    height: 50%;
 
 
 }
+.circles{
+    height: 50%;
+}
 .reviewNavRow{
-    height: 10%;
+    height: 15%;
+
 }
 
 .reviewInfo{
-    height: 90%;
+    height: 80%;
 
 }
 
@@ -352,18 +358,16 @@ font-family: "OleoScript-Bold";
 .aboveQuote{
     height: 25%;
 }
-.clientPic{
-    height: 30%;
-    background-color: black;
-}
+
 
 .clientName{
     font-size: 3vh;
     font-family: "Yrsa-Bold";
+    color: black;
 }
 
 .reviewText{
-    font-size: 2vh;
+    font-size: 3vh;
     background-color: blanchedalmond;
 }
 

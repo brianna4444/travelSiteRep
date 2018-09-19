@@ -97,7 +97,7 @@
 
   </div>
 
-    <div class="row infoSection">
+    <div id="galleryImage" class="row infoSection">
         <div class="col-5"></div>
         <div class="col-5">
             <div class="container-fluid infoBox">
@@ -107,10 +107,10 @@
                 <div class="row nav">
                     <div class="col-3"></div>
                     <div class="col-6">
-                        <div id="dot1" class="navDots"><i class="fa fa-circle" onclick="changeInfo(dot1)"></i></div>
-                        <div id="dot1" class="navDots"><i class="fa fa-circle" onclick="changeInfo(dot2)"></i></div>
-                        <div id="dot1" class="navDots"><i class="fa fa-circle" onclick="changeInfo(dot3)"></i></div>
-                        <div id="dot1" class="navDots"><i class="fa fa-circle" onclick="changeInfo(dot4)"></i></div>
+                        <i id="dot1" class="fa fa-circle btn navDots" onclick="changeInfo(0)"></i>
+                        <i id="dot2" class="fa fa-circle btn navDots" onclick="changeInfo(1)"></i>
+                        <i id="dot3" class="fa fa-circle btn navDots" onclick="changeInfo(2)"></i>
+                        <i id="dot4" class="fa fa-circle btn navDots" onclick="changeInfo(3)"></i>
                     </div>
                 <div class="col-3"></div>
             </div>
@@ -137,26 +137,31 @@
     <div class="row">
         <h1 class="reviewTitle">Happy Travelers!</h1>
     </div>
+
     <div class="row reviewNavRow">
-        <div class="col-5"></div>
-        <div class="col-2 row reviewNav">
-            <div class="col-3 btn"><</div>
-            <div class="col-6 reviewName text-center">REVIEWS</div>
-            <div class="col-3 btn">></div>
+
+            <div class="col-12 reviewName text-center">Reviews</div>
+            <div class="col-12 circles text-center">
+                <i  class="fa fa-circle btn navDots" onclick="changeReview(0)"></i>
+                <i  class="fa fa-circle btn navDots" onclick="changeReview(1)"></i>
+                <i  class="fa fa-circle btn navDots" onclick="changeReview(2)"></i>
+                <i  class="fa fa-circle btn navDots" onclick="changeReview(3)"></i>
+            </div>
         </div>
-        <div class="col-5"></div>
-    </div>
+
+
+
     <div class="row reviewInfo">
         <div class="col-3 text-right"><img class= "quoteImg" src="images/ob_quotes_left.svg"> </div>
         <div class="col-6">
             <div class="container-fluid">
                 <div class="row reviewBox">
-                    <div class="col-3">
-                        <div class="clientPic"><img src=""></div>
-                        <h4 class="clientName text-center">Name</h4>
+                    <div class="col-5">
+
+                        <div id="nameClient" class="clientName text-center"></div>
                     </div>
-                    <div class="col-9 reviewText">
-                        <p>We loved it</p>
+                    <div id="reviewClient" class="col-7 reviewText">
+
                     </div>
                 </div>
             </div>

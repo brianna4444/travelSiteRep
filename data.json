@@ -1,0 +1,22 @@
+[
+  {
+    "image": "images/mexicoBtn/1.jpg",
+    "header": "place 1",
+    "text": "This is the first story."
+  },
+  {
+    "image": "images/mexicoBtn/3.jpg",
+    "header": "place 1",
+    "text": "This is the second story."
+  },
+  {
+    "image": "images/mexicoBtn/3.jpg",
+    "header": "place 1",
+    "text": "This is the third story."
+  },
+  {
+    "image": "images/jamaicaBtn/1.jpg",
+    "header": "place 1",
+    "text": "This is the fourth story."
+  }
+]

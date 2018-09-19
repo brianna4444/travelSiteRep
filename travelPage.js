@@ -49,11 +49,42 @@ function hideModal(){
     $('#modal').css("display", "none");
 }
 
+let items=[];
 
+function loadData(){
+    $.getJSON("data.json", function(data){
+        $.each( data, function(key,val){
+            items.push(val);
 
-function changeInfo(id) {
-    let img= "/images/galleryPics/" + id + ".jpg";
-    let information= "/images/galleryInfo/" + id;
-('#info').backgroundImage(img);
-('#info').text(information);
+        })
+console.log(items);
+
+    })
 }
+loadData();
+
+let reviews=[];
+
+function getData(){
+    $.getJSON("reviewData.json", function(data){
+        $.each( data, function(key,val){
+            reviews.push(val);
+
+        })
+        console.log(reviews);
+
+    })
+}
+getData();
+
+function changeInfo(n) {
+let div= $('#info').html("<h1>" + items[n].header + "</h1>" + "<p>" + items[n].text + "</p>");
+let backgroundImg= $('#galleryImage').css("background", "url("+items[n].image+") no-repeat center center")
+
+}
+
+function changeReview(n) {
+    $('#nameClient').html("<h1>"+ reviews[n].name + "</h1>");
+    $('#reviewClient').html("<p>" + reviews[n].text + "</p>");
+}
+
