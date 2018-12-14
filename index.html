@@ -12,12 +12,20 @@
 <body>
 
 <div class="container-fluid">
-    <div class="row" style="height: 23%">
-        <div class="col-1"></div>
-        <div class="col-8 container-fluid heading">
-          <h1 class="row name">Christy Althage</h1>
-            <p class="row slogan">Your travel agent</p>
+    <div class="row top" style="height: 23%">
+        <!--<div class="col-1"></div>-->
+        <div class="col-5 container-fluid heading">
+            <img id="logo" src="images/logo.png">
+
+          <!--<h1 class="row name">Christy Althage</h1>-->
+            <!--<p class="row slogan"></p>-->
             <div class="row last"></div>
+        </div>
+        <div class="col-3">
+            <div class="row" style="height: 70%"></div>
+            <div class="row" style="height: 30%">
+            <p class="saying">..always follow your passion and keep exploring</p></div>
+
         </div>
         <div class="container-fluid contactInfo col-2">
             <div class="row empty"></div>
@@ -29,8 +37,8 @@
         <div class="col-1"></div>
     </div>
     <div class="row" style="height: 12%; background: rgb(48,48,48)">
-        <div class="col-3"></div>
-        <div class="col-9 container-fluid" id="buttons">
+
+        <div class="col-12 container-fluid" id="buttons">
             <div class="row" style="height: 30%"></div>
             <div class="row" style="height: 40%">
                 <button class="btn destinationBtn col-3 text-center " onclick="moveSlow('#destinationRedirect',1000)">DESTINATION GALLERY</button>
@@ -73,7 +81,9 @@
         <button id="haitiBtn" class="destinationBtn  " onclick="addGallery('haitiBtn')" >Haiti</button>
 
     </div>
-    <div id="imgSection" class="row imageSection"></div>
+    <div id="imgSection" class="row imageSection">
+
+    </div>
 
     <div id="modal">
     <span class="close" onclick="hideModal()">&times;</span>
@@ -102,23 +112,23 @@
         <div class="col-5">
             <div class="container-fluid infoBox">
 
-                <div id="info" class="row"></div>
+                <div id="info" class="row">
+                    <div id="title"></div>
+                    <div id="story"></div>
+                </div>
 
                 <div class="row nav">
-                    <div class="col-3"></div>
-                    <div class="col-6">
-                        <i id="dot1" class="fa fa-circle btn navDots" onclick="changeInfo(0)"></i>
-                        <i id="dot2" class="fa fa-circle btn navDots" onclick="changeInfo(1)"></i>
-                        <i id="dot3" class="fa fa-circle btn navDots" onclick="changeInfo(2)"></i>
-                        <i id="dot4" class="fa fa-circle btn navDots" onclick="changeInfo(3)"></i>
+
+                    <div class="col-12 text-center" id="dots" >
+
                     </div>
-                <div class="col-3"></div>
+
             </div>
 
 
                 <div class="row want">
                     <div class="col-3"></div>
-                    <button class="col-6 wantBtn btn-danger text-center">I WANT</button>
+                    <button class="col-6 wantBtn btn-danger text-center" onclick="moveSlow('#contactsRedirect',1600)">I WANT</button>
                     <div class="col-3"></div>
                 </div>
 
@@ -141,11 +151,8 @@
     <div class="row reviewNavRow">
 
             <div class="col-12 reviewName text-center">Reviews</div>
-            <div class="col-12 circles text-center">
-                <i  class="fa fa-circle btn navDots" onclick="changeReview(0)"></i>
-                <i  class="fa fa-circle btn navDots" onclick="changeReview(1)"></i>
-                <i  class="fa fa-circle btn navDots" onclick="changeReview(2)"></i>
-                <i  class="fa fa-circle btn navDots" onclick="changeReview(3)"></i>
+            <div class="col-12 circles text-center" id="circle">
+
             </div>
         </div>
 

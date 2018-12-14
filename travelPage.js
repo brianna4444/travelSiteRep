@@ -16,6 +16,22 @@ function moveSlow(id,time) {
 
 
 
+    $(document).ready(function() {
+
+        $("#cruiseBtn").css("backgroundColor", "orange");
+        let div = $("#imgSection");
+        let folder = "images/cruiseBtn";
+        let number= images.cruiseBtn;
+        for (let i = 1; i <= number; i++) {
+            let modalImg = folder + "/" + i + ".jpg";
+            div.append("<img onclick=\"showModal(\'" + modalImg + "\')\" id= '" + i + "' class='destinationImages' src='" + folder + "/" + i + ".jpg" + "'>");
+
+
+
+        }
+
+    });
+
 function addGallery(id) {
 
     let child = $('#destinationButtons').children();
@@ -64,27 +80,79 @@ console.log(items);
 loadData();
 
 let reviews=[];
+let stories= [];
+
+
 
 function getData(){
-    $.getJSON("reviewData.json", function(data){
-        $.each( data, function(key,val){
+    $.getJSON("reviewData.json", function(data) {
+        $.each(data, function (key, val) {
             reviews.push(val);
 
         })
-        console.log(reviews);
 
+        console.log(reviews);
+        changeReview(reviews);
+        addReviewInfo(reviews[0].name, reviews[0].text);
     })
+        $.getJSON("storyData", function(data){
+            $.each( data, function(key,val){
+                stories.push(val);
+
+            })
+
+
+        console.log(stories);
+        changeStory(stories);
+        addStoryInfo(stories[0].title, stories[0].text, stories[0].image)
+});
 }
+
 getData();
 
-function changeInfo(n) {
-let div= $('#info').html("<h1>" + items[n].header + "</h1>" + "<p>" + items[n].text + "</p>");
-let backgroundImg= $('#galleryImage').css("background", "url("+items[n].image+") no-repeat center center")
+
+function changeReview(arr) {
+    let div= $('#circle');
+    for (let i=0; i< arr.length; i++){
+
+        let circle= document.createElement("i");
+        circle.className="fa fa-circle btn navDots";
+        circle.onclick= function(){ addReviewInfo(reviews[i].name, reviews[i].text)};
+        div.append(circle);
+
+    }
+}
+
+
+
+
+function addReviewInfo(name, text) {
+    $('#nameClient').empty();
+    $('#reviewClient').empty();
+    $('#nameClient').append(name);
+    $('#reviewClient').append(text);
+}
+
+function changeStory(arr) {
+    let dotsDiv= $('#dots');
+    for (let i=0; i< arr.length; i++){
+
+        let circle= document.createElement("i");
+        circle.className="fa fa-circle btn navDots";
+        circle.onclick= function(){ addStoryInfo(stories[i].title, stories[i].text, stories[i].image)};
+        dotsDiv.append(circle);
+
+    }
+
+
 
 }
 
-function changeReview(n) {
-    $('#nameClient').html("<h1>"+ reviews[n].name + "</h1>");
-    $('#reviewClient').html("<p>" + reviews[n].text + "</p>");
-}
+function addStoryInfo(title, text, image){
+$('#title').empty();
+$('#story').empty();
+$('#title').append(title);
+$('#story').append(text);
+$('.infoSection').css("background", "url(" + image+ ") no-repeat center center");
 
+}

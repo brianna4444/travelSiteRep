@@ -24,10 +24,21 @@ body{
     height: 100%;
 }
 
+#logo{
+    height: 100%;
+    width: 90%;
+}
+.top{
+    background-color: white;
+}
 
+.saying{
+    color: black
 
+}
 .heading{
     height:100%;
+ padding-left: 0 !important;
 
 
 }
@@ -165,6 +176,10 @@ padding: 5%;
     font-family: "Yrsa-Bold";
 }
 
+.bannerInfo p{
+    color: black;
+}
+
 .destinationHeader{
 
     height: 20%;
@@ -245,7 +260,7 @@ font-family: "OleoScript-Bold";
 }
 
 .infoSection{
-    background: url(images/beach.jpg) no-repeat center center;
+
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -254,12 +269,15 @@ font-family: "OleoScript-Bold";
     height: 75%;
 
 
+
 }
 
 .infoBox{
     background-color: rgb(48,48,48);
     opacity: .9;
     height: 70%;
+    max-height: 700px;
+
 
     margin-top: 20% ;
     margin-bottom: 20% ;
@@ -270,8 +288,12 @@ font-family: "OleoScript-Bold";
 
     width: 2vw;
     height: 2vh;
+
 }
 
+#dots{
+    height: 3%;
+}
 
 
 #info{
@@ -291,6 +313,7 @@ font-family: "OleoScript-Bold";
 
 .want{
     height: 20%;
+    margin: 1%;
 }
 .wantBtn{
     height: 80%;
@@ -331,12 +354,23 @@ font-family: "OleoScript-Bold";
 
 
 }
+
+#nameClient{
+    color: black;
+}
+
+#reviewClient{
+    color: black;
+}
 .circles{
     height: 50%;
 }
 .reviewNavRow{
     height: 15%;
 
+}
+.fa-circle{
+    color: black;
 }
 
 .reviewInfo{
@@ -369,6 +403,8 @@ font-family: "OleoScript-Bold";
 .reviewText{
     font-size: 3vh;
     background-color: blanchedalmond;
+    overflow: scroll;
+
 }
 
 
@@ -432,3 +468,15 @@ padding-right: 1%;
     width: 1vw;
     color: white;
 }
+
+#title{
+    height: 20%;
+    color:  white;
+}
+
+#story{
+    overflow-y: scroll;
+    height: 80%;
+    color: white;
+}
+
