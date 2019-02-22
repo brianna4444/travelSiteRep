@@ -1,10 +1,11 @@
 
 
 let images = {
-    cruiseBtn: 3,
+    cruiseBtn: 24,
     jamaicaBtn: 3,
     mexicoBtn: 3,
-    haitiBtn: 3
+    haitiBtn: 3,
+    dominicanRepublicBtn: 3
 };
 
 
@@ -44,6 +45,8 @@ function addGallery(id) {
     $('#' + id).css("background-color", "orange");
     imageGallery(id);
 }
+
+
 function imageGallery (id) {
     $("#imgSection").html("");
     let number = images[id];
@@ -56,6 +59,10 @@ function imageGallery (id) {
 
     }
 }
+
+
+
+
 function showModal(modalImg){
 $('#modal').css("display", "block");
 $('#modalImage').attr("src", modalImg);

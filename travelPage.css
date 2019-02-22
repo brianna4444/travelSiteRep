@@ -29,7 +29,8 @@ body{
     width: 90%;
 }
 .top{
-    background-color: white;
+    background: url(images/BG_2.png) no-repeat center center fixed;
+
 }
 
 .saying{
@@ -79,7 +80,7 @@ font-family: "OleoScript-Bold";
 }
 
 .contactInfo .empty{
-    height: 30%;
+    height: 8%;
 }
 
 .contactInfo .imgIcon{
@@ -196,7 +197,7 @@ padding: 5%;
 
 }
 .destinationBtn{
-    width: 25%;
+    width: 20%;
 
 
 }
