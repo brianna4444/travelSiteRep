@@ -21,6 +21,8 @@ function moveSlow(id,time) {
 
         $("#cruiseBtn").css("backgroundColor", "orange");
         let div = $("#imgSection");
+        div.html("Coming Soon");
+        /*
         let folder = "images/cruiseBtn";
         let number= images.cruiseBtn;
         for (let i = 1; i <= number; i++) {
@@ -30,6 +32,7 @@ function moveSlow(id,time) {
 
 
         }
+        */
 
     });
 
@@ -44,12 +47,14 @@ function addGallery(id) {
 
     $('#' + id).css("background-color", "orange");
     imageGallery(id);
+
 }
 
 
 function imageGallery (id) {
-    $("#imgSection").html("");
-    let number = images[id];
+
+    $("#imgSection").html("Coming Soon");
+  /*  let number = images[id];
     let folder = "images/" + id;
 
     for (let i = 1; i <= number; i++) {
@@ -58,6 +63,7 @@ function imageGallery (id) {
 
 
     }
+    */
 }
 
 
@@ -75,7 +81,7 @@ function hideModal(){
 let items=[];
 
 function loadData(){
-    $.getJSON("data.json", function(data){
+   /* $.getJSON("data.json", function(data){
         $.each( data, function(key,val){
             items.push(val);
 
@@ -83,6 +89,22 @@ function loadData(){
 console.log(items);
 
     })
+    */
+
+    $.ajax({
+        type: 'GET',
+        url: "data.json",
+        beforeSend: function(request) {
+            request.setRequestHeader(" Access-Control-Request-Headers", "x-requested-with");
+        }
+
+    }).done(function(data) {
+        $.each( data, function(key,val){
+            items.push(val);
+
+        })
+    });
+
 }
 loadData();
 

@@ -84,9 +84,9 @@ font-family: "OleoScript-Bold";
 }
 
 .contactInfo .imgIcon{
-    min-height: 2vh;
+    min-height: 3vh;
     padding-right: 10%;
-    width: 3vw;
+    width: 4vw;
 
 
 
@@ -300,6 +300,7 @@ font-family: "OleoScript-Bold";
 #info{
     height: 70%;
     width: 100%;
+    margin: 5%;
 }
 
 #info h1, p{
@@ -464,9 +465,9 @@ font-family: "OleoScript-Bold";
 }
 
 .contactInformation .imgIcon{
-    min-height: 2vh;
-padding-right: 1%;
-    width: 1vw;
+    min-height: 4vh;
+padding-right: 5%;
+    width: 3vw;
     color: white;
 }
 
@@ -479,5 +480,7 @@ padding-right: 1%;
     overflow-y: scroll;
     height: 80%;
     color: white;
+    max-height: 10em;
+    overflow-x: hidden;
 }
 
