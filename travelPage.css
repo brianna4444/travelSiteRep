@@ -83,8 +83,9 @@ font-family: "OleoScript-Bold";
     height: 8%;
 }
 
-.contactInfo .imgIcon{
-    min-height: 3vh;
+.imgIcon{
+    min-height: 1vh;
+    max-height: 2vh;
     padding-right: 10%;
     width: 4vw;
 
@@ -166,10 +167,6 @@ font-family: "OleoScript-Bold";
     background-color: rgb(48,48,48);
     font-family: "Yrsa-Bold";
     border-color: rgb(48,48,48);
-}
-
-.selfPic{
-
 }
 
 .bannerInfo{
