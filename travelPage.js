@@ -8,6 +8,14 @@ let images = {
     dominicanRepublicBtn: 3
 };
 
+$(document).ready(function() {
+
+    $("#cruiseBtn").css("backgroundColor", "orange");
+    let div = $("#imgSection");
+    div.html("Coming Soon");
+
+
+});
 
 function moveSlow(id,time) {
     $('html,body').animate({
@@ -16,25 +24,6 @@ function moveSlow(id,time) {
     }
 
 
-
-    $(document).ready(function() {
-
-        $("#cruiseBtn").css("backgroundColor", "orange");
-        let div = $("#imgSection");
-        div.html("Coming Soon");
-        /*
-        let folder = "images/cruiseBtn";
-        let number= images.cruiseBtn;
-        for (let i = 1; i <= number; i++) {
-            let modalImg = folder + "/" + i + ".jpg";
-            div.append("<img onclick=\"showModal(\'" + modalImg + "\')\" id= '" + i + "' class='destinationImages' src='" + folder + "/" + i + ".jpg" + "'>");
-
-
-
-        }
-        */
-
-    });
 
 function addGallery(id) {
 
@@ -54,6 +43,26 @@ function addGallery(id) {
 function imageGallery (id) {
 
     $("#imgSection").html("Coming Soon");
+
+
+
+    $.ajax({
+        type: "GET",
+        url: "http://localhost:27017/search",
+        data: {
+            'collection': "travelGallery",
+            'album': id
+
+
+
+        },
+        success: function (data) {//array of items found
+            console.log(data);
+            //showSearch(data, album, collection);
+
+        }
+    });
+
   /*  let number = images[id];
     let folder = "images/" + id;
 
@@ -66,6 +75,10 @@ function imageGallery (id) {
     */
 }
 
+function showSearch(data, album, collection){
+    $("#imgSection").append(data.albums(0));
+    $("#imgSection").append(data.albums(1))
+}
 
 
 
@@ -185,3 +198,5 @@ $('#story').append(text);
 $('.infoSection').css("background", "url(" + image+ ") no-repeat center center");
 
 }
+
+
