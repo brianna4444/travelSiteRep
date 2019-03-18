@@ -13,7 +13,11 @@ body{
     height: 100%
 }
 
-
+@media (max-width: 320px) {
+    .element {
+        width: 90%;
+    }
+}
 
 
 .container{
@@ -26,8 +30,8 @@ body{
 
 #logo{
     height: 90%;
-    width: 90%;
-    max-width: 60%;
+    width: 60%;
+    max-width: 50%;
 }
 .top{
     /*background: url(images/BG_2.png) no-repeat center center fixed;*/
@@ -37,7 +41,8 @@ body{
 }
 
 .saying{
-    color: rebeccapurple;
+    color: red;
+    font-size: 2rem;
 
 }
 .heading{
@@ -181,10 +186,14 @@ font-family: "OleoScript-Bold";
 .bannerInfo{
 padding: 5%;
     font-family: "Yrsa-Bold";
+
+
 }
 
 .bannerInfo p{
     color: black;
+    overflow-y: scroll;
+
 }
 
 
@@ -260,7 +269,7 @@ padding: 5%;
 
 
 .infoSection{
-
+    background: no-repeat center center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -377,11 +386,12 @@ font-family: "OleoScript-Bold";
 }
 
 .reviewBox{
-    height: 40%;
+    height: 60%;
     background-color: blanchedalmond;
     box-shadow: 2px 2px 9px rgb(48,48,48);
     padding: 3%;
     margin: 3%;
+    overflow-y: scroll;
 }
 .quoteImg{
     height: 20vh;
@@ -401,14 +411,14 @@ font-family: "OleoScript-Bold";
 .reviewText{
     font-size: 3vh;
     background-color: blanchedalmond;
-    overflow: scroll;
+    overflow-y: scroll;
 
 }
 
 
 
 .contactSection{
-    background-color: rgba(128,128,128,.5);
+
     height: 100%;
 
 }
@@ -480,7 +490,7 @@ padding-right: 5%;
 
 .contactInformation .email{
     height: 20%;
-    font-size: 2vh;
+    font-size: 3vh;
     padding: 3%;
     margin: 2%;
     font-family: "Yrsa-Bold";
