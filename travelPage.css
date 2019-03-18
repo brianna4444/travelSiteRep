@@ -79,57 +79,9 @@ font-family: "OleoScript-Bold";
 }
 
 
-.contactInfo{
-    height: 100%;
-    padding: 3%;
 
 
 
-}
-
-.contactInfo .empty{
-    height: 8%;
-}
-
-.imgIcon{
-    min-height: 1vh;
-    max-height: 2vh;
-    padding-right: 10%;
-    width: 4vw;
-
-
-
-}
-.contactInformation{
-    padding: 3%;
-    margin: 3%;
-}
-
- .address{
-    height: 20%;
-    font-size: 2vh;
-    padding: 3%;
-    margin: 2%;
-    font-family: "Yrsa-Bold";
-
-}
-
- .email{
-    height: 20%;
-    font-size: 2vh;
-    padding: 3%;
-    margin: 2%;
-    font-family: "Yrsa-Bold";
-}
-
-.phone{
-    height: 20%;
-    font-size: 2vh;
-    padding: 3%;
-    margin: 2%;
-    font-family: "Yrsa-Bold";
-
-}
 
 
 
