@@ -4,7 +4,6 @@ html{
 
 
 body{
-
     background: url(images/BG_2.png) no-repeat center center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
@@ -221,16 +220,13 @@ padding: 5%;
 
 
 .infoSection{
-    background: no-repeat center center fixed;
+    background: url(images/storyImages/cruise.jpg);
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+    background-size: cover !important;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
-    background-size: cover;
-    height: 70%;
-
-
-
-
 }
 
 .infoBox{
@@ -469,3 +465,12 @@ padding-right: 5%;
     overflow-x: hidden;
 }
 
+.destinationSection{
+    margin-top: 3.5vh;
+}
+
+@media only screen and (max-width: 760px) {
+    .destinationSection{
+        margin-top: 16vh !important;
+    }
+}
