@@ -24,13 +24,15 @@ mongo.connect("mongodb://localhost:27017", function (err, client) {
     app.get('/search', function (req, res) {
         let collName = req.query.collection;
         let album = req.query.album;
-        let obj = {
-            name: album
-        };
+        let obj = {};
+        if (album && album!=""){
+            obj['name'] = album;
+        }
+
         let coll = db.collection(collName);
         coll.find(obj).toArray(function (err, result) {
             res.send(result);
         });
 
     });
-})
+});
