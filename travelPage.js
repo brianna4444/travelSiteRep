@@ -1,5 +1,3 @@
-
-
 let images = {
     cruiseBtn: 24,
     jamaicaBtn: 3,
@@ -8,7 +6,7 @@ let images = {
     dominicanRepublicBtn: 3
 };
 
-$(document).ready(function() {
+$(document).ready(function () {
 
     $("#cruiseBtn").css("backgroundColor", "orange");
     let div = $("#imgSection");
@@ -17,12 +15,11 @@ $(document).ready(function() {
 
 });
 
-function moveSlow(id,time) {
+function moveSlow(id, time) {
     $('html,body').animate({
         scrollTop: $(id).offset().top
     }, time);
-    }
-
+}
 
 
 function addGallery(id) {
@@ -40,10 +37,9 @@ function addGallery(id) {
 }
 
 
-function imageGallery (id) {
+function imageGallery(id) {
 
     $("#imgSection").html("Coming Soon");
-
 
 
     $.ajax({
@@ -54,7 +50,6 @@ function imageGallery (id) {
             'album': id
 
 
-
         },
         success: function (data) {//array of items found
             console.log(data);
@@ -63,71 +58,70 @@ function imageGallery (id) {
         }
     });
 
-  /*  let number = images[id];
-    let folder = "images/" + id;
+    /*  let number = images[id];
+      let folder = "images/" + id;
 
-    for (let i = 1; i <= number; i++) {
-        let modalImg = folder + "/" + i + ".jpg";
-        $("#imgSection").append("<img onclick=\"showModal(\'" + modalImg + "\')\" id= '" + i + "' class='destinationImages' src='" + folder + "/" + i + ".jpg" + "'>");
+      for (let i = 1; i <= number; i++) {
+          let modalImg = folder + "/" + i + ".jpg";
+          $("#imgSection").append("<img onclick=\"showModal(\'" + modalImg + "\')\" id= '" + i + "' class='destinationImages' src='" + folder + "/" + i + ".jpg" + "'>");
 
 
-    }
-    */
+      }
+      */
 }
 
-function showSearch(data, album, collection){
+function showSearch(data, album, collection) {
     $("#imgSection").append(data.albums(0));
     $("#imgSection").append(data.albums(1))
 }
 
 
-
-function showModal(modalImg){
-$('#modal').css("display", "block");
-$('#modalImage').attr("src", modalImg);
+function showModal(modalImg) {
+    $('#modal').css("display", "block");
+    $('#modalImage').attr("src", modalImg);
 }
 
-function hideModal(){
+function hideModal() {
     $('#modal').css("display", "none");
 }
 
-let items=[];
+let items = [];
 
-function loadData(){
-   /* $.getJSON("data.json", function(data){
-        $.each( data, function(key,val){
-            items.push(val);
+function loadData() {
+    /* $.getJSON("data.json", function(data){
+         $.each( data, function(key,val){
+             items.push(val);
 
-        })
-console.log(items);
+         })
+ console.log(items);
 
-    })
-    */
+     })
+     */
 
     $.ajax({
         type: 'GET',
         url: "data.json",
-        beforeSend: function(request) {
+        beforeSend: function (request) {
             request.setRequestHeader(" Access-Control-Request-Headers", "x-requested-with");
         }
 
-    }).done(function(data) {
-        $.each( data, function(key,val){
+    }).done(function (data) {
+        $.each(data, function (key, val) {
             items.push(val);
 
         })
     });
 
 }
+
 loadData();
 
-let reviews=[];
-let stories= [];
+let reviews = [];
+let stories = [];
 
 
-
-function getData(){
-    $.getJSON("reviewData.json", function(data) {
+function getData() {
+    $.getJSON("reviewData.json", function (data) {
         $.each(data, function (key, val) {
             reviews.push(val);
 
@@ -137,35 +131,35 @@ function getData(){
         changeReview(reviews);
         addReviewInfo(reviews[0].name, reviews[0].text);
     })
-        $.getJSON("storyData", function(data){
-            $.each( data, function(key,val){
-                stories.push(val);
+    $.getJSON("storyData", function (data) {
+        $.each(data, function (key, val) {
+            stories.push(val);
 
-            })
+        })
 
 
         console.log(stories);
         changeStory(stories);
         addStoryInfo(stories[0].title, stories[0].text, stories[0].image)
-});
+    });
 }
 
 getData();
 
 
 function changeReview(arr) {
-    let div= $('#circle');
-    for (let i=0; i< arr.length; i++){
+    let div = $('#circle');
+    for (let i = 0; i < arr.length; i++) {
 
-        let circle= document.createElement("i");
-        circle.className="fa fa-circle btn navDots";
-        circle.onclick= function(){ addReviewInfo(reviews[i].name, reviews[i].text)};
+        let circle = document.createElement("i");
+        circle.className = "fa fa-circle btn navDots";
+        circle.onclick = function () {
+            addReviewInfo(reviews[i].name, reviews[i].text)
+        };
         div.append(circle);
 
     }
 }
-
-
 
 
 function addReviewInfo(name, text) {
@@ -176,26 +170,27 @@ function addReviewInfo(name, text) {
 }
 
 function changeStory(arr) {
-    let dotsDiv= $('#dots');
-    for (let i=0; i< arr.length; i++){
+    let dotsDiv = $('#dots');
+    for (let i = 0; i < arr.length; i++) {
 
-        let circle= document.createElement("i");
-        circle.className="fa fa-circle btn navDots";
-        circle.onclick= function(){ addStoryInfo(stories[i].title, stories[i].text, stories[i].image)};
+        let circle = document.createElement("i");
+        circle.className = "fa fa-circle btn navDots";
+        circle.onclick = function () {
+            addStoryInfo(stories[i].title, stories[i].text, stories[i].image)
+        };
         dotsDiv.append(circle);
 
     }
 
 
-
 }
 
-function addStoryInfo(title, text, image){
-$('#title').empty();
-$('#story').empty();
-$('#title').append(title);
-$('#story').append(text);
-$('.infoSection').css("background", "url(" + image+ ") no-repeat center center");
+function addStoryInfo(title, text, image) {
+    $('#title').empty();
+    $('#story').empty();
+    $('#title').append(title);
+    $('#story').append(text);
+    $('.infoSection').css("background", "url(" + image + ")");
 
 }
 
