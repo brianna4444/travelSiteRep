@@ -29,8 +29,8 @@ body{
 
 #logo{
     height: 90%;
-    width: 60%;
-    max-width: 50%;
+    width: 90%;
+    max-width: 90%;
 }
 .top{
     /*background: url(images/BG_2.png) no-repeat center center fixed;*/
@@ -77,13 +77,26 @@ font-family: "OleoScript-Bold";
 
 }
 
+.navbar-brand{
+    width: 100%;
 
+}
 
+.note{
+    font-size: 1rem;
+}
 
+.navbar-nav{
+    margin-left: 25%;
+}
 
+.navbar-toggler{
+    margin-left: 45%;
 
-
-
+}
+.nav-item{
+    text-align: right;
+}
 
 .destinationBtn{
     outline: 0;
@@ -147,7 +160,7 @@ padding: 5%;
 
 .bannerInfo p{
     color: black;
-    overflow-y: scroll;
+
 
 }
 
@@ -231,6 +244,7 @@ padding: 5%;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
+    height: ;
 }
 
 .infoBox{
@@ -270,7 +284,8 @@ padding: 5%;
 }
 
 .navbar{
-    height: 10%;
+
+
 
 }
 
