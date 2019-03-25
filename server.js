@@ -25,7 +25,7 @@ mongo.connect("mongodb://localhost:27017", function (err, client) {
         let collName = req.query.collection;
         let album = req.query.album;
         let obj = {};
-        if (album && album!=""){
+        if (album && album!==""){
             obj['name'] = album;
         }
 

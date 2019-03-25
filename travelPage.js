@@ -46,14 +46,15 @@ function imageGallery(id) {
         type: "GET",
         url: "http://localhost:27017/search",
         data: {
-            'collection': "travelGallery",
-            'album': id
+            'collection': id,
+            'album':
 
 
         },
         success: function (data) {//array of items found
             console.log(data);
-            //showSearch(data, album, collection);
+
+            showSearch(data);
 
         }
     });
@@ -70,9 +71,13 @@ function imageGallery(id) {
       */
 }
 
-function showSearch(data, album, collection) {
-    $("#imgSection").append(data.albums(0));
-    $("#imgSection").append(data.albums(1))
+function showSearch(data) {
+    for (let i=0; i<=data.length; i++){
+    $("#imgSection").append(data[i].name)
+   // $("#imgSection").append(onclick=\"showModal(\'" + modalImg + "\')\" id= '" + i + "' class='destinationImages')
+
+
+    }
 }
 
 
