@@ -37,7 +37,7 @@ function addGallery(id) {
 }
 
 
-function imageGallery(id) {
+function imageGallery(id, album) {
 
     $("#imgSection").html("Coming Soon");
 
@@ -47,14 +47,14 @@ function imageGallery(id) {
         url: "http://localhost:27017/search",
         data: {
             'collection': id,
-            'album':
+            'album': album
 
 
         },
-        success: function (data) {//array of items found
+        success: function (data, id) {//array of items found
             console.log(data);
 
-            showSearch(data);
+            showSearch(data, id);
 
         }
     });
@@ -71,9 +71,11 @@ function imageGallery(id) {
       */
 }
 
-function showSearch(data) {
+function showSearch(data, id) {
     for (let i=0; i<=data.length; i++){
     $("#imgSection").append(data[i].name)
+        let album= data[i].name;
+        $("#imgSection").attr("onclick", imageGallery(id, album));
    // $("#imgSection").append(onclick=\"showModal(\'" + modalImg + "\')\" id= '" + i + "' class='destinationImages')
 
 
