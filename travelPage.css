@@ -1,5 +1,6 @@
 html{
     height: 100%;
+    overflow-x: hidden;
 }
 
 
@@ -12,13 +13,6 @@ body{
     height: 100%
 }
 
-@media (max-width: 320px) {
-    .element {
-        width: 90%;
-    }
-}
-
-
 .container{
     height: 100%;
 }
@@ -28,10 +22,11 @@ body{
 }
 
 #logo{
-    height: 90%;
-    width: 90%;
+    height: 25%;
+    width: 25%;
     max-width: 90%;
 }
+
 .top{
     /*background: url(images/BG_2.png) no-repeat center center fixed;*/
     background-color: rgb(255,255,153);
@@ -244,13 +239,11 @@ padding: 5%;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
-    height: ;
 }
 
 .infoBox{
     background-color: rgb(48,48,48);
     opacity: .9;
-    height: 70%;
     max-height: 700px;
 
 
@@ -273,7 +266,6 @@ padding: 5%;
 
 
 #info{
-    height: 65%;
     width: 100%;
     margin: 2%;
 }
@@ -281,12 +273,6 @@ padding: 5%;
 #info h1, p{
     width: 100%;
     color: white;
-}
-
-.navbar{
-
-
-
 }
 
 .want{
@@ -472,24 +458,45 @@ padding-right: 5%;
 }
 
 #title{
-    height: 20%;
+    font-family: "OleoScript-Bold";
+    font-size: 2rem;
     color:  white;
 }
 
 #story{
-    overflow-y: scroll;
+    overflow-y: hidden;
     height: 80%;
     color: white;
     max-height: 10em;
     overflow-x: hidden;
 }
 
-.destinationSection{
-    margin-top: 4vh;
+#story::-webkit-scrollbar {
+    width: 0.5em;
 }
 
-@media only screen and (max-width: 760px) {
-    .destinationSection{
-        margin-top: 16vh !important;
-    }
+#story::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
 }
+
+#story::-webkit-scrollbar-thumb {
+    border-radius: 5px;
+    background-color: darkgray;
+    outline: 1px solid slategrey;
+}
+
+.chosenDot:before{
+    background-color: orange;
+    padding: 1px;
+    border-radius: 25px;
+}
+
+.hideBackground{
+    transition: 0.5s;
+}
+
+/*@media only screen and (max-width: 760px) {*/
+    /*.destinationSection{*/
+        /*margin-top: 16vh !important;*/
+    /*}*/
+/*}*/

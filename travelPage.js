@@ -125,7 +125,7 @@ function getData() {
         $.each(data, function (key, val) {
             reviews.push(val);
 
-        })
+        });
 
         console.log(reviews);
         changeReview(reviews);
@@ -135,12 +135,13 @@ function getData() {
         $.each(data, function (key, val) {
             stories.push(val);
 
-        })
+        });
 
 
-        console.log(stories);
+        //console.log(stories);
         changeStory(stories);
-        addStoryInfo(stories[0].title, stories[0].text, stories[0].image)
+        addStoryInfo(stories[0].title, stories[0].text, stories[0].image);
+        choseDot(0);
     });
 }
 
@@ -169,14 +170,23 @@ function addReviewInfo(name, text) {
     $('#reviewClient').append(text);
 }
 
+function choseDot(num) {
+    let dots = $('#dots').children();           //chose all dots, which are child of #dots
+    for (let i = 0; i < dots.length; i++) {                //remove all orange dots
+        dots[i].classList.remove('chosenDot');
+    }
+    let dot = dots[num];        //chose necessary dot
+    dot.classList.add('chosenDot');     //make it orange
+}
+
 function changeStory(arr) {
     let dotsDiv = $('#dots');
     for (let i = 0; i < arr.length; i++) {
-
         let circle = document.createElement("i");
         circle.className = "fa fa-circle btn navDots";
         circle.onclick = function () {
-            addStoryInfo(stories[i].title, stories[i].text, stories[i].image)
+            addStoryInfo(stories[i].title, stories[i].text, stories[i].image);
+            choseDot(i);
         };
         dotsDiv.append(circle);
 
@@ -185,13 +195,35 @@ function changeStory(arr) {
 
 }
 
-function addStoryInfo(title, text, image) {
-    $('#title').empty();
-    $('#story').empty();
-    $('#title').append(title);
-    $('#story').append(text);
-    $('.infoSection').css("background", "url(" + image + ")");
+function setListeneers() {
+    $('#story').hover(function () {
+        let status = $(this).css('overflow-y');
+        if (status == "auto") {
+            $(this).css('overflow-y', 'hidden');
+        } else {
+            $(this).css('overflow-y', 'auto');
+        }
+    });
+};
 
+function addStoryInfo(title, text, image) {
+    $('#story').fadeOut("slow", function () {
+        $('#story').empty();
+        $('#story').append(text);
+        $('#story').fadeIn("slow", function () {
+
+        });
+    });
+    $('#title').fadeOut("slow", function () {
+        $('#title').empty();
+        $('#title').append(title);
+        $('#title').fadeIn("slow", function () {
+
+        });
+    });
+    let back = $('.infoSection');
+    back.addClass('hideBackground');
+    back.css("background", "url(" + image + ")");
 }
 
-
+setListeneers();
