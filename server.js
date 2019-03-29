@@ -21,13 +21,23 @@ mongo.connect("mongodb://localhost:27017", function (err, client) {
 
     let db = client.db("travel");
 
-    app.get('/search', function (req, res) {
+    app.get('/findCity', function (req, res) {
         let collName = req.query.collection;
-        let album = req.query.album;
         let obj = {};
-        if (album && album!==""){
-            obj['name'] = album;
-        }
+
+        let coll = db.collection(collName);
+        coll.find(obj).toArray(function (err, result) {
+            res.send(result);
+        });
+
+    });
+
+    app.get('/findImages', function (req, res) {
+        let collName = req.query.collection;
+        let album= req.query.album;
+        let obj = {
+            name: album
+        };
 
         let coll = db.collection(collName);
         coll.find(obj).toArray(function (err, result) {

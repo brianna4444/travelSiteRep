@@ -21,6 +21,8 @@ body{
     height: 100%
 }
 
+
+
 #logo{
     height: 25%;
     width: 25%;
@@ -187,6 +189,10 @@ padding: 5%;
     height:  50px;
 }
 
+.destinationSection{
+height: 100%;
+}
+
 
 #modal {
     display: none; /* Hidden by default */
@@ -238,7 +244,7 @@ padding: 5%;
     background-size: cover !important;
     -webkit-background-size: cover;
     -moz-background-size: cover;
-    -o-background-size: cover;
+    -o-background-size: cover
 }
 
 .infoBox{
@@ -334,17 +340,17 @@ font-family: "OleoScript-Bold";
 }
 
 .reviewInfo{
-    height: 80%;
+    height: 70%;
 
 }
 
 .reviewBox{
-    height: 60%;
+    height: 80%;
     background-color: blanchedalmond;
     box-shadow: 2px 2px 9px rgb(48,48,48);
     padding: 3%;
     margin: 3%;
-    overflow-y: scroll;
+
 }
 .quoteImg{
     height: 20vh;
@@ -362,9 +368,10 @@ font-family: "OleoScript-Bold";
 }
 
 .reviewText{
+    height: 80%;
     font-size: 3vh;
     background-color: blanchedalmond;
-    overflow-y: scroll;
+
 
 }
 
@@ -487,6 +494,12 @@ padding-right: 5%;
 
 .chosenDot:before{
     background-color: orange;
+    padding: 1px;
+    border-radius: 25px;
+}
+
+.chosenNavDot:before{
+    background-color: black;
     padding: 1px;
     border-radius: 25px;
 }

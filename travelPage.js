@@ -1,16 +1,13 @@
-let images = {
-    cruiseBtn: 24,
-    jamaicaBtn: 3,
-    mexicoBtn: 3,
-    haitiBtn: 3,
-    dominicanRepublicBtn: 3
-};
+
 
 $(document).ready(function () {
 
     $("#cruiseBtn").css("backgroundColor", "orange");
     let div = $("#imgSection");
-    div.html("Coming Soon");
+    div.html("Coming Soon!");
+
+    //addGallery("cruiseBtn");
+
 
 
 });
@@ -22,7 +19,7 @@ function moveSlow(id, time) {
 }
 
 
-function addGallery(id) {
+/*function addGallery(id) {
 
     let child = $('#destinationButtons').children();
 
@@ -32,56 +29,116 @@ function addGallery(id) {
 
 
     $('#' + id).css("background-color", "orange");
-    imageGallery(id);
+    findCity(id);
 
-}
+}*/
 
 
-function imageGallery(id, album) {
+function findCity(id) {
 
     $("#imgSection").html("Coming Soon");
 
 
     $.ajax({
         type: "GET",
-        url: "http://localhost:27017/search",
+        url: "http://localhost:3000/findcity",
         data: {
-            'collection': id,
-            'album': album
+            'collection': id
 
 
         },
-        success: function (data, id) {//array of items found
+        success: function (data) {//array of items found
             console.log(data);
 
-            showSearch(data, id);
+           showCityCard(data, id);
 
         }
     });
 
-    /*  let number = images[id];
-      let folder = "images/" + id;
-
-      for (let i = 1; i <= number; i++) {
-          let modalImg = folder + "/" + i + ".jpg";
-          $("#imgSection").append("<img onclick=\"showModal(\'" + modalImg + "\')\" id= '" + i + "' class='destinationImages' src='" + folder + "/" + i + ".jpg" + "'>");
-
-
-      }
-      */
 }
 
-function showSearch(data, id) {
-    for (let i=0; i<=data.length; i++){
-    $("#imgSection").append(data[i].name)
-        let album= data[i].name;
-        $("#imgSection").attr("onclick", imageGallery(id, album));
-   // $("#imgSection").append(onclick=\"showModal(\'" + modalImg + "\')\" id= '" + i + "' class='destinationImages')
+function showCityCard(data, id) {
+    let listDiv= $("#imgSection");
+    listDiv.empty();
+    listDiv.className = "list row";
+
+    for (let i=0; i<data.length; i++){
+        let div= document.createElement("div");
+        div.className= " col-md-4 pt-2 pl-2 pr-2";
+        let cardDiv= document.createElement("div");
+        cardDiv.className= "card h-100 w-100";
+        let imgPart= document.createElement("img");
+        cardDiv.append(imgPart);
+        imgPart.className= "card-img-top img-fluid";
+        let image= data[i].cityImage;
+        imgPart.append(image);
+        imgPart.src=image;
+        imgPart.alt= "Card Image";
+        let bodyPart= document.createElement("div");
+        bodyPart.className= "card-body";
+        cardDiv.append(bodyPart);
+        let cardTitlePart= document.createElement("h");
+        bodyPart.append(cardTitlePart);
+        cardTitlePart.className= "card-title";
+        let cityName= data[i].name;
+        cardTitlePart.append(cityName);
 
 
+        cardDiv.onclick= function(){
+            findImages(cityName, id);
+        };
+
+    div.appendChild(cardDiv);
+    listDiv[0].appendChild(div);
     }
 }
 
+function findImages(cityName, id) {
+    $.ajax({
+        type: "GET",
+        url: "http://localhost:3000/findImages",
+        data: {
+            'collection': id,
+            'album': cityName
+
+
+        },
+        success: function (data) {//array of items found
+            console.log(data);
+            showImages(data[0]);
+
+
+        }
+    });
+
+}
+
+function showImages(data){
+    let listDiv= $("#imgSection");
+    listDiv.empty();
+    listDiv.className = "list row";
+
+    for (let i=0; i<data.images.length; i++){
+        let div= document.createElement("div");
+        div.className= "col-md-3 pt-2 pl-2 pr-2";
+        let imgDiv= document.createElement("div");
+        imgDiv.className= "card h-100 w-100";
+       let img= document.createElement("img");
+        img.className= "image img-fluid";
+        imgDiv.append(img);
+        let image= data.images[i];
+        img.src=image;
+        img.alt= "Image";
+        img.onclick= function(){
+            showModal(image)};
+        listDiv[0].appendChild(div);
+        div.appendChild(imgDiv);
+
+
+    }
+
+
+}
 
 function showModal(modalImg) {
     $('#modal').css("display", "block");
@@ -95,17 +152,7 @@ function hideModal() {
 let items = [];
 
 function loadData() {
-    /* $.getJSON("data.json", function(data){
-         $.each( data, function(key,val){
-             items.push(val);
-
-         })
- console.log(items);
-
-     })
-     */
-
-    $.ajax({
+ $.ajax({
         type: 'GET',
         url: "data.json",
         beforeSend: function (request) {
@@ -137,6 +184,7 @@ function getData() {
         console.log(reviews);
         changeReview(reviews);
         addReviewInfo(reviews[0].name, reviews[0].text);
+        choseNavDot(0);
     })
     $.getJSON("storyData", function (data) {
         $.each(data, function (key, val) {
@@ -161,8 +209,10 @@ function changeReview(arr) {
 
         let circle = document.createElement("i");
         circle.className = "fa fa-circle btn navDots";
+
         circle.onclick = function () {
-            addReviewInfo(reviews[i].name, reviews[i].text)
+            addReviewInfo(reviews[i].name, reviews[i].text);
+            choseNavDot(i);
         };
         div.append(circle);
 
@@ -171,11 +221,24 @@ function changeReview(arr) {
 
 
 function addReviewInfo(name, text) {
-    $('#nameClient').empty();
-    $('#reviewClient').empty();
-    $('#nameClient').append(name);
-    $('#reviewClient').append(text);
+
+    $('#nameClient').fadeOut("slow", function () {
+        $('#nameClient').empty();
+        $('#nameClient').append(name);
+        $('#nameClient').fadeIn("slow", function () {
+
+        });
+    });
+
+    $('#reviewClient').fadeOut("slow", function () {
+        $('#reviewClient').empty();
+        $('#reviewClient').append(text);
+        $('#reviewClient').fadeIn("slow", function () {
+
+        });
+    });
 }
+
 
 function choseDot(num) {
     let dots = $('#dots').children();           //chose all dots, which are child of #dots
@@ -185,6 +248,16 @@ function choseDot(num) {
     let dot = dots[num];        //chose necessary dot
     dot.classList.add('chosenDot');     //make it orange
 }
+
+function choseNavDot(num) {
+    let dots = $('#circle').children();           //chose all dots, which are child of #dots
+    for (let i = 0; i < dots.length; i++) {                //remove all orange dots
+        dots[i].classList.remove('chosenNavDot');
+    }
+    let dot = dots[num];        //chose necessary dot
+    dot.classList.add('chosenNavDot');     //make it orange
+}
+
 
 function changeStory(arr) {
     let dotsDiv = $('#dots');
