@@ -267,6 +267,7 @@ function changeStory(arr) {
         circle.onclick = function () {
             addStoryInfo(stories[i].title, stories[i].text, stories[i].image);
             choseDot(i);
+            $('#story').scrollTop(0);
         };
         dotsDiv.append(circle);
 
