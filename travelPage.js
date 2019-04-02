@@ -191,9 +191,6 @@ function getData() {
             stories.push(val);
 
         });
-
-
-        //console.log(stories);
         changeStory(stories);
         addStoryInfo(stories[0].title, stories[0].text, stories[0].image);
         choseDot(0);
