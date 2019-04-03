@@ -19,7 +19,7 @@ mongo.connect("mongodb://localhost:27017", function (err, client) {
         return;
     }
 
-    let db = client.db("travel");
+    let db = client.db("config");
 
     app.get('/findCity', function (req, res) {
         let collName = req.query.collection;

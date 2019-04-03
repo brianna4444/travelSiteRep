@@ -1,3 +1,5 @@
+let url= "http://tactravels.com:3000";
+
 
 
 $(document).ready(function () {
@@ -6,7 +8,7 @@ $(document).ready(function () {
     let div = $("#imgSection");
     div.html("Coming Soon!");
 
-    //addGallery("cruiseBtn");
+    addGallery("cruiseBtn");
 
 
 
@@ -19,7 +21,7 @@ function moveSlow(id, time) {
 }
 
 
-/*function addGallery(id) {
+function addGallery(id) {
 
     let child = $('#destinationButtons').children();
 
@@ -31,7 +33,7 @@ function moveSlow(id, time) {
     $('#' + id).css("background-color", "orange");
     findCity(id);
 
-}*/
+}
 
 
 function findCity(id) {
@@ -41,7 +43,7 @@ function findCity(id) {
 
     $.ajax({
         type: "GET",
-        url: "http://localhost:3000/findcity",
+        url: url + "/findCity",
         data: {
             'collection': id
 
@@ -96,7 +98,7 @@ function showCityCard(data, id) {
 function findImages(cityName, id) {
     $.ajax({
         type: "GET",
-        url: "http://localhost:3000/findImages",
+        url: url + "/findImages",
         data: {
             'collection': id,
             'album': cityName
