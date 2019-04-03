@@ -1,10 +1,10 @@
-html{
+html {
     height: 100%;
     overflow-x: hidden;
 }
 
 
-body{
+body {
     background: url(images/BG_2.png) no-repeat center center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
@@ -13,181 +13,175 @@ body{
     height: 100%
 }
 
-.container{
+.container {
     height: 100%;
 }
 
-.container-fluid{
+.container-fluid {
     height: 100%
 }
 
 
-
-#logo{
+#logo {
     height: 25%;
     width: 25%;
     max-width: 90%;
 }
 
-.top{
-    /*background: url(images/BG_2.png) no-repeat center center fixed;*/
-    background-color: rgb(255,255,153);
-    /*height: 20%*/
-
+.top {
+    background-color: rgb(255, 255, 153);
 }
 
-.saying{
+.saying {
     color: red;
     font-size: 2rem;
 
 }
-.heading{
-    height:100%;
- padding-left: 0 !important;
+
+.heading {
+    height: 100%;
+    padding-left: 0 !important;
 
 
 }
 
-.heading .name{
+.heading .name {
     height: 50%;
     font-size: calc(4vw + 4vh + 2vmin);
     color: white;
-font-family: "OleoScript-Bold";
-    text-shadow: 4px 4px 4px rgb(48,48,48);
+    font-family: "OleoScript-Bold";
+    text-shadow: 4px 4px 4px rgb(48, 48, 48);
     margin: 1%;
 
 }
 
-.heading .slogan{
+.heading .slogan {
     padding: 2%;
     height: 20%;
     font-size: calc(1vw + 1vh + 1vmin);
     color: white;
     font-family: "Yrsa-Bold";
-    text-shadow: 4px 4px 4px rgb(48,48,48);
+    text-shadow: 4px 4px 4px rgb(48, 48, 48);
     margin: 1%;
 }
 
-.heading .last{
+.heading .last {
     height: 10%;
 
 
 }
 
-.navbar-brand{
+.navbar-brand {
     width: 100%;
 
 }
 
-.note{
+.note {
     font-size: 1rem;
 }
 
-.navbar-nav{
+.navbar-nav {
 
 }
 
-.navbar-toggler{
+.navbar-toggler {
     margin-left: 45%;
 
 }
-.nav-item{
+
+.nav-item {
 
 }
 
-.destinationBtn{
+.destinationBtn {
     width: 25%;
     outline: 0;
     border-size: 0;
     outline: none !important;
     font-size: 3vh 3vw;
     color: white;
-    background-color: rgb(48,48,48);
+    background-color: rgb(48, 48, 48);
     font-family: "Yrsa-Bold";
-    border-color: rgb(48,48,48);
+    border-color: rgb(48, 48, 48);
 }
 
 
-
-.aboutBtn{
+.aboutBtn {
     outline: 0;
     border-size: 0;
     outline: none !important;
     font-size: 3vh;
     color: white;
-    background-color: rgb(48,48,48);
+    background-color: rgb(48, 48, 48);
     font-family: "Yrsa-Bold";
-    border-color: rgb(48,48,48);
+    border-color: rgb(48, 48, 48);
 }
 
-.reviewBtn{
+.reviewBtn {
     outline: 0;
     border-size: 0;
     outline: none !important;
     font-size: 3vh;
     color: white;
-    background-color: rgb(48,48,48);
+    background-color: rgb(48, 48, 48);
     font-family: "Yrsa-Bold";
-    border-color: rgb(48,48,48);
+    border-color: rgb(48, 48, 48);
 }
 
 
-
-.contactsBtn{
+.contactsBtn {
     outline: 0;
     border-size: 0;
     outline: none !important;
     font-size: 3vh;
     color: white;
-    background-color: rgb(48,48,48);
+    background-color: rgb(48, 48, 48);
     font-family: "Yrsa-Bold";
-    border-color: rgb(48,48,48);
+    border-color: rgb(48, 48, 48);
 }
 
 
-.bannerInfo{
-padding: 5%;
+.bannerInfo {
+    padding: 5%;
     font-family: "Yrsa-Bold";
 
 
 }
 
-#aboutParagraph{
+#aboutParagraph {
     overflow: hidden;
 }
 
-.bannerInfo p{
+.bannerInfo p {
     color: black;
 
 
 }
 
 
-
-
-.destinationHeader{
+.destinationHeader {
 
     height: auto;
-    background-color: rgb(48,48,48);
+    background-color: rgb(48, 48, 48);
     opacity: .8;
 }
 
-.destinationName{
+.destinationName {
     font-size: calc(4vw + 4vh + 2vmin);
     color: white;
     font-family: "OleoScript-Bold";
-    text-shadow: 4px 4px 4px rgb(0,0,0);
+    text-shadow: 4px 4px 4px rgb(0, 0, 0);
     margin: 2%;
 
 }
 
-.destinationImages{
+.destinationImages {
     width: 50px;
-    height:  50px;
+    height: 50px;
 }
 
-.destinationSection{
-height: 100%;
+.destinationSection {
+    height: 100%;
 }
 
 
@@ -201,8 +195,8 @@ height: 100%;
     width: 100%; /* Full width */
     height: 100%; /* Full height */
     overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
+    background-color: rgb(0, 0, 0); /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.9); /* Black w/ opacity */
 }
 
 
@@ -230,141 +224,135 @@ height: 100%;
     cursor: pointer;
 }
 
-
-
-
-
-.infoSection{
+.infoSection {
     background: url(images/storyImages/cruise.jpg);
     background-position: center !important;
     background-repeat: no-repeat !important;
     background-size: cover !important;
     -webkit-background-size: cover;
     -moz-background-size: cover;
-    -o-background-size: cover
+    -o-background-size: cover;
+    height: 90vh !important;
 }
 
-.infoBox{
-    background-color: rgb(48,48,48);
+.infoBox {
+    background-color: rgb(48, 48, 48);
     opacity: .9;
-    max-height: 700px;
-
-
-    margin-top: 40% ;
-    margin-bottom: 20% ;
+    max-height: 40vh;
+    margin-top: 40%;
+    margin-bottom: 5vh;
 
 }
 
-.navDots{
-
+.navDots {
     width: 2vw;
     height: 2vh;
     margin: 1%
-
 }
 
-#dots{
+#dots {
     height: 3%;
 }
 
 
-#info{
+#info {
     width: 100%;
     margin: 2%;
 }
 
-#info h1, p{
+#info h1, p {
     width: 100%;
     color: white;
 }
 
-.want{
+.want {
     height: 10%;
-    margin: 4%;
+    padding-left: 3vh;
+    padding-right: 3vh;
+    margin-top: 7%;
 }
-.wantBtn{
+
+.wantBtn {
     height: 80%;
     width: 40%;
     font-family: "Yrsa-Bold";
-
 }
 
 
-.reviewSection{
-
+.reviewSection {
     height: 100%;
- }
+}
 
 
-.reviewTitle{
+.reviewTitle {
     font-size: calc(5vw + 5vh + 2vmin);
     height: 10%;
     color: white;
-font-family: "OleoScript-Bold";
-    text-shadow: 4px 4px 4px rgb(48,48,48);
+    font-family: "OleoScript-Bold";
+    text-shadow: 4px 4px 4px rgb(48, 48, 48);
     padding: 2%;
-
-
 }
 
 
-
-.reviewName{
+.reviewName {
     font-size: 5vh;
     color: white;
     font-family: "Yrsa-Bold";
     height: 50%;
-
-
 }
 
-#nameClient{
+#nameClient {
     color: black;
 }
 
-#reviewClient{
+#reviewClient {
     color: black;
 }
-.circles{
+
+.circles {
     height: 50%;
 }
-.reviewNavRow{
+
+.reviewNavRow {
     height: 15%;
 
 }
-.fa-circle{
+
+.fa-circle {
     color: black;
 }
 
-.reviewInfo{
+.reviewInfo {
     height: 70%;
 
 }
 
-.reviewBox{
+.reviewBox {
     height: 80%;
     background-color: blanchedalmond;
-    box-shadow: 2px 2px 9px rgb(48,48,48);
+    box-shadow: 2px 2px 9px rgb(48, 48, 48);
     padding: 3%;
     margin: 3%;
 
 }
-.quoteImg{
+
+.quoteImg {
     height: 20vh;
     width: 20vw;
 }
-.aboveQuote{
+
+.aboveQuote {
     height: 25%;
 }
 
 
-.clientName{
+.clientName {
     font-size: 3vh;
     font-family: "Yrsa-Bold";
     color: black;
 }
 
-.reviewText{
+.reviewText {
     height: 80%;
     font-size: 3vh;
     background-color: blanchedalmond;
@@ -373,71 +361,66 @@ font-family: "OleoScript-Bold";
 }
 
 
-
-.contactSection{
+.contactSection {
 
     height: 100%;
 
 }
-.grey{
-    background-color: rgb(48,48,48);
+
+.grey {
+    background-color: rgb(48, 48, 48);
     height: 10%;
-
-
 }
 
-.contactArea{
+.contactArea {
     height: 80%;
 }
 
-.contactWith{
-
-    color: white;
-    font-size: 5vw;
-font-family: "OleoScript-Bold";
-    text-shadow: 4px 4px 4px rgb(48,48,48);
-}
-
-.christy{
-
+.contactWith {
     color: white;
     font-size: 5vw;
     font-family: "OleoScript-Bold";
-    text-shadow: 4px 4px 4px rgb(48,48,48);
-
+    text-shadow: 4px 4px 4px rgb(48, 48, 48);
 }
 
-.form{
-    height:80%;
+.christy {
+    color: white;
+    font-size: 5vw;
+    font-family: "OleoScript-Bold";
+    text-shadow: 4px 4px 4px rgb(48, 48, 48);
+}
+
+.form {
+    height: 80%;
     background-color: blanchedalmond;
     opacity: 1;
     width: 50%;
     margin-top: 3%;
     padding: 3%;
     overflow-x: scroll;
-
-
 }
 
-.form-control{
+.form-control {
     font-size: 2vw;
 }
 
-.first{
+.first {
     height: 20%;
 }
-.contactInformation{
+
+.contactInformation {
     height: 50%;
 }
 
-.contactInformation .imgIcon{
+.contactInformation .imgIcon {
     min-height: 6vh;
     min-width: 6vw;
-padding-right: 5%;
+    padding-right: 5%;
     width: 3vw;
     color: white;
 }
-.contactInformation .address{
+
+.contactInformation .address {
     height: 20%;
     font-size: 4vh;
     padding: 3%;
@@ -445,7 +428,7 @@ padding-right: 5%;
     font-family: "Yrsa-Bold";
 }
 
-.contactInformation .email{
+.contactInformation .email {
     height: 20%;
     font-size: 3vh;
     padding: 3%;
@@ -453,7 +436,7 @@ padding-right: 5%;
     font-family: "Yrsa-Bold";
 }
 
-.contactInformation .phone{
+.contactInformation .phone {
     height: 20%;
     font-size: 4vh;
     padding: 3%;
@@ -461,13 +444,13 @@ padding-right: 5%;
     font-family: "Yrsa-Bold";
 }
 
-#title{
+#title {
     font-family: "OleoScript-Bold";
     font-size: 2rem;
-    color:  white;
+    color: white;
 }
 
-#story{
+#story {
     overflow-y: hidden;
     height: 80%;
     color: white;
@@ -480,7 +463,7 @@ padding-right: 5%;
 }
 
 #story::-webkit-scrollbar-track {
-    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
 }
 
 #story::-webkit-scrollbar-thumb {
@@ -489,24 +472,24 @@ padding-right: 5%;
     outline: 1px solid slategrey;
 }
 
-.chosenDot:before{
+.chosenDot:before {
     background-color: orange;
     padding: 1px;
     border-radius: 25px;
 }
 
-.chosenNavDot:before{
+.chosenNavDot:before {
     background-color: black;
     padding: 1px;
     border-radius: 25px;
 }
 
-.hideBackground{
+.hideBackground {
     transition: 0.5s;
 }
 
 /*@media only screen and (max-width: 760px) {*/
-    /*.destinationSection{*/
-        /*margin-top: 16vh !important;*/
-    /*}*/
+/*.destinationSection{*/
+/*margin-top: 16vh !important;*/
+/*}*/
 /*}*/

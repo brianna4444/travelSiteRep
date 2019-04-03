@@ -191,9 +191,6 @@ function getData() {
             stories.push(val);
 
         });
-
-
-        //console.log(stories);
         changeStory(stories);
         addStoryInfo(stories[0].title, stories[0].text, stories[0].image);
         choseDot(0);
@@ -267,6 +264,7 @@ function changeStory(arr) {
         circle.onclick = function () {
             addStoryInfo(stories[i].title, stories[i].text, stories[i].image);
             choseDot(i);
+            $('#story').scrollTop(0);
         };
         dotsDiv.append(circle);
 
