@@ -508,11 +508,11 @@ body {
 /*}*/
 /*}*/
 
-@media only screen and (min-width: 760px) {
+/*@media only screen and (min-width: 760px) {
     #aboutMeSection{
         max-height: 50vh;
     }
-}
+}*/
 
 
 .card{
