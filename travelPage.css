@@ -395,9 +395,18 @@ body {
     background-color: blanchedalmond;
     opacity: 1;
     width: 50%;
-    margin-top: 3%;
+    margin-top: 4vh;
     padding: 3%;
-    overflow-x: scroll;
+    margin-bottom: 4%;
+}
+
+#contactSection2{
+    max-height: 20vh;
+    background-color: rgb(48, 48, 48);
+    opacity: .9;
+    width: 100%;
+    margin-top: 4vh;
+    padding: 3%;
 }
 
 .form-control {
@@ -488,8 +497,19 @@ body {
     transition: 0.5s;
 }
 
+.fbImage{
+    max-height: 4vh;
+    max-width: 4vh;
+}
+
 /*@media only screen and (max-width: 760px) {*/
 /*.destinationSection{*/
 /*margin-top: 16vh !important;*/
 /*}*/
 /*}*/
+
+@media only screen and (min-width: 760px) {
+    #aboutMeSection{
+        max-height: 50vh;
+    }
+}
