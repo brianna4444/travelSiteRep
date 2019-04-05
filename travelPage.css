@@ -513,3 +513,12 @@ body {
         max-height: 50vh;
     }
 }
+
+
+.card{
+    background-color: lightyellow !important;
+}
+
+.card-title{
+    font-family: "Yrsa-Bold" !important
+}

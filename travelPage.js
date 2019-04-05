@@ -77,7 +77,7 @@ function showCityCard(data, id) {
         imgPart.src=image;
         imgPart.alt= "Card Image";
         let bodyPart= document.createElement("div");
-        bodyPart.className= "card-body";
+        bodyPart.className= "card-body text-center";
         cardDiv.append(bodyPart);
         let cardTitlePart= document.createElement("h");
         bodyPart.append(cardTitlePart);
