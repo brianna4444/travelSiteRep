@@ -307,3 +307,32 @@ function addStoryInfo(title, text, image) {
 }
 
 setListeneers();
+
+
+function sendMessage(){
+    let firstName= $('#form_name').text();
+    let lastName= $('#form_lastname').text();
+    let email= $('#form_email').text();
+    let phone= $('#form_tel').text();
+    let message= $('#form_message').text();
+    $.ajax({
+        type: "POST",
+        url: url + "/postMessage",
+        data: {
+            'collection': "contactFormMessages",
+            'firstName': firstName,
+            'lastName': lastName,
+            'email': email,
+            'phone': phone,
+            'message': message
+
+        },
+        success:
+            alert("Message Sent");
+            $('.buttonSend').attr("disabled")
+
+
+
+    })
+
+}

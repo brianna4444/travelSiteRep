@@ -45,4 +45,22 @@ mongo.connect("mongodb://localhost:27017", function (err, client) {
         });
 
     });
+
+    app.post('/postMessage', function (req,res){
+        let collection= req.query.collection;
+        let firstName= req.query.firstName;
+        let lastName= req.query.lastName;
+        let phone= req.query.phone;
+        let email= req.query.email;
+        let message= req.query.message
+        let obj={
+            "firstName": firstName,
+            "lastName": lastName,
+            "phone": phone,
+            "email": email,
+            "message": message
+        };
+        let coll= db.collection(collection);
+        coll.insertOne(obj);
+    })
 });
