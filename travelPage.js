@@ -310,13 +310,13 @@ setListeneers();
 
 
 function sendMessage(){
-    let firstName= $('#form_name').text();
-    let lastName= $('#form_lastname').text();
-    let email= $('#form_email').text();
-    let phone= $('#form_tel').text();
-    let message= $('#form_message').text();
+    let firstName= $('#form_name').val();
+    let lastName= $('#form_lastname').val();
+    let email= $('#form_email').val();
+    let phone= $('#form_tel').val();
+    let message= $('#form_message').val();
     $.ajax({
-        type: "POST",
+        type: "GET",
         url: url + "/postMessage",
         data: {
             'collection': "contactFormMessages",
@@ -327,11 +327,10 @@ function sendMessage(){
             'message': message
 
         },
-        success:
+        success: function(data){
             alert("Message Sent");
             $('.buttonSend').attr("disabled")
-
-
+        }
 
     })
 

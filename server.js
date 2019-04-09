@@ -46,7 +46,7 @@ mongo.connect("mongodb://localhost:27017", function (err, client) {
 
     });
 
-    app.post('/postMessage', function (req,res){
+    app.get('/postMessage', function (req,res){
         let collection= req.query.collection;
         let firstName= req.query.firstName;
         let lastName= req.query.lastName;
@@ -62,5 +62,6 @@ mongo.connect("mongodb://localhost:27017", function (err, client) {
         };
         let coll= db.collection(collection);
         coll.insertOne(obj);
+        res.send();
     })
 });
