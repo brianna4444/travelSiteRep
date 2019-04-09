@@ -5,6 +5,7 @@ let fs = require('fs');
 let mongo = require("mongodb").MongoClient;
 let mongodb = require("mongodb");
 let cors= require("cors");
+let nodemailer = require('nodemailer');
 
 app.use(cors());
 
@@ -63,5 +64,30 @@ mongo.connect("mongodb://localhost:27017", function (err, client) {
         let coll= db.collection(collection);
         coll.insertOne(obj);
         res.send();
+
+        var transporter = nodemailer.createTransport({
+            service: 'gmail',
+            auth: {
+                user: 'youremail@gmail.com',
+                pass: 'yourpassword'
+            }
+        });
+
+        var mailOptions = {
+            from: 'travelagentchristy@gmail.com',
+            to: email,
+            subject: 'New contact message from website',
+            text: obj
+        };
+
+        transporter.sendMail(mailOptions, function(error, info){
+            if (error) {
+                console.log(error);
+            } else {
+                console.log('Email sent: ' + info.response);
+            }
+        });
+
     })
 });
+
