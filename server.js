@@ -68,16 +68,18 @@ mongo.connect("mongodb://localhost:27017", function (err, client) {
         var transporter = nodemailer.createTransport({
             service: 'gmail',
             auth: {
-                user: 'youremail@gmail.com',
-                pass: 'yourpassword'
+                user: 'tactravelwebsite@gmail.com',
+                pass: 'America123!'
             }
         });
 
+        let sendText = '<p>Name: ' + firstName +" " + lastName +'</p></n><p>Phone: ' + phone +'</p></n><p>Email: ' +email +'</p></n> Message: ' +message +'</p>';
+
         var mailOptions = {
-            from: 'travelagentchristy@gmail.com',
-            to: email,
+            from: 'tactravelwebsite@gmail.com',
+            to: 'travelagentchristy@gmail.com',
             subject: 'New contact message from website',
-            text: obj
+            html: sendText
         };
 
         transporter.sendMail(mailOptions, function(error, info){
