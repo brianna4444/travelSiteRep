@@ -522,3 +522,7 @@ body {
 .card-title{
     font-family: "Yrsa-Bold" !important
 }
+
+.requiredBorder{
+    border-color: red;
+}

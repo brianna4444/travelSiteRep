@@ -200,19 +200,19 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="form_name">Firstname *</label>
-                                <input id="form_name" type="text" name="name" class="form-control"
+                                <label for="form_name">First Name *</label>
+                                <input id="form_name" type="text" name="name" class="form-control is-invalid"
                                         required="required"
                                        data-error="Firstname is required.">
-                                <div class="help-block with-errors"></div>
+                                <div class="help-block with-errors invalid-feedback">Please provide first name.</div>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="form_lastname">Lastname *</label>
+                                <label for="form_lastname">Last Name</label>
                                 <input id="form_lastname" type="text" name="surname" class="form-control"
-                                        required="required"
-                                       data-error="Lastname is required.">
+
+                                      >
                                 <div class="help-block with-errors"></div>
                             </div>
                         </div>
@@ -220,30 +220,30 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="form_email">Email *</label>
+                                <label for="form_email">Email</label>
                                 <input id="form_email" type="email" name="email" class="form-control"
-                                        required="required"
-                                       data-error="Valid email is required.">
+
+                                       >
                                 <div class="help-block with-errors"></div>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="form_email">Phone *</label>
-                                <input id="form_tel" type="tel" name="tel" class="form-control"
+                                <label for="form_email">Phone*</label>
+                                <input id="form_tel" type="tel" name="tel" class="form-control is-invalid"
                                         required="required"
                                        data-error="Valid phone number is required.">
-                                <div class="help-block with-errors"></div>
+                                <div class="help-block with-errors invalid-feedback">Please provide phone number.</div>
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-group">
-                                <label for="form_message">Message *</label>
+                                <label for="form_message">Message</label>
                                 <textarea id="form_message" name="message" class="form-control"
-                                          rows="4" required="required"
-                                          data-error="Please, leave us a message."></textarea>
+                                          rows="4"
+                                          ></textarea>
                                 <div class="help-block with-errors"></div>
                             </div>
                         </div>

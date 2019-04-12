@@ -49,12 +49,16 @@ mongo.connect(config.server.mongoAddress, function (err, client) {
     });
 
     app.get('/postMessage', function (req,res){
-        let collection= req.query.collection;
+        let collection= "contactFormMessages";
         let firstName= req.query.firstName;
         let lastName= req.query.lastName;
         let phone= req.query.phone;
         let email= req.query.email;
         let message= req.query.message
+        if (firstName == undefined || phone == undefined){
+            res.send("First Name and Phone Number Required");
+            return;
+        }
         let obj={
             "firstName": firstName,
             "lastName": lastName,
