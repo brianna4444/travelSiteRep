@@ -1,6 +1,7 @@
+let config = require('./config.json');
 let express = require('express');
 let app = express();
-let port = 3000;
+let port = config.server.port;
 let fs = require('fs');
 let mongo = require("mongodb").MongoClient;
 let mongodb = require("mongodb");
@@ -14,7 +15,7 @@ app.listen(port, function () {
     console.log("server is working")
 });
 
-mongo.connect("mongodb://localhost:27017", function (err, client) {
+mongo.connect(config.server.mongoAddress, function (err, client) {
     if (err) {
         console.log("cant connect to server");
         return;
@@ -68,16 +69,16 @@ mongo.connect("mongodb://localhost:27017", function (err, client) {
         var transporter = nodemailer.createTransport({
             service: 'gmail',
             auth: {
-                user: 'tactravelwebsite@gmail.com',
-                pass: 'America123!'
+                user: config.mail.from,
+                pass: config.mail.pass
             }
         });
 
         let sendText = '<p>Name: ' + firstName +" " + lastName +'</p></n><p>Phone: ' + phone +'</p></n><p>Email: ' +email +'</p></n> Message: ' +message +'</p>';
 
         var mailOptions = {
-            from: 'tactravelwebsite@gmail.com',
-            to: 'travelagentchristy@gmail.com',
+            from: config.mail.from,
+            to: config.mail.to,
             subject: 'New contact message from website',
             html: sendText
         };
