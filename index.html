@@ -12,29 +12,35 @@
           integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.bundle.js"></script>
+    <link rel="stylesheet" href="node_modules/animate.css/animate.min.css">
 </head>
 <body>
 
 <div class="container-fluid mainPage" style="height: auto">
 
-    <nav class="row navbar navbar-expand-lg navbar-light bg-light ">
-        <div class="col-4"><img class="img-fluid " style="width: 10rem; height: 5rem" id="logo" src="images/logo.png">
+    <nav class="row navbar navbar-expand-lg navbar-light topNav">
+        <div class="col-4 col-md-3"><img class="img-fluid " style="width: 10rem; height: 5rem" id="logo"
+                                         src="images/logo.png">
         </div>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
                 aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
 
-        <div class="col-8 collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="col-8 col-md-9 collapse navbar-collapse" id="navbarNavAltMarkup">
 
             <div class="navbar-nav">
                 <a style="color: red" class="nav-item nav-link">Site Under Construction <span
                         class="sr-only">(current)</span></a>
-                <a class="nav-item nav-link" onclick="moveSlow('#destinationRedirect',1000)">Destination Gallery <span
+                <a class="nav-item nav-link menu-elem" onclick="moveSlow('#destinationRedirect',1000)">Destination
+                    Gallery <span
+                            class="sr-only">(current)</span></a>
+                <a class="nav-item nav-link menu-elem" onclick="moveSlow('#reviewsRedirect',1200)">Reviews <span
                         class="sr-only">(current)</span></a>
-                <a class="nav-item nav-link" onclick="moveSlow('#reviewsRedirect',1200)">Reviews <span class="sr-only">(current)</span></a>
-                <a class="nav-item nav-link" onclick="moveSlow('#aboutRedirect',1400)">About Me <span class="sr-only">(current)</span></a>
-                <a class="nav-item nav-link" onclick="moveSlow('#contactsRedirect',1600)">Contact <span class="sr-only">(current)</span></a>
+                <a class="nav-item nav-link menu-elem" onclick="moveSlow('#aboutRedirect',1400)">About Me <span
+                        class="sr-only">(current)</span></a>
+                <a class="nav-item nav-link menu-elem" onclick="moveSlow('#contactsRedirect',1600)">Contact <span
+                        class="sr-only">(current)</span></a>
 
 
             </div>
@@ -61,7 +67,7 @@
 
                 <div class="row want">
                     <div class="col-md-3"></div>
-                    <button class="col-md-6 wantBtn btn-danger text-center"
+                    <button class="col-md-6 wantBtn btn-danger text-center buttonHoverEffect"
                             onclick="moveSlow('#contactsRedirect',1600)">I WANT
                     </button>
                     <div class="col-md-3"></div>
@@ -76,7 +82,7 @@
 
 </div>
 
-<div id="destinationRedirect" class="destinationSection container-fluid " style="height: auto">
+<div id="destinationRedirect" class="destinationSection container-fluid" style="height: auto">
     <div class="row destinationHeader">
         <div class="col-2"></div>
         <div class="col-10">
@@ -84,10 +90,14 @@
         </div>
     </div>
     <div id="destinationButtons" class="row destinationBtns">
-        <button id="cruiseBtn" class="destinationBtn " onclick="addGallery('cruiseBtn')">Cruises</button>
-        <button id="jamaicaBtn" class="destinationBtn " onclick="addGallery('jamaicaBtn')">Jamaica</button>
-        <button id="mexicoBtn" class="destinationBtn " onclick="addGallery('mexicoBtn')">Mexico</button>
-        <button id="dominicanRepublicBtn" class="destinationBtn  " onclick="addGallery('dominicanRepublicBtn')">
+        <button id="cruiseBtn" class="destinationBtn buttonHoverEffect" onclick="addGallery('cruiseBtn')">Cruises
+        </button>
+        <button id="jamaicaBtn" class="destinationBtn buttonHoverEffect" onclick="addGallery('jamaicaBtn')">Jamaica
+        </button>
+        <button id="mexicoBtn" class="destinationBtn buttonHoverEffect" onclick="addGallery('mexicoBtn')">Mexico
+        </button>
+        <button id="dominicanRepublicBtn" class="destinationBtn buttonHoverEffect"
+                onclick="addGallery('dominicanRepublicBtn')">
             Dominican Republic
         </button>
 
@@ -152,7 +162,7 @@
     <div class="row" id="aboutMeSection">
         <div class="col-md-1 d-xs-none d-sm-none"></div>
         <div class="col-md-10 col-xs-12">
-            <div class="row aboutMe" >
+            <div class="row aboutMe">
                 <div class="col-md-4 d-none d-md-block text-right h-100">
                     <img class="img-fluid h-100" src="images/photo_autor.svg">
                 </div>
@@ -202,7 +212,7 @@
                             <div class="form-group">
                                 <label for="form_name">First Name *</label>
                                 <input id="form_name" type="text" name="name" class="form-control is-invalid"
-                                        required="required"
+                                       required="required"
                                        data-error="Firstname is required.">
                                 <div class="help-block with-errors invalid-feedback">Please provide first name.</div>
                             </div>
@@ -212,7 +222,7 @@
                                 <label for="form_lastname">Last Name</label>
                                 <input id="form_lastname" type="text" name="surname" class="form-control"
 
-                                      >
+                                >
                                 <div class="help-block with-errors"></div>
                             </div>
                         </div>
@@ -223,7 +233,7 @@
                                 <label for="form_email">Email</label>
                                 <input id="form_email" type="email" name="email" class="form-control"
 
-                                       >
+                                >
                                 <div class="help-block with-errors"></div>
                             </div>
                         </div>
@@ -231,7 +241,7 @@
                             <div class="form-group">
                                 <label for="form_email">Phone*</label>
                                 <input id="form_tel" type="tel" name="tel" class="form-control is-invalid"
-                                        required="required"
+                                       required="required"
                                        data-error="Valid phone number is required.">
                                 <div class="help-block with-errors invalid-feedback">Please provide phone number.</div>
                             </div>
@@ -243,7 +253,7 @@
                                 <label for="form_message">Message</label>
                                 <textarea id="form_message" name="message" class="form-control"
                                           rows="4"
-                                          ></textarea>
+                                ></textarea>
                                 <div class="help-block with-errors"></div>
                             </div>
                         </div>
@@ -256,20 +266,6 @@
 
             </form>
         </div>
-        <!--<div class="col-md-7">-->
-            <!--<div class="container-fluid contactInformation">-->
-                <!--<div class="row first"></div>-->
-
-                <!--<div class="row address col-xs-12"><a href="https://www.facebook.com/tactravelllc/"><img class="imgIcon"-->
-                                                                                                         <!--src="images/fbicon.svg">TAC-->
-                    <!--Travel LLC</a></div>-->
-
-                <!--<div class="row email col-xs-12"><img class="imgIcon" src="images/ic_mail.svg">travelagentchristy@gmail.com-->
-                <!--</div>-->
-
-                <!--<div class="row phone col-xs-12"><img class="imgIcon" src="images/ic_phone.svg">501-794-6747</div>-->
-            <!--</div>-->
-        <!--</div>-->
 
         <div class="col-md-1"></div>
         <div class="col-md-3 col-xs-12">
@@ -277,17 +273,22 @@
                 <div class="row" style="height: 5%"></div>
                 <div class="row w-100" style="height: 30%">
                     <div class="col-md-12">
-                        <a href="https://www.facebook.com/tactravelllc/"><img class="fbImage" src="images/fbicon.svg"> TAC on facebook </a>
+                        <a href="https://www.facebook.com/tactravelllc/"><img class="fbImage" src="images/fbicon.svg">
+                            TAC on facebook </a>
                     </div>
                 </div>
                 <div class="row w-100" style="height: 30%">
                     <div class="col-md-12">
-                        <a href="https://www.facebook.com/tactravelllc/" style="color: white"><img class="fbImage" src="images/ic_mail.svg"> travelagentchristy@gmail.com </a>
+                        <a href="https://www.facebook.com/tactravelllc/" style="color: white"><img class="fbImage"
+                                                                                                   src="images/ic_mail.svg">
+                            travelagentchristy@gmail.com </a>
                     </div>
                 </div>
                 <div class="row w-100" style="height: 30%">
                     <div class="col-md-12">
-                        <a href="https://www.facebook.com/tactravelllc/" style="color: #54c962"><img class="fbImage" src="images/ic_phone.svg"> 501-794-6747 </a>
+                        <a href="https://www.facebook.com/tactravelllc/" style="color: #54c962"><img class="fbImage"
+                                                                                                     src="images/ic_phone.svg">
+                            501-794-6747 </a>
                     </div>
                 </div>
                 <div class="row" style="height: 5%"></div>
@@ -300,5 +301,5 @@
 
 
 </body>
-<script src="travelPage.js"></script>
+<script src="travelPage.js" async></script>
 </html>

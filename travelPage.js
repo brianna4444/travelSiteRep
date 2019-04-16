@@ -50,7 +50,6 @@ function findCity(id) {
 
         },
         success: function (data) {//array of items found
-            console.log(data);
 
            showCityCard(data, id);
 
@@ -68,7 +67,7 @@ function showCityCard(data, id) {
         let div= document.createElement("div");
         div.className= " col-md-4 pt-2 pl-2 pr-2";
         let cardDiv= document.createElement("div");
-        cardDiv.className= "card h-100 w-100";
+        cardDiv.className= "card h-100 w-100 imageBox  animated fadeIn delay-0.5s";
         let imgPart= document.createElement("img");
         cardDiv.append(imgPart);
         imgPart.className= "card-img-top img-fluid";
@@ -106,7 +105,6 @@ function findImages(cityName, id) {
 
         },
         success: function (data) {//array of items found
-            console.log(data);
             showImages(data[0]);
 
 
@@ -183,7 +181,6 @@ function getData() {
 
         });
 
-        console.log(reviews);
         changeReview(reviews);
         addReviewInfo(reviews[0].name, reviews[0].text);
         choseNavDot(0);

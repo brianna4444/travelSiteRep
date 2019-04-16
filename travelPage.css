@@ -154,8 +154,6 @@ body {
 
 .bannerInfo p {
     color: black;
-
-
 }
 
 
@@ -525,4 +523,28 @@ body {
 
 .requiredBorder{
     border-color: red;
+}
+
+.topNav{
+    background-color: rgba(43,42,39,0.96) !important;
+}
+
+.menu-elem{
+    font-size: x-large;
+    color: #718fbf !important;
+    font-family: "OleoScript-Bold";
+}
+
+.menu-elem:hover{
+    cursor: pointer;
+    color: darkgray !important;
+}
+
+.buttonHoverEffect:hover{
+    cursor: pointer;
+}
+
+.imageBox{
+    background-color: blanchedalmond !important;
+    box-shadow: 2px 2px 9px rgb(48, 48, 48) !important;
 }
