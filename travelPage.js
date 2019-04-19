@@ -67,7 +67,7 @@ function showCityCard(data, id) {
         let div= document.createElement("div");
         div.className= " col-md-4 pt-2 pl-2 pr-2";
         let cardDiv= document.createElement("div");
-        cardDiv.className= "card h-100 w-100 imageBox  animated fadeIn delay-0.5s";
+        cardDiv.className= "card h-100 w-100 imageBox animated fadeIn delay-0.5s";
         let imgPart= document.createElement("img");
         cardDiv.append(imgPart);
         imgPart.className= "card-img-top img-fluid";
@@ -82,7 +82,7 @@ function showCityCard(data, id) {
         bodyPart.append(cardTitlePart);
         cardTitlePart.className= "card-title";
         let cityName= data[i].name;
-        cardTitlePart.append(cityName);
+        cardTitlePart.append(cityName + " Photos");
 
 
         cardDiv.onclick= function(){
@@ -130,6 +130,7 @@ function showImages(data){
         img.src=image;
         img.alt= "Image";
         img.onclick= function(){
+
             showModal(image)};
         listDiv[0].appendChild(div);
         div.appendChild(imgDiv);
@@ -141,6 +142,7 @@ function showImages(data){
 }
 
 function showModal(modalImg) {
+
     $('#modal').css("display", "block");
     $('#modalImage').attr("src", modalImg);
 }

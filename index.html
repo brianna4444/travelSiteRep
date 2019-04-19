@@ -19,25 +19,27 @@
 <div class="container-fluid mainPage" style="height: auto">
 
     <nav class="row navbar navbar-expand-lg navbar-light topNav">
-        <div class="col-4 col-md-3"><img class="img-fluid " style="width: 10rem; height: 5rem" id="logo"
+        <div class="col-4 col-sm-4 col-md-4"style="padding: 0"><img class="img-fluid " style="width: 20rem; height: 9rem" id="logo"
                                          src="images/logo.png">
         </div>
+
+
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
                 aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
 
-        <div class="col-8 col-md-9 collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="col-8 col-sm-8 col-md-8 collapse navbar-collapse" style="padding-left: 20vw" id="navbarNavAltMarkup">
 
             <div class="navbar-nav">
-                <a style="color: red" class="nav-item nav-link">Site Under Construction <span
+                <a style="color: red" class="nav-item nav-link"><span
                         class="sr-only">(current)</span></a>
                 <a class="nav-item nav-link menu-elem" onclick="moveSlow('#destinationRedirect',1000)">Destination
                     Gallery <span
                             class="sr-only">(current)</span></a>
                 <a class="nav-item nav-link menu-elem" onclick="moveSlow('#reviewsRedirect',1200)">Reviews <span
                         class="sr-only">(current)</span></a>
-                <a class="nav-item nav-link menu-elem" onclick="moveSlow('#aboutRedirect',1400)">About Me <span
+                <a class="nav-item nav-link menu-elem" onclick="moveSlow('#aboutRedirect',1400)">About Us <span
                         class="sr-only">(current)</span></a>
                 <a class="nav-item nav-link menu-elem" onclick="moveSlow('#contactsRedirect',1600)">Contact <span
                         class="sr-only">(current)</span></a>
@@ -48,10 +50,11 @@
     </nav>
 
 
-    <div id="galleryImage" class="row infoSection">
+    <div id="galleryImage" style="height: auto">
+        <div class="row infoSection" style="height: auto">
         <div class="col-md-6 col-sm-4 col-xs-4"></div>
         <div class="col-md-4 col-sm-4 col-xs-4" style="height: 50%">
-            <div class="container-fluid infoBox">
+            <div class="container-fluid infoBox" style="height: auto">
 
                 <div id="info" class="row">
                     <div id="title" class="mx-auto mt-3"></div>
@@ -59,18 +62,18 @@
                 </div>
 
                 <div class="row nav mt-2">
-                    <div class="col-md-12 text-center" id="dots">
+                    <div class="col-12 text-center" id="dots">
                     </div>
 
                 </div>
 
 
-                <div class="row want">
-                    <div class="col-md-3"></div>
-                    <button class="col-md-6 wantBtn btn-danger text-center buttonHoverEffect"
+                <div class="row want" >
+                    <div class="col-3"></div>
+                    <button class="col-6 wantBtn btn-danger text-center buttonHoverEffect"
                             onclick="moveSlow('#contactsRedirect',1600)">I WANT
                     </button>
-                    <div class="col-md-3"></div>
+                    <div class="col-3"></div>
                 </div>
 
             </div>
@@ -80,6 +83,7 @@
     </div>
 
 
+</div>
 </div>
 
 <div id="destinationRedirect" class="destinationSection container-fluid" style="height: auto">
@@ -154,11 +158,18 @@
 
 <div id="aboutRedirect" class="container-fluid aboutSection" style="height: auto">
     <div class="row destinationHeader h-25">
-        <div class="col-md-2"></div>
-        <div class="col-md-10">
-            <h1 class="destinationName">About Me</h1>
+
+        <div class="col-md-12 text-center">
+            <h1 class="destinationName">About Us</h1>
         </div>
     </div>
+    <div class="row" style="height: 5vh"></div>
+    <div class="row h-25">
+
+        <p class="col-12 text-center" style="color: black; font-family: Yrsa-Bold" id="aboutParagraph">It is the mission of TAC Travel to provide services that fit our client's specific travel needs. We will also prepare the travelers for their trip and follow up through the entire process. Our employees will use their knowledge and resources in a professional and friendly manner at all times.
+        </p>
+    </div>
+    <div class="row" style="height: 5vh"></div>
     <div class="row" id="aboutMeSection">
         <div class="col-md-1 d-xs-none d-sm-none"></div>
         <div class="col-md-10 col-xs-12">
@@ -166,7 +177,8 @@
                 <div class="col-md-4 d-none d-md-block text-right h-100">
                     <img class="img-fluid h-100" src="images/photo_autor.svg">
                 </div>
-                <div class="bannerInfo d-block col-md-8">
+                <div class="bannerInfo d-block col-md-8" style="padding-top: 0 !important">
+
                     <h3>Owner/ Lead Agent</h3>
                     <p id="aboutParagraph"> I have been a travel agent since 2010. My experience started young with my
                         parents traveling in
@@ -199,8 +211,8 @@
     </div>
 
     <div class="row contactArea">
-        <div class="col-md-1"></div>
-        <div class="col-md-4 form h-90 ">
+        <div class=" col-md-1"></div>
+        <div class="col-md-4 col-sm-12 form h-90 ">
             <form id="contact-form" method="post" action="mailto:travelagentchristy@gmail.com" role="form">
 
                 <div class="messages"></div>
@@ -267,8 +279,8 @@
             </form>
         </div>
 
-        <div class="col-md-1"></div>
-        <div class="col-md-3 col-xs-12">
+        <div class="col-md-1 "></div>
+        <div class="col-md-5 col-xs-12 col-sm-12 pl-0 pr-0">
             <div id="contactSection2" class="container-fluid">
                 <div class="row" style="height: 5%"></div>
                 <div class="row w-100" style="height: 30%">

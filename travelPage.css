@@ -142,7 +142,7 @@ body {
 
 
 .bannerInfo {
-    padding: 5%;
+    padding-top: 0 !important;
     font-family: "Yrsa-Bold";
 
 
@@ -187,7 +187,7 @@ body {
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
     z-index: 1; /* Sit on top */
-    padding-top: 100px; /* Location of the box */
+    padding-top: 70px; /* Location of the box */
     left: 0;
     top: 0;
     width: 100%; /* Full width */
@@ -200,8 +200,8 @@ body {
 
 .modal-content {
     margin: auto;
-    width: 80%;
-    max-width: 700px;
+    width: 90%;
+    max-width: 800px;
 }
 
 .close {
@@ -244,12 +244,12 @@ body {
 
 .navDots {
     width: 2vw;
-    height: 2vh;
-    margin: 1%
+    height: 3vh;
+    margin: 2%
 }
 
 #dots {
-    height: 3%;
+    height: 4%;
 }
 
 
@@ -264,15 +264,17 @@ body {
 }
 
 .want {
-    height: 10%;
+    height: 20%;
+
     padding-left: 3vh;
     padding-right: 3vh;
     margin-top: 7%;
 }
 
 .wantBtn {
-    height: 80%;
+    height: 100%;
     width: 40%;
+
     font-family: "Yrsa-Bold";
 }
 
@@ -318,6 +320,7 @@ body {
 
 .fa-circle {
     color: black;
+    height: 3vh
 }
 
 .reviewInfo {
@@ -500,11 +503,11 @@ body {
     max-width: 4vh;
 }
 
-/*@media only screen and (max-width: 760px) {*/
-/*.destinationSection{*/
-/*margin-top: 16vh !important;*/
-/*}*/
-/*}*/
+@media only screen and (max-width: 970px) {
+    #navbarNavAltMarkup{
+        padding-left: 3vw !important;
+    }
+}
 
 /*@media only screen and (min-width: 760px) {
     #aboutMeSection{
@@ -515,6 +518,10 @@ body {
 
 .card{
     background-color: lightyellow !important;
+}
+
+.card:hover{
+    cursor: pointer;
 }
 
 .card-title{
@@ -547,4 +554,19 @@ body {
 .imageBox{
     background-color: blanchedalmond !important;
     box-shadow: 2px 2px 9px rgb(48, 48, 48) !important;
+}
+
+.zoom {
+    padding: 2px;
+    transition: transform .2s; /* Animation */
+    margin: 0 auto;
+}
+
+.zoom:hover {
+    transform: scale(1.1);
+padding: 4px;
+    z-index: 1;
+cursor: pointer;
+    background-color: yellow !important;
+
 }

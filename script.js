@@ -1,6 +1,6 @@
 let nameColl= "mexicoBtn";
-let cityName= "Riviera Maya";
-let cityImage= "images/mexicoBtn/RivieraMaya";
+let cityName= "Cabo San Lucas";
+let cityImage= "images/mexicoBtn/CaboSanLucas";
 let images = [];
 
 let mongo = require("mongodb").MongoClient;
