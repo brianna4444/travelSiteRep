@@ -34,6 +34,20 @@ mongo.connect(config.server.mongoAddress, function (err, client) {
 
     });
 
+    app.get('/findStory', function (req,res) {
+        let coll = db.collection("stories");
+        coll.find({}).toArray(function (err, result) {
+            res.send(result);
+        })
+    })
+
+    app.get('/findReview', function (req,res) {
+        let coll = db.collection("reviews");
+        coll.find({}).toArray(function (err, result) {
+            res.send(result);
+        })
+    })
+
     app.get('/findImages', function (req, res) {
         let collName = req.query.collection;
         let album= req.query.album;
