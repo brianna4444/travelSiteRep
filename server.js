@@ -7,6 +7,30 @@ let mongo = require("mongodb").MongoClient;
 let mongodb = require("mongodb");
 let cors= require("cors");
 let nodemailer = require('nodemailer');
+let multer= require('multer');
+
+var storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        if (req.originalUrl == "/updateAlbum"){
+            let collName= req.body.collection;
+            let path= "/images/" + collName;
+            cb(null, __dirname+ path)
+        }
+        else if (req.originalUrl == "/updateStory"){
+            cb(null, __dirname+'/uploads/stories')
+        }
+        else{                           //You can add any other if else for your different request
+            cb(null, __dirname+'/uploads')
+        }
+    },
+    filename: function (req, file, cb) {
+        let words = file.mimetype.split("/");
+        let type = words[words.length-1];
+        cb(null, file.fieldname + '-' + Date.now()+'.'+type);
+    }
+});
+
+var upload = multer({ storage: storage })
 
 app.use(cors());
 
@@ -20,6 +44,9 @@ mongo.connect(config.server.mongoAddress, function (err, client) {
         console.log("cant connect to server");
         return;
     }
+
+
+
 
     let db = client.db("config");
 
@@ -108,6 +135,28 @@ mongo.connect(config.server.mongoAddress, function (err, client) {
                 console.log('Email sent: ' + info.response);
             }
         });
+
+
+        app.post("/updateAlbum", upload.single("image"), function (req, res) {
+
+            let filename = req.file.filename;
+            let name = req.body.name;
+            let collName = req.body.collection;
+            let path= "/images/" + collName;
+            let id = req.body.id;
+            let collection = db.collection(collName);
+
+            var myquery = {'_id':ObjectID(id)};
+            var newvalues = { $set: {name: name, cityImage: __dirname+ path + "/" + filename} };
+            collection.updateOne(myquery, newvalues, function(err, res) {
+                if (err) throw err;
+            });
+        });
+
+
+
+
+
 
     })
 });
