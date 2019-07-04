@@ -4,10 +4,12 @@ let app = express();
 let port = config.server.port;
 let fs = require('fs');
 let mongo = require("mongodb").MongoClient;
+let ObjectID = require('mongodb').ObjectID;
 let mongodb = require("mongodb");
 let cors= require("cors");
 let nodemailer = require('nodemailer');
 let multer= require('multer');
+
 
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -89,6 +91,22 @@ mongo.connect(config.server.mongoAddress, function (err, client) {
 
     });
 
+
+    app.post("/updateAlbum", upload.single("image"), function (req, res) {
+        console.log(1);
+        let filename = req.file.filename;
+        let name = req.body.name;
+        let collName = req.body.collection;
+        let path= "./images/" + collName;
+        let id = req.body.id;
+        let collection = db.collection(collName);
+        var myquery = {'_id':ObjectID(id)};
+        var newvalues = { $set: {name: name, cityImage: path + "/" + filename} };
+        collection.updateOne(myquery, newvalues, function(err, res) {
+            if (err) throw err;
+        });
+    });
+
     app.get('/postMessage', function (req,res){
         let collection= "contactFormMessages";
         let firstName= req.query.firstName;
@@ -135,28 +153,6 @@ mongo.connect(config.server.mongoAddress, function (err, client) {
                 console.log('Email sent: ' + info.response);
             }
         });
-
-
-        app.post("/updateAlbum", upload.single("image"), function (req, res) {
-
-            let filename = req.file.filename;
-            let name = req.body.name;
-            let collName = req.body.collection;
-            let path= "/images/" + collName;
-            let id = req.body.id;
-            let collection = db.collection(collName);
-
-            var myquery = {'_id':ObjectID(id)};
-            var newvalues = { $set: {name: name, cityImage: __dirname+ path + "/" + filename} };
-            collection.updateOne(myquery, newvalues, function(err, res) {
-                if (err) throw err;
-            });
-        });
-
-
-
-
-
 
     })
 });
