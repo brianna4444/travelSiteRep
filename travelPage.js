@@ -187,15 +187,21 @@ function getData() {
         addReviewInfo(reviews[0].name, reviews[0].text);
         choseNavDot(0);
     })
-    $.getJSON("storyData", function (data) {
-        $.each(data, function (key, val) {
-            stories.push(val);
 
-        });
-        changeStory(stories);
-        addStoryInfo(stories[0].title, stories[0].text, stories[0].image);
-        choseDot(0);
-    });
+    $.ajax({
+        type: 'GET',
+        url: url + "/findStory",
+success: function (data){
+    $.each(data, function (key, val) {
+        stories.push(val);
+
+    })
+    changeStory(stories);
+    addStoryInfo(stories[0].title, stories[0].text, stories[0].image);
+    choseDot(0);
+}
+    })
+
 }
 
 getData();
