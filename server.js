@@ -133,11 +133,11 @@ mongo.connect(config.server.mongoAddress, function (err, client) {
     });
 
 
-    app.post("/updateReview", function (req, res) {
+    app.get("/updateReview", function (req, res) {
 
-        let id = req.body.id;
-        let name = req.body.name;
-        let text= req.body.text;
+        let id = req.query.id;
+        let name = req.query.name;
+        let text= req.query.text;
 
         let collection = db.collection("reviews");
         var myquery = {'_id':ObjectID(id)};
