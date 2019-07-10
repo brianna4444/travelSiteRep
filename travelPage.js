@@ -174,10 +174,16 @@ loadData();
 
 let reviews = [];
 let stories = [];
+let about={};
 
 
 function getData() {
-    $.getJSON("reviewData.json", function (data) {
+
+
+
+
+
+   /* $.getJSON("reviewData.json", function (data) {
         $.each(data, function (key, val) {
             reviews.push(val);
 
@@ -186,6 +192,22 @@ function getData() {
         changeReview(reviews);
         addReviewInfo(reviews[0].name, reviews[0].text);
         choseNavDot(0);
+    })*/
+
+
+    $.ajax( {
+        type: 'GET',
+        url: url+ "/findReview",
+        success: function(data) {
+            $.each(data, function (key, val) {
+                reviews.push(val);
+
+            });
+
+            changeReview(reviews);
+            addReviewInfo(reviews[0].name, reviews[0].text);
+            choseNavDot(0);
+        }
     })
 
     $.ajax({
@@ -200,6 +222,20 @@ success: function (data){
     addStoryInfo(stories[0].title, stories[0].text, stories[0].image);
     choseDot(0);
 }
+    })
+
+    $.ajax({
+        type: 'GET',
+        url: url + "/findAbout",
+        success: function (data){
+            $.each(data, function (key, val) {
+                about.push(val);
+
+            })
+
+            showAbout(about.name, about.image, about.text, about.mission);
+
+        }
     })
 
 }
@@ -313,6 +349,18 @@ function addStoryInfo(title, text, image) {
 
 setListeneers();
 
+
+/*function showAbout(name, image, text,mission){
+    let name= name;
+    let image= image;
+    let text= text;
+    let mission= mission;
+
+    $('#aboutParagraph').append(mission);
+    $('#nameImage').append(image);
+    $('#name').append(name);
+    $('#text').append(text);
+}*/
 
 function sendMessage(){
     let firstName= $('#form_name').val();

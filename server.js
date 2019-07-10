@@ -70,14 +70,21 @@ mongo.connect(config.server.mongoAddress, function (err, client) {
         coll.find({}).toArray(function (err, result) {
             res.send(result);
         })
-    })
+    });
 
     app.get('/findReview', function (req,res) {
         let coll = db.collection("reviews");
         coll.find({}).toArray(function (err, result) {
             res.send(result);
         })
-    })
+    });
+
+    app.get('/findAbout', function (req,res) {
+        let coll = db.collection("about");
+        coll.find({}).toArray(function (err, result) {
+            res.send(result);
+        })
+    });
 
     app.get('/findImages', function (req, res) {
         let collName = req.query.collection;
@@ -124,6 +131,40 @@ mongo.connect(config.server.mongoAddress, function (err, client) {
             if (err) throw err;
         });
     });
+
+
+    app.post("/updateReview", function (req, res) {
+
+        let id = req.body.id;
+        let name = req.body.name;
+        let text= req.body.text;
+
+        let collection = db.collection("reviews");
+        var myquery = {'_id':ObjectID(id)};
+        var newvalues = { $set: {name: name, text: text} };
+        collection.updateOne(myquery, newvalues, function(err, res) {
+            if (err) throw err;
+        });
+    });
+
+
+    app.post("/updateAbout", upload.single("image"), function (req, res) {
+
+        let filename = req.file.filename;
+        let name = req.body.name;
+        let text= req.body.text;
+        let path= "./images/storyImages/main";
+        let id = req.body.id;
+        let mission= req.body.mission;
+        let collection = db.collection("about");
+        var myquery = {'_id':ObjectID(id)};
+        var newvalues = { $set: {name: name, image: path + "/" + filename, text: text, mission: mission} };
+        collection.updateOne(myquery, newvalues, function(err, res) {
+            if (err) throw err;
+        });
+    });
+
+
 
     app.get('/postMessage', function (req,res){
         let collection= "contactFormMessages";
