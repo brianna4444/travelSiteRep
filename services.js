@@ -78,11 +78,6 @@ app.factory('request', function ($http) {
             })
 
 
-            /*$http.post("http://localhost:3000/updateReview", JSON.stringify(fd), {
-                'Content-Type': 'application/x-www-form-urlencoded'
-            }).then(function (data) {
-                console.log(data);
-            })*/
         },
 
         aboutRequest: function (callback) {
@@ -140,7 +135,67 @@ app.factory('request', function ($http) {
             })
 
 
-        }
+        },
+        saveNewStory: function (title, text, file) {
+            let fd = new FormData();
+            fd.append('title', title);
+            fd.append("text", text);
+
+            fd.append("file", file);  //suppose to be last
+            $http.post("http://tactravels.com:3000/saveNewStory", fd, {  //put http://tactravels.com:3000/updateAlbum instead there
+                withCredentials: true,
+                headers: {'Content-Type': undefined},
+                transformRequest: angular.identity,
+            }).then(function (data) {
+                console.log(data);
+            })
+        },
+
+        saveNewCity: function (album, name, file, files) {
+            let fd = new FormData();
+            fd.append('album', album);
+            fd.append("name", name);
+
+            fd.append("file", file);
+            fd.append("files", files);//suppose to be last
+            $http.post("http://tactravels.com:3000/saveNewCity", fd, {  //put http://tactravels.com:3000/updateAlbum instead there
+                withCredentials: true,
+                headers: {'Content-Type': undefined},
+                transformRequest: angular.identity,
+            }).then(function (data) {
+                console.log(data);
+            })
+        },
+
+        saveNewAlbum: function (album) {
+
+            let fd = {};
+            fd["album"] = album;
+
+
+            $http({
+                method: 'GET',
+                url: "http://tactravels.com:3000/saveNewAlbum?album=" + album
+            })
+
+
+        },
+
+        saveNewReview: function (name, text) {
+
+            let fd = {};
+
+            fd["name"] = name;
+            fd["text"] = text;
+
+            $http({
+                method: 'GET',
+                url: "http://tactravels.com:3000/saveNewReview?name=" + name + "&text=" + text 
+            })
+
+
+        },
+
 
     }
 });

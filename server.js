@@ -122,7 +122,7 @@ mongo.connect(config.server.mongoAddress, function (err, client) {
         let filename = req.file.filename;
         let title = req.body.title;
         let text= req.body.text;
-        let path= "./images/storyImages/main";
+        let path= "images/storyImages/main";
         let id = req.body.id;
         let collection = db.collection("stories");
         var myquery = {'_id':ObjectID(id)};
@@ -164,6 +164,28 @@ mongo.connect(config.server.mongoAddress, function (err, client) {
         });
     });
 
+
+    app.get('/findContact', function (req,res) {
+        let coll = db.collection("contact");
+        coll.find({}).toArray(function (err, result) {
+            res.send(result);
+        })
+    });
+
+    app.get("/updateContact", function (req, res) {
+
+        let id = req.query.id;
+        let facebook = req.query.facebook;
+        let email= req.query.email;
+        let phone= req.query.phone;
+
+        let collection = db.collection("contact");
+        var myquery = {'_id':ObjectID(id)};
+        var newvalues = { $set: {facebook: facebook, email: email, phone: phone} };
+        collection.updateOne(myquery, newvalues, function(err, res) {
+            if (err) throw err;
+        });
+    });
 
 
     app.get('/postMessage', function (req,res){

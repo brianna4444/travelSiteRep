@@ -32,6 +32,12 @@ $scope.rightBar= false;
     $scope.about={};
     $scope.contact={};
 
+    $scope.storyModal=false;
+    $scope.albumModal=false;
+    $scope.cityModal=false;
+    $scope.reviewModal=false;
+
+
 
     $scope.goBack= function(){
         if ($scope.showAlbum=== true) {
@@ -144,6 +150,7 @@ $scope.rightBar= false;
         $scope.reviewTab= true;
         $scope.aboutTab= false;
         $scope.contactTab= false;
+
     }
 
 
@@ -217,6 +224,37 @@ $scope.showReview= function(review){
     $scope.saveContactData= function (id, facebook, email, phone) {
         request.updateContact(id, facebook, email, phone);
 
+    }
+
+
+
+    $scope.addReview=function(){
+        $scope.reviewModal= true;
+
+    }
+    $scope.saveNewReview= function(name, text){
+        request.addNewReview(name, text);
+    }
+
+    $scope.addStory= function(){
+$scope.storyModal= true;
+    }
+    $scope.saveNewStory= function(title, text, image){
+        request.addNewStory(title, text, image);
+    }
+
+    $scope.addAlbum= function(){
+$scope.albumModal= true;
+    }
+    $scope.saveNewAlbum= function(){
+        request.addNewAlbum();
+    }
+
+    $scope.addCity= function(album){
+$scope.cityModal= true;
+    }
+    $scope.saveNewCity= function(album, name, cityImage, images){
+        request.addNewCity(album, name, cityImage, images);
     }
 
 })

@@ -228,12 +228,19 @@ success: function (data){
         type: 'GET',
         url: url + "/findAbout",
         success: function (data){
-            $.each(data, function (key, val) {
-                about.push(val);
 
-            })
+            showAbout(data[0].name, data[0].image, data[0].text, data[0].mission);
 
-            showAbout(about.name, about.image, about.text, about.mission);
+        }
+    })
+
+
+    $.ajax({
+        type: 'GET',
+        url: url + "/findContact",
+        success: function (data){
+
+            showContact(data[0].facebook, data[0].email, data[0].phone);
 
         }
     })
@@ -350,17 +357,24 @@ function addStoryInfo(title, text, image) {
 setListeneers();
 
 
-/*function showAbout(name, image, text,mission){
-    let name= name;
-    let image= image;
-    let text= text;
-    let mission= mission;
+function showAbout(name, image, text,mission){
 
-    $('#aboutParagraph').append(mission);
-    $('#nameImage').append(image);
-    $('#name').append(name);
-    $('#text').append(text);
-}*/
+
+    $('#mission').text(mission);
+    $('#nameImage').attr("src", image);
+    $('#name').text(name);
+    $('#text').text(text);
+}
+
+
+function showContact(facebook, email, phone){
+
+
+
+    $('#facebook').text(facebook);
+    $('#email').text(email);
+    $('#phone').text(phone);
+}
 
 function sendMessage(){
     let firstName= $('#form_name').val();
