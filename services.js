@@ -190,7 +190,7 @@ app.factory('request', function ($http) {
 
             $http({
                 method: 'GET',
-                url: "http://tactravels.com:3000/saveNewReview?name=" + name + "&text=" + text 
+                url: "http://tactravels.com:3000/saveNewReview?name=" + name + "&text=" + text
             })
 
 

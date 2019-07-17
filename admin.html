@@ -38,6 +38,7 @@
         <div class="list-group" id="list-tab" role="tablist">
             <a ng-click="findImages(collection)" ng-repeat="collection in collectionNames" class="list-group-item list-group-item-action " id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home">{{collection}}</a>
         </div>
+        <button class="btn-success" ng-click="addAlbum()">Add Album</button>
     </div>
 
     <div class="col-8" ng-model="rightBar" ng-if="rightBar=true">
@@ -67,6 +68,7 @@
         <div class="list-group" id="list-tab" role="tablist">
             <a ng-repeat="story in stories" ng-click="showStory(story)" class="list-group-item list-group-item-action " id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home">{{story.title}}</a>
         </div>
+        <button class="btn-success" ng-click="addStory()">Add Story</button>
     </div>
 
     <div class="col-8"  ng-if="rightBar==true">
