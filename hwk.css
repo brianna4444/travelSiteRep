@@ -59,4 +59,13 @@ img{
     background-color: white;
 }
 
+/*
+float: right - moves elements on right side of parent element
+ */
 
+.listButtons{
+    float: right;
+    text-align: center;
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+}
