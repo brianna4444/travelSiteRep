@@ -136,13 +136,13 @@ app.factory('request', function ($http) {
 
 
         },
-        saveNewStory: function (title, text, file) {
+        addNewStory: function (title, text, file) {
             let fd = new FormData();
             fd.append('title', title);
             fd.append("text", text);
 
             fd.append("file", file);  //suppose to be last
-            $http.post("http://tactravels.com:3000/saveNewStory", fd, {  //put http://tactravels.com:3000/updateAlbum instead there
+            $http.post("http://tactravels.com:3000/addNewStory", fd, {  //put http://tactravels.com:3000/updateAlbum instead there
                 withCredentials: true,
                 headers: {'Content-Type': undefined},
                 transformRequest: angular.identity,
@@ -151,14 +151,14 @@ app.factory('request', function ($http) {
             })
         },
 
-        saveNewCity: function (album, name, file, files) {
+        addNewCity: function (album, name, file, files) {
             let fd = new FormData();
             fd.append('album', album);
             fd.append("name", name);
 
             fd.append("file", file);
             fd.append("files", files);//suppose to be last
-            $http.post("http://tactravels.com:3000/saveNewCity", fd, {  //put http://tactravels.com:3000/updateAlbum instead there
+            $http.post("http://tactravels.com:3000/addNewCity", fd, {  //put http://tactravels.com:3000/updateAlbum instead there
                 withCredentials: true,
                 headers: {'Content-Type': undefined},
                 transformRequest: angular.identity,
@@ -167,7 +167,7 @@ app.factory('request', function ($http) {
             })
         },
 
-        saveNewAlbum: function (album) {
+        addNewAlbum: function (album) {
 
             let fd = {};
             fd["album"] = album;
@@ -175,13 +175,13 @@ app.factory('request', function ($http) {
 
             $http({
                 method: 'GET',
-                url: "http://tactravels.com:3000/saveNewAlbum?album=" + album
+                url: "http://tactravels.com:3000/addNewAlbum?album=" + album
             })
 
 
         },
 
-        saveNewReview: function (name, text) {
+        addNewReview: function (name, text) {
 
             let fd = {};
 
@@ -190,11 +190,70 @@ app.factory('request', function ($http) {
 
             $http({
                 method: 'GET',
-                url: "http://tactravels.com:3000/saveNewReview?name=" + name + "&text=" + text
+                url: "http://tactravels.com:3000/addNewReview?name=" + name + "&text=" + text
             })
 
 
         },
+
+        deleteReview: function (id) {
+
+            let fd = {};
+
+            fd["id"] = id;
+
+            $http({
+                method: 'GET',
+                url: "http://tactravels.com:3000/deleteReview?id=" + id
+            })
+
+
+        },
+
+        deleteStory: function (id) {
+
+            let fd = {};
+
+            fd["id"] = id;
+
+            $http({
+                method: 'GET',
+                url: "http://tactravels.com:3000/deleteStory?id=" + id
+            })
+
+
+        },
+
+        deleteAlbum: function (album) {
+
+            let fd = {};
+
+            fd["album"] = album;
+
+            $http({
+                method: 'GET',
+                url: "http://tactravels.com:3000/deleteAlbum?album=" + album
+            })
+
+
+        },
+
+        deleteCity: function (album, id) {
+
+            let fd = {};
+
+            fd["album"] = album;
+            fd["id"] = id;
+
+            $http({
+                method: 'GET',
+                url: "http://tactravels.com:3000/deleteCity?id=" + id + "&album=" + album
+            })
+
+
+        },
+
+
 
 
     }

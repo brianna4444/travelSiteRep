@@ -9,3 +9,54 @@ img{
     height: 100px;
     width: 300px
 }
+
+
+#reviewModal{
+    position: absolute;
+    z-index: 1000;
+    top: 20rem;
+    left: 20rem;
+    width: 50%;
+    height: 50%;
+    border: black solid 2px;
+    padding: 2%;
+    background-color: white;
+}
+
+#storyModal{
+    position: absolute;
+    z-index: 1000;
+    top: 20rem;
+    left: 20rem;
+    width: 50%;
+    height: 50%;
+    border: black solid 2px;
+    padding: 2%;
+    background-color: white;
+}
+
+#albumModal{
+    position: absolute;
+    z-index: 1000;
+    top: 20rem;
+    left: 20rem;
+    width: 50%;
+    height: 50%;
+    border: black solid 2px;
+    padding: 2%;
+    background-color: white;
+}
+
+#cityModal{
+    position: absolute;
+    z-index: 1000;
+    top: 20rem;
+    left: 20rem;
+    width: 50%;
+    height: 50%;
+    border: black solid 2px;
+    padding: 2%;
+    background-color: white;
+}
+
+

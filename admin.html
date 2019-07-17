@@ -34,14 +34,20 @@
 
 <div class="row" ng-if="albumTab">
 
-    <div class="col-4">
+    <div class="col-6">
         <div class="list-group" id="list-tab" role="tablist">
-            <a ng-click="findImages(collection)" ng-repeat="collection in collectionNames" class="list-group-item list-group-item-action " id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home">{{collection}}</a>
+            <div ng-repeat="collection in collectionNames" class="row list-group-item list-group-item-action " id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home">
+                <span class="col-7"  ng-click="findImages(collection)">{{collection}} </span>
+                <button class="col-1 btn-danger" ng-click="deleteAlbum(collection)">X</button>
+            <button class="col-3 btn-info" ng-click="addCity()">add city</button>
         </div>
+        </div>
+<span>
         <button class="btn-success" ng-click="addAlbum()">Add Album</button>
+    </span>
     </div>
 
-    <div class="col-8" ng-model="rightBar" ng-if="rightBar=true">
+    <div class="col-6" ng-model="rightBar" ng-if="rightBar=true">
         <div style="padding: 3%; margin-bottom: 3%" class="tab-content" ng-repeat="city in cities" id="nav-tabContent">
             <div class="tab-pane fade show active" id="list-home" role="tabpanel" aria-labelledby="list-home-list"></div>
             <div class="row" >
@@ -54,9 +60,37 @@
             <div class="row">
                 <button class="col-12 btn btn-success" ng-click="saveCityData(city.name, city.cityImage, city._id)" >save</button>
 
+                <button class="col-12 btn btn-danger" ng-click="deleteCity(collection, city._id)">delete</button>
             </div>
 
         </div>
+    </div>
+
+    <div id="albumModal" ng-if="albumModal">
+        <div class="row">
+            <input ng-model="newAlbum" placeholder="Album Name">
+        </div>
+        <div class="row">
+            <button class="col-6 btn-success" ng-click="saveNewAlbum(newAlbum.name)" >save</button>
+            <button class="col-6 btn-danger" ng-click="closeModal()" >cancel</button>
+
+        </div>
+    </div>
+
+    <div id="cityModal" ng-if="cityModal">
+        <div class="row" >
+            <input class="col-6" ng-model="newCity.name">
+            <div class="col-6">
+                <img ng-src="{{newCity.cityImage}}" class="row col-12">
+                <input type="file" ng-file-select="onFileSelect($files)" ng-model="newCity.cityImage" class="row col-12">
+            </div>
+        </div>
+        <div class="row">
+            <button class="col-12 btn btn-success" ng-click="saveNewCity( newCity.name, newCity.cityImage)" >save</button>
+            <button class="col-12 btn btn-danger" ng-click="closeModal()" >cancel</button>
+
+        </div>
+
     </div>
 </div>
 
@@ -78,18 +112,36 @@
                 <input class="col-6" ng-model="story.title">
                 <div class="col-6">
                     <img ng-src="{{story.image}}" class="row col-12">
-                    <input type="file" ng-file-select="onFileSelect($files)" ng-model="story.image" class="row col-12">
+                    <input  type="file" ng-file-select="onFileSelect($files)" ng-model="story.image" class="row col-12">
                 </div>
             </div>
             <div class="row">
                 <textarea class="col-12" ng-model="story.text"></textarea>
             </div>
             <div class="row">
-                <button class="col-12" ng-click="saveStoryData(story._id, story.title, story.text, story.image)" >save</button>
-
+                <button class="col-12 btn btn-success" ng-click="saveStoryData(story._id, story.title, story.text, story.image)" >save</button>
+                <button class="col-12 btn btn-danger" ng-click="deleteStory(story._id)">delete</button>
             </div>
 
         </div>
+    </div>
+
+    <div id="storyModal" ng-if="modal">
+        <div class="row">
+            <input placeholder="Story Title" class="col-6" ng-model="newStory.title">
+            <div class="col-6">
+                <img ng-src="{{newStory.image}}" class="row col-12">
+                <input type="file" ng-file-select="onFileSelect($files)" ng-model="story.image" class="row col-12">
+            </div>
+        </div>
+        <div class="row">
+            <textarea placeholder="Story Text" class="col-12" ng-model="newStory.text"></textarea>
+        </div>
+        <div class="row">
+            <button class="col-6 btn-success" ng-click="saveNewStory(newStory.title, newStory.text, newStory.image)" >save</button>
+            <button class="col-6 btn-danger" ng-click="closeModal()" >cancel</button>
+        </div>
+
     </div>
 </div>
 
@@ -114,10 +166,24 @@
                 <textarea class="col-12" ng-model="review.text"></textarea>
             </div>
             <div class="row">
-                <button class="col-12" ng-click="saveReviewData(review._id, review.name, review.text)" >save</button>
-
+                <button class="col-6 btn-success" ng-click="saveReviewData(review._id, review.name, review.text)" >save</button>
+                <button class="col-6 btn-danger" ng-click="deleteReview(review._id)">delete</button>
             </div>
 
+        </div>
+    </div>
+
+    <div id="reviewModal" ng-if="modal">
+        <div class="row">
+             <input placeholder="Name" class="col-12" ng-model="newReview.name">
+
+        </div>
+        <div class="row">
+            <textarea placeholder="Review" class="col-12" ng-model="newReview.text"></textarea>
+        </div>
+        <div class="row">
+            <button class="col-6 btn-success" ng-click="saveNewReview(newReview.name, newReview.text)" >save</button>
+            <button class="col-6 btn-danger" ng-click="closeModal()" >cancel</button>
         </div>
     </div>
 </div>
@@ -144,7 +210,7 @@
         </div>
 
         <div class="row">
-            <button class="col-12" ng-click="saveAboutData(about._id, about.name, about.image, about.text, about.mission)" >save</button>
+            <button class="col-12 btn btn-success" ng-click="saveAboutData(about._id, about.name, about.image, about.text, about.mission)" >save</button>
 
         </div>
 
@@ -171,7 +237,7 @@
         </div>
 
         <div class="row">
-            <button class="col-12" ng-click="saveContactData(contact._id, contact.facebook, contact.email, contact.phone)" >save</button>
+            <button class="col-12 btn btn-success" ng-click="saveContactData(contact._id, contact.facebook, contact.email, contact.phone)" >save</button>
 
         </div>
 

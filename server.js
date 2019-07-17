@@ -187,6 +187,118 @@ mongo.connect(config.server.mongoAddress, function (err, client) {
         });
     });
 
+    app.post("/saveNewStory", upload.single("image"), function (req, res) {
+
+        let filename = req.file.filename;
+        let title = req.body.title;
+        let text= req.body.text;
+        let path= "images/storyImages/main";
+        let id = req.body.id;
+        let collection = db.collection("stories");
+        var myquery = {'_id':ObjectID(id)};
+        var newvalues = { $set: {title: title, text: text, image: path + "/" + filename} };
+        collection.updateOne(myquery, newvalues, function(err, res) {
+            if (err) throw err;
+        });
+    });
+
+
+    app.post("/saveNewCity", upload.single("image"), function (req, res) {
+
+        let filename = req.file.filename;
+        let title = req.body.title;
+        let text= req.body.text;
+        let path= "images/storyImages/main";
+        let id = req.body.id;
+        let collection = db.collection("stories");
+        var myquery = {'_id':ObjectID(id)};
+        var newvalues = { $set: {title: title, text: text, image: path + "/" + filename} };
+        collection.updateOne(myquery, newvalues, function(err, res) {
+            if (err) throw err;
+        });
+    });
+
+    app.get("/addNewReview", function (req, res) {
+
+        let name = req.query.name;
+        let text = req.query.text;
+
+
+        let collection = db.collection("reviews");
+
+        var newvalues = {name: name, text: text};
+        collection.insertOne(newvalues, function(err, res) {
+            if (err) throw err;
+
+        });
+        res.send("success");
+    });
+
+    app.get("/addNewAlbum", function (req, res) {
+
+        let album = req.query.album;
+
+        db.createCollection(album, function(err, res) {
+            if (err) throw err;
+
+        });
+        res.send("success");
+    });
+
+    app.get("/deleteAlbum", function (req, res) {
+
+        let album = req.query.album;
+
+
+        db.collection.remove(album, function(err, res) {
+            if (err) throw err;
+
+        });
+        res.send("success");
+    });
+
+
+    app.get("/deleteStory", function (req, res) {
+
+        let id = req.query.id;
+        let collection = db.collection("stories");
+        var myquery = {'_id':ObjectID(id)};
+
+        collection.deleteOne (myquery, function(err, res) {
+            if (err) throw err;
+
+        });
+        res.send("success");
+    });
+
+    app.get("/deleteReview", function (req, res) {
+
+        let id = req.query.id;
+        let collection = db.collection("reviews");
+        var myquery = {'_id':ObjectID(id)};
+
+        collection.remove (myquery, function(err, res) {
+            if (err) throw err;
+
+        });
+        res.send("success");
+    });
+
+    app.get("/deleteCity", function (req, res) {
+
+        let id = req.query.id;
+        let album= req.query.album;
+        let collection = db.collection(album);
+        var myquery = {'_id':ObjectID(id)};
+
+        collection.deleteOne (myquery, function(err, res) {
+            if (err) throw err;
+
+        });
+        res.send("success");
+    });
+
+
 
     app.get('/postMessage', function (req,res){
         let collection= "contactFormMessages";

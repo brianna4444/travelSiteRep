@@ -32,10 +32,16 @@ $scope.rightBar= false;
     $scope.about={};
     $scope.contact={};
 
-    $scope.storyModal=false;
+    $scope.modal=false;
     $scope.albumModal=false;
     $scope.cityModal=false;
-    $scope.reviewModal=false;
+
+
+
+    $scope.newReview= {};
+    $scope.newStory={};
+    $scope.newAlbum="";
+    $scope.newCity={};
 
 
 
@@ -229,18 +235,26 @@ $scope.showReview= function(review){
 
 
     $scope.addReview=function(){
-        $scope.reviewModal= true;
+        $scope.modal= true;
 
     }
     $scope.saveNewReview= function(name, text){
         request.addNewReview(name, text);
+        $scope.modal= false;
+    }
+    $scope.deleteReview= function(id){
+        request.deleteReview(id);
     }
 
     $scope.addStory= function(){
-$scope.storyModal= true;
+$scope.modal= true;
     }
     $scope.saveNewStory= function(title, text, image){
         request.addNewStory(title, text, image);
+        $scope.modal= false;
+    }
+    $scope.deleteStory= function(id){
+        request.deleteStory(id);
     }
 
     $scope.addAlbum= function(){
@@ -248,13 +262,27 @@ $scope.albumModal= true;
     }
     $scope.saveNewAlbum= function(){
         request.addNewAlbum();
+        $scope.modal= false;
+    }
+    $scope.deleteAlbum= function(id){
+        request.deleteAlbum(id);
     }
 
-    $scope.addCity= function(album){
+    $scope.addCity= function(){
 $scope.cityModal= true;
     }
     $scope.saveNewCity= function(album, name, cityImage, images){
         request.addNewCity(album, name, cityImage, images);
+        $scope.modal= false;
+    }
+    $scope.deleteCity= function(album, id){
+        request.deleteCity(album, id);
+    }
+
+    $scope.closeModal= function(){
+        $scope.modal= false;
+        $scope.albumModal= false;
+        $scope.cityModal= false;
     }
 
 })
