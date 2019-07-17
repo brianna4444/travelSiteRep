@@ -245,6 +245,9 @@ mongo.connect(config.server.mongoAddress, function (err, client) {
         res.send("success");
     });
 
+    /*
+    do it by sending id as you did with others
+     */
     app.get("/deleteAlbum", function (req, res) {
 
         let album = req.query.album;
@@ -262,9 +265,9 @@ mongo.connect(config.server.mongoAddress, function (err, client) {
 
         let id = req.query.id;
         let collection = db.collection("stories");
-        var myquery = {'_id':ObjectID(id)};
+        var myquery = {'_id':new ObjectID(id)};
 
-        collection.deleteOne (myquery, function(err, res) {
+        collection.deleteOne(myquery, function(err, res) {
             if (err) throw err;
 
         });
@@ -275,7 +278,7 @@ mongo.connect(config.server.mongoAddress, function (err, client) {
 
         let id = req.query.id;
         let collection = db.collection("reviews");
-        var myquery = {'_id':ObjectID(id)};
+        var myquery = {'_id':new ObjectID(id)};
 
         collection.remove (myquery, function(err, res) {
             if (err) throw err;
@@ -289,7 +292,7 @@ mongo.connect(config.server.mongoAddress, function (err, client) {
         let id = req.query.id;
         let album= req.query.album;
         let collection = db.collection(album);
-        var myquery = {'_id':ObjectID(id)};
+        var myquery = {'_id':new ObjectID(id)};
 
         collection.deleteOne (myquery, function(err, res) {
             if (err) throw err;
