@@ -112,6 +112,7 @@ $scope.rightBar= false;
         $scope.reviewTab= false;
         $scope.aboutTab= false;
         $scope.contactTab= false;
+        $scope.modal=false;
     }
 
     $scope.showStoriesTab=function(){
@@ -121,6 +122,7 @@ $scope.rightBar= false;
         $scope.reviewTab= false;
         $scope.aboutTab= false;
         $scope.contactTab= false;
+        $scope.modal=false;
     }
 
     $scope.findStory= function() {
@@ -156,6 +158,7 @@ $scope.rightBar= false;
         $scope.reviewTab= true;
         $scope.aboutTab= false;
         $scope.contactTab= false;
+        $scope.modal=false;
 
     }
 
@@ -187,6 +190,7 @@ $scope.showReview= function(review){
         $scope.reviewTab= false;
         $scope.contactTab= false;
         $scope.aboutTab= true;
+        $scope.modal=false;
     }
 
     $scope.findAbout= function(){
@@ -204,7 +208,7 @@ $scope.showReview= function(review){
         urltoFile(strImage, filename).then(function (imageFile) {
             request.updateAbout(id, name, imageFile, text, mission);
         });
-    }
+    };
 
 
     $scope.showContactTab= function(){
@@ -214,7 +218,8 @@ $scope.showReview= function(review){
         $scope.reviewTab= false;
         $scope.aboutTab= false;
         $scope.contactTab= true;
-    }
+        $scope.modal=false;
+    };
 
 
     $scope.findContact= function(){

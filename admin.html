@@ -38,8 +38,8 @@
         <div class="list-group" id="list-tab" role="tablist">
             <div ng-repeat="collection in collectionNames" class="row list-group-item list-group-item-action " id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home">
                 <span class="col-7"  ng-click="findImages(collection)">{{collection}} </span>
-                <button class="col-1 btn-danger" ng-click="deleteAlbum(collection)">X</button>
-            <button class="col-3 btn-info" ng-click="addCity()">add city</button>
+                <button class="col-1 btn-danger listButtons" ng-click="deleteAlbum(collection)">X</button>
+                <button class="col-3 btn-info listButtons" ng-click="addCity()">add city</button>
         </div>
         </div>
 <span>
