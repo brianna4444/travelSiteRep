@@ -146,6 +146,7 @@ $scope.rightBar= false;
 
         urltoFile(strImage, filename).then(function (imageFile) {
             request.updateStory(imageFile, id, title, text);
+            $scope.showStoriesTab();
         });
     }
 
@@ -179,6 +180,7 @@ $scope.showReview= function(review){
 
     $scope.saveReviewData= function (id, name, text) {
     request.updateReview(id, name, text);
+        $scope.showReviewsTab();
 
     }
 
@@ -207,6 +209,7 @@ $scope.showReview= function(review){
 
         urltoFile(strImage, filename).then(function (imageFile) {
             request.updateAbout(id, name, imageFile, text, mission);
+            $scope.showAboutTab();
         });
     };
 
@@ -234,6 +237,7 @@ $scope.showReview= function(review){
 
     $scope.saveContactData= function (id, facebook, email, phone) {
         request.updateContact(id, facebook, email, phone);
+        $scope.showContactTab();
 
     }
 
@@ -245,10 +249,14 @@ $scope.showReview= function(review){
     }
     $scope.saveNewReview= function(name, text){
         request.addNewReview(name, text);
+        $scope.showReviewsTab();
         $scope.modal= false;
     }
     $scope.deleteReview= function(id){
         request.deleteReview(id);
+        $scope.showReviewsTab();
+        $scope.rightBar= false;
+
     }
 
     $scope.addStory= function(){
@@ -256,10 +264,12 @@ $scope.modal= true;
     }
     $scope.saveNewStory= function(title, text, image){
         request.addNewStory(title, text, image);
+        $scope.showStoriesTab();
         $scope.modal= false;
     }
     $scope.deleteStory= function(id){
         request.deleteStory(id);
+        $scope.showStoriesTab();
     }
 
     $scope.addAlbum= function(){
@@ -267,10 +277,12 @@ $scope.albumModal= true;
     }
     $scope.saveNewAlbum= function(){
         request.addNewAlbum();
+        $scope.showAlbumsTab();
         $scope.modal= false;
     }
     $scope.deleteAlbum= function(id){
         request.deleteAlbum(id);
+        $scope.showAlbumsTab();
     }
 
     $scope.addCity= function(){
@@ -278,10 +290,12 @@ $scope.cityModal= true;
     }
     $scope.saveNewCity= function(album, name, cityImage, images){
         request.addNewCity(album, name, cityImage, images);
+        $scope.showAlbumsTab();
         $scope.modal= false;
     }
     $scope.deleteCity= function(album, id){
         request.deleteCity(album, id);
+        $scope.showAlbumsTab();
     }
 
     $scope.closeModal= function(){
