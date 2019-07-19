@@ -1,4 +1,4 @@
-let nameColl= "mexicoBtn";
+let nameColl= "jamaiBtn";
 let cityName= "Cabo San Lucas";
 let cityImage= "images/mexicoBtn/CaboSanLucas";
 let images = [];

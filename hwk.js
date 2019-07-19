@@ -293,9 +293,10 @@ $scope.modal= true;
     }
     $scope.deleteStory= function(id){
         $scope.deleteModal= false;
+        $scope.rightBar= false;
         request.deleteStory(id);
         $scope.showStoriesTab();
-        $scope.rightBar= false;
+
     }
 
     $scope.addAlbum= function(){
