@@ -28,6 +28,7 @@ $scope.rightBar= false;
     $scope.title="";
     $scope.story={};
     $scope.reviews=[];
+    $scope.reviewIndex=0;
     $scope.review={};
     $scope.about={};
     $scope.contact={};
@@ -35,6 +36,8 @@ $scope.rightBar= false;
     $scope.modal=false;
     $scope.albumModal=false;
     $scope.cityModal=false;
+
+    $scope.deleteModal= false;
 
 
 
@@ -172,8 +175,9 @@ $scope.findReview= function(){
     })
 }
 
-$scope.showReview= function(review){
+$scope.showReview= function(review, index){
         $scope.review= review;
+        $scope.reviewIndex= index;
         $scope.rightBar= true;
 }
 
@@ -209,7 +213,7 @@ $scope.showReview= function(review){
 
         urltoFile(strImage, filename).then(function (imageFile) {
             request.updateAbout(id, name, imageFile, text, mission);
-            $scope.showAboutTab();
+
         });
     };
 
@@ -237,7 +241,7 @@ $scope.showReview= function(review){
 
     $scope.saveContactData= function (id, facebook, email, phone) {
         request.updateContact(id, facebook, email, phone);
-        $scope.showContactTab();
+
 
     }
 
@@ -252,10 +256,17 @@ $scope.showReview= function(review){
         $scope.showReviewsTab();
         $scope.modal= false;
     }
+
+    $scope.delete= function(){
+        $scope.deleteModal= true;
+    }
+
     $scope.deleteReview= function(id){
+        $scope.deleteModal= false;
         request.deleteReview(id);
-        $scope.showReviewsTab();
+        $scope.reviews.splice($scope.reviewIndex,1);
         $scope.rightBar= false;
+
 
     }
 
@@ -263,13 +274,28 @@ $scope.showReview= function(review){
 $scope.modal= true;
     }
     $scope.saveNewStory= function(title, text, image){
-        request.addNewStory(title, text, image);
+
+        let strImage = image;
+        let filename = "image";
+
+        urltoFile(strImage, filename).then(function (imageFile) {
+            request.addNewStory(title, text, imageFile);
+            $scope.showStoriesTab();
+        });
+
+
         $scope.showStoriesTab();
+
         $scope.modal= false;
+
+
+
     }
     $scope.deleteStory= function(id){
+        $scope.deleteModal= false;
         request.deleteStory(id);
         $scope.showStoriesTab();
+        $scope.rightBar= false;
     }
 
     $scope.addAlbum= function(){
@@ -304,4 +330,9 @@ $scope.cityModal= true;
         $scope.cityModal= false;
     }
 
+
+    $scope.closeDeleteModal= function(){
+        $scope.deleteModal= false;
+
+    }
 })

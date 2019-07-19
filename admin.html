@@ -38,7 +38,7 @@
         <div class="list-group" id="list-tab" role="tablist">
             <div ng-repeat="collection in collectionNames" class="row list-group-item list-group-item-action " id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home">
                 <span class="col-7"  ng-click="findImages(collection)">{{collection}} </span>
-                <button class="col-1 btn-danger listButtons" ng-click="deleteAlbum(collection)">X</button>
+                <button class="col-1 btn-danger listButtons" ng-click="delete()">X</button>
                 <button class="col-3 btn-info listButtons" ng-click="addCity()">add city</button>
         </div>
         </div>
@@ -92,6 +92,12 @@
         </div>
 
     </div>
+
+    <div ng-if="deleteModal" class="row" id="deleteModal">
+        <p class="col-12">Are you sure you want to delete?</p>
+        <button ng-click="closeDeleteModal()" class=" btn btn-info col-6">cancel</button>
+        <button ng-click="deleteAlbum(collection)" class="btn btn-danger col-6">delete</button>
+    </div>
 </div>
 
 
@@ -120,7 +126,7 @@
             </div>
             <div class="row">
                 <button class="col-12 btn btn-success" ng-click="saveStoryData(story._id, story.title, story.text, story.image)" >save</button>
-                <button class="col-12 btn btn-danger" ng-click="deleteStory(story._id)">delete</button>
+                <button class="col-12 btn btn-danger" ng-click="delete()">delete</button>
             </div>
 
         </div>
@@ -131,7 +137,7 @@
             <input placeholder="Story Title" class="col-6" ng-model="newStory.title">
             <div class="col-6">
                 <img ng-src="{{newStory.image}}" class="row col-12">
-                <input type="file" ng-file-select="onFileSelect($files)" ng-model="story.image" class="row col-12">
+                <input type="file" ng-file-select="onFileSelect($files)" ng-model="newStory.image" class="row col-12">
             </div>
         </div>
         <div class="row">
@@ -143,6 +149,12 @@
         </div>
 
     </div>
+
+    <div ng-if="deleteModal" class="row" id="deleteModal">
+        <p class="col-12">Are you sure you want to delete?</p>
+        <button ng-click="closeDeleteModal()" class=" btn btn-info col-6">cancel</button>
+        <button ng-click="deleteStory(story._id)" class="btn btn-danger col-6">delete</button>
+    </div>
 </div>
 
 
@@ -150,7 +162,7 @@
 
     <div class="col-4">
         <div class="list-group" id="list-tab" role="tablist">
-            <a ng-repeat="review in reviews" ng-click="showReview(review)" class="list-group-item list-group-item-action " id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home">{{review.name}}</a>
+            <a ng-repeat="review in reviews" ng-click="showReview(review, $index)" class="list-group-item list-group-item-action " id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home">{{review.name}}</a>
         </div>
         <button class="btn-success" ng-click="addReview()">Add Review</button>
     </div>
@@ -167,7 +179,7 @@
             </div>
             <div class="row">
                 <button class="col-6 btn-success" ng-click="saveReviewData(review._id, review.name, review.text)" >save</button>
-                <button class="col-6 btn-danger" ng-click="deleteReview(review._id)">delete</button>
+                <button class="col-6 btn-danger" ng-click="delete()">delete</button>
             </div>
 
         </div>
@@ -185,6 +197,12 @@
             <button class="col-6 btn-success" ng-click="saveNewReview(newReview.name, newReview.text)" >save</button>
             <button class="col-6 btn-danger" ng-click="closeModal()" >cancel</button>
         </div>
+    </div>
+
+    <div ng-if="deleteModal" class="row" id="deleteModal">
+        <p class="col-12">Are you sure you want to delete?</p>
+        <button ng-click="closeDeleteModal()" class=" btn btn-info col-6">cancel</button>
+        <button ng-click="deleteReview(review._id)" class="btn btn-danger col-6">delete</button>
     </div>
 </div>
 

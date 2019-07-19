@@ -13,14 +13,23 @@ let multer= require('multer');
 
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        if (req.originalUrl == "/updateAlbum"){
+        if (req.originalUrl == "/updateAlbum" || req.originalUrl== "/addNewAlbum"){
             let collName= req.body.collection;
             let path= "/images/" + collName;
             cb(null, __dirname+ path)
         }
-        else if (req.originalUrl == "/updateStory"){
+        else if (req.originalUrl == "/updateStory" || req.originalUrl == "/addNewStory"){
 
             cb(null, __dirname+ "/images/storyImages/main")
+        }
+        else if (req.originalUrl == "/addNewCity"){
+            let collName= req.body.collection;
+            let path= "/images/" + collName;
+            cb(null, __dirname+ path)
+        }
+        else if (req.originalUrl == "/updateAbout"){
+
+            cb(null, __dirname+ "/images")
         }
         else{                           //You can add any other if else for your different request
 
@@ -153,11 +162,11 @@ mongo.connect(config.server.mongoAddress, function (err, client) {
         let filename = req.file.filename;
         let name = req.body.name;
         let text= req.body.text;
-        let path= "./images/storyImages/main";
+        let path= "./images";
         let id = req.body.id;
         let mission= req.body.mission;
         let collection = db.collection("about");
-        var myquery = {'_id':ObjectID(id)};
+        var myquery = {'_id': new ObjectID(id)};
         var newvalues = { $set: {name: name, image: path + "/" + filename, text: text, mission: mission} };
         collection.updateOne(myquery, newvalues, function(err, res) {
             if (err) throw err;
@@ -187,23 +196,23 @@ mongo.connect(config.server.mongoAddress, function (err, client) {
         });
     });
 
-    app.post("/saveNewStory", upload.single("image"), function (req, res) {
+    app.post("/addNewStory", upload.single("image"), function (req, res) {
 
         let filename = req.file.filename;
         let title = req.body.title;
         let text= req.body.text;
         let path= "images/storyImages/main";
-        let id = req.body.id;
+
         let collection = db.collection("stories");
-        var myquery = {'_id':ObjectID(id)};
-        var newvalues = { $set: {title: title, text: text, image: path + "/" + filename} };
-        collection.updateOne(myquery, newvalues, function(err, res) {
+
+        var newvalues = {title: title, text: text, image: path + "/" + filename} ;
+        collection.insertOne(newvalues, function(err, res) {
             if (err) throw err;
         });
     });
 
 
-    app.post("/saveNewCity", upload.single("image"), function (req, res) {
+    app.post("/addNewCity", upload.single("image"), function (req, res) {
 
         let filename = req.file.filename;
         let title = req.body.title;
@@ -211,9 +220,9 @@ mongo.connect(config.server.mongoAddress, function (err, client) {
         let path= "images/storyImages/main";
         let id = req.body.id;
         let collection = db.collection("stories");
-        var myquery = {'_id':ObjectID(id)};
+        var myquery = {'_id':new ObjectID(id)};
         var newvalues = { $set: {title: title, text: text, image: path + "/" + filename} };
-        collection.updateOne(myquery, newvalues, function(err, res) {
+        collection.insertOne(myquery, newvalues, function(err, res) {
             if (err) throw err;
         });
     });

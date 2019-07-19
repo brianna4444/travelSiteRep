@@ -141,7 +141,7 @@ app.factory('request', function ($http) {
             fd.append('title', title);
             fd.append("text", text);
 
-            fd.append("file", file);  //suppose to be last
+            fd.append("image", file);  //suppose to be last
             $http.post("http://tactravels.com:3000/addNewStory", fd, {  //put http://tactravels.com:3000/updateAlbum instead there
                 withCredentials: true,
                 headers: {'Content-Type': undefined},
