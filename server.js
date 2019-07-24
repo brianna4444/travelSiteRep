@@ -61,7 +61,7 @@ mongo.connect(config.server.mongoAddress, function (err, client) {
 
 
 
-    let db = client.db("config");
+    let db = client.db(config.server.database);
 
     app.get('/findCity', function (req, res) {
         let collName = req.query.collection;
@@ -111,7 +111,6 @@ mongo.connect(config.server.mongoAddress, function (err, client) {
 
 
     app.post("/updateAlbum", upload.single("image"), function (req, res) {
-        console.log(1);
         let filename = req.file.filename;
         let name = req.body.name;
         let collName = req.body.collection;
@@ -158,7 +157,6 @@ mongo.connect(config.server.mongoAddress, function (err, client) {
 
 
     app.post("/updateAbout", upload.single("image"), function (req, res) {
-
         let filename = req.file.filename;
         let name = req.body.name;
         let text= req.body.text;
