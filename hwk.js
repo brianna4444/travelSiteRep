@@ -46,6 +46,9 @@ $scope.rightBar= false;
     $scope.newAlbum="";
     $scope.newCity={};
 
+    $scope.imageBar= false;
+    $scope.city= {};
+
 
 
     $scope.goBack= function(){
@@ -336,4 +339,35 @@ $scope.cityModal= true;
         $scope.deleteModal= false;
 
     }
+
+
+    $scope.showCityImages= function(city, collection, id){
+        $scope.imageBar= true;
+        $scope.city= city;
+        $scope.collection= collection;
+        $scope.id= id;
+
+    }
+
+
+    $scope.updateNewImage= function(image){
+
+        let strImage = image;
+        let filename = "image";
+        let city= $scope.city.name;
+        let collection= $scope.collection;
+        let id= $scope.id;
+
+
+        urltoFile(strImage, filename).then(function (imageFile) {
+            request.updateImages(imageFile, city, collection, id);
+
+        });
+
+
+
+
+
+}
+
 })

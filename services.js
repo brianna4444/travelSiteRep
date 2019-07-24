@@ -253,6 +253,23 @@ app.factory('request', function ($http) {
 
         },
 
+        updateImages: function (file, city, collection) {
+            let fd = new FormData();
+
+            fd.append('collection', collection);
+            fd.append('city', city);
+            fd.append('id', id);
+            fd.append("image", file);  //suppose to be last
+            $http.post("http://tactravels.com:3000/updateImages", fd, {  //put http://tactravels.com:3000/updateAlbum instead there
+                withCredentials: true,
+                headers: {'Content-Type': undefined},
+                transformRequest: angular.identity,
+            }).then(function (data) {
+                console.log(data);
+            })
+        },
+
+
 
 
 
