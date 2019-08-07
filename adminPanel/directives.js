@@ -84,10 +84,10 @@ app.directive("imgUpload",function($http,$compile){
             '<div class="dropzone">'+
             '<p class="msg">Click or Drag and Drop files to upload</p>'+
             '</div>'+
-            '<button class="btn" ng-click="updateImages(data.src)">upload all</button>'
+            '<button class="btn" ng-click="updateImages(data.src)">upload all</button>'+
             '<div class="preview clearfix">'+
             '<div class="previewData clearfix" ng-repeat="data in previewData track by $index">'+
-            '<img src={{data.src}}></img>'+
+            '<img src={{data.src}}>'+
             '<div class="previewDetails">'+
             '<div class="detail"><b>Name : </b>{{data.name}}</div>'+
             '<div class="detail"><b>Type : </b>{{data.type}}</div>'+
@@ -182,4 +182,4 @@ app.directive("imgUpload",function($http,$compile){
             }
         }
     }
-});
+}});
