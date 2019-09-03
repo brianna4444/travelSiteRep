@@ -31,6 +31,12 @@ var storage = multer.diskStorage({
 
             cb(null, __dirname+ "/images")
         }
+        else if (req.originalUrl == "/updateImages"){
+            let collName= req.body.collection;
+            let city= req.body.city;
+            let path= "/images/" + collName + "/"+ city;
+            cb(null, __dirname+ path)
+        }
         else{                           //You can add any other if else for your different request
 
             cb(null, __dirname+'/uploads')
@@ -308,16 +314,19 @@ mongo.connect(config.server.mongoAddress, function (err, client) {
         res.send("success");
     });
 
+    app.get("/test", function(req,res){
+        res.send("test");
+    })
 
     app.post("/updateImages", upload.single("image"), function (req, res) {
         let filename = req.file.filename;
         let city = req.body.city;
         let collName = req.body.collection;
-        let path= "./images/" + collName + "/"+ city;
+        let path= "images/" + collName + "/"+ city;
         let id = req.body.id;
         let collection = db.collection(collName);
         var myquery = {'_id':ObjectID(id)};
-        var newvalues = { $addToSet: {images: path + "/" + filename} };
+        var newvalues = { $addToSet: {"images": path + "/" + filename} };
         collection.updateOne(myquery, newvalues, function(err, res) {
             if (err) throw err;
         });

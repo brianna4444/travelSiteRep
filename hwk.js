@@ -1,7 +1,7 @@
 let app = angular.module("AngApp",[]);
 let url= "http://tactravels.com:3000";
 
-app.controller("AngContr", function ($scope, request) {
+app.controller("AngContr", function ($scope, request, $rootScope) {
 
 
 $scope.collectionNames = ["jamaicaBtn", "mexicoBtn", "dominicanRepublicBtn", "cruiseBtn"];
@@ -350,13 +350,15 @@ $scope.cityModal= true;
     }
 
 
-    $scope.updateNewImage= function(image){
+
+
+    $rootScope.updateNewImage= function(image){
 
         let strImage = image;
         let filename = "image";
         let city= $scope.city.name;
         let collection= $scope.collection;
-        let id= $scope.id;
+        let id= $scope.city['_id'];
 
 
         urltoFile(strImage, filename).then(function (imageFile) {

@@ -253,7 +253,7 @@ app.factory('request', function ($http) {
 
         },
 
-        updateImages: function (file, city, collection) {
+        updateImages: function (file, city, collection, id) {
             let fd = new FormData();
 
             fd.append('collection', collection);

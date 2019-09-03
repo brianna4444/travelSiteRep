@@ -1,6 +1,7 @@
 app.directive("ngFileSelect", function(fileReader, $timeout, $rootScope) {
     return {
         scope: {
+
             ngModel: '='
         },
         link: function($scope, el) {
@@ -73,10 +74,11 @@ app.factory("fileReader", function($q, $log) {
 });
 
 
-app.directive("imgUpload",function($http,$compile){
+app.directive("imgUpload",function($http,$compile, $rootScope){
     return {
         restrict : 'AE',
         scope : {
+
             url : "@",
             method : "@"
         },
@@ -84,7 +86,7 @@ app.directive("imgUpload",function($http,$compile){
             '<div class="dropzone">'+
             '<p class="msg">Click or Drag and Drop files to upload</p>'+
             '</div>'+
-            '<button class="btn" ng-click="updateImages(data.src)">upload all</button>'
+            '<button class="btn" ng-click="updateImages(data.src)">upload all</button>'+
             '<div class="preview clearfix">'+
             '<div class="previewData clearfix" ng-repeat="data in previewData track by $index">'+
             '<img src={{data.src}}></img>'+
@@ -163,18 +165,10 @@ app.directive("imgUpload",function($http,$compile){
                 });
             }*/
 
+scope.updateNewImage= function(data){
+    $rootScope.updateNewImage(data.src);
+}
 
-            scope.updateNewImage= function(data){
-
-                let strImage = image;
-                let filename = "image";
-                let city= data.
-
-
-                urltoFile(strImage, filename).then(function (imageFile) {
-                    request.updateImages(imageFile, city, collection);
-
-                });
 
             scope.remove=function(data){
                 var index= scope.previewData.indexOf(data);
