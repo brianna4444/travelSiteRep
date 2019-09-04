@@ -6,28 +6,27 @@ let fs = require('fs');
 let mongo = require("mongodb").MongoClient;
 let ObjectID = require('mongodb').ObjectID;
 let mongodb = require("mongodb");
-let cors= require("cors");
+let cors = require("cors");
 let nodemailer = require('nodemailer');
-let multer= require('multer');
+let multer = require('multer');
 
+//config part
+let allowIps = config.admin.ips;
 
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        if (req.originalUrl == "/updateAlbum" || req.originalUrl== "/addNewAlbum"){
-            let collName= req.body.collection;
-            let path= "/images/" + collName;
-            cb(null, __dirname+ path)
-        }
-        else if (req.originalUrl == "/updateStory" || req.originalUrl == "/addNewStory"){
+        if (req.originalUrl == "/updateAlbum" || req.originalUrl == "/addNewAlbum") {
+            let collName = req.body.collection;
+            let path = "/images/" + collName;
+            cb(null, __dirname + path)
+        } else if (req.originalUrl == "/updateStory" || req.originalUrl == "/addNewStory") {
 
-            cb(null, __dirname+ "/images/storyImages/main")
-        }
-        else if (req.originalUrl == "/addNewCity"){
-            let collName= req.body.collection;
-            let path= "/images/" + collName;
-            cb(null, __dirname+ path)
-        }
-        else if (req.originalUrl == "/updateAbout"){
+            cb(null, __dirname + "/images/storyImages/main")
+        } else if (req.originalUrl == "/addNewCity") {
+            let collName = req.body.collection;
+            let path = "/images/" + collName;
+            cb(null, __dirname + path)
+        } else if (req.originalUrl == "/updateAbout") {
 
             cb(null, __dirname+ "/images")
         }
@@ -39,32 +38,57 @@ var storage = multer.diskStorage({
         }
         else{                           //You can add any other if else for your different request
 
-            cb(null, __dirname+'/uploads')
+            cb(null, __dirname + '/uploads')
         }
     },
     filename: function (req, file, cb) {
         let words = file.mimetype.split("/");
-        let type = words[words.length-1];
-        cb(null, file.fieldname + '-' + Date.now()+'.'+type);
+        let type = words[words.length - 1];
+        cb(null, file.fieldname + '-' + Date.now() + '.' + type);
     }
 });
 
-var upload = multer({ storage: storage })
+var upload = multer({storage: storage})
 
 app.use(cors());
+
+app.use('/node_modules', express.static(__dirname + '/node_modules/'));
+app.use('/adminPanel', express.static(__dirname + '/adminPanel/'));
+app.use('/images', express.static(__dirname + '/images/'));
+
 
 
 app.listen(port, function () {
     console.log("server is working")
 });
 
+app.get('/admin', function (req, res) {
+    if (checkIfAdmin(req)){
+        res.sendfile(__dirname + '/adminPanel/admin.html');
+    }
+    else{
+        let ip = getIp(req);
+        res.send("access denied from "+ ip);
+    }
+});
+
+function getIp(req){
+    let unparsedIps = (req.headers['x-forwarded-for'] || req.connection.remoteAddress).split(',')[0].trim();
+    let ips = unparsedIps.split(':');
+    let ip = ips[ips.length-1];
+    return ip;
+}
+
+function checkIfAdmin(req){
+    let ip = getIp(req);
+    return allowIps.includes(ip);
+}
+
 mongo.connect(config.server.mongoAddress, function (err, client) {
     if (err) {
         console.log("cant connect to server");
         return;
     }
-
-
 
 
     let db = client.db(config.server.database);
@@ -80,21 +104,21 @@ mongo.connect(config.server.mongoAddress, function (err, client) {
 
     });
 
-    app.get('/findStory', function (req,res) {
+    app.get('/findStory', function (req, res) {
         let coll = db.collection("stories");
         coll.find({}).toArray(function (err, result) {
             res.send(result);
         })
     });
 
-    app.get('/findReview', function (req,res) {
+    app.get('/findReview', function (req, res) {
         let coll = db.collection("reviews");
         coll.find({}).toArray(function (err, result) {
             res.send(result);
         })
     });
 
-    app.get('/findAbout', function (req,res) {
+    app.get('/findAbout', function (req, res) {
         let coll = db.collection("about");
         coll.find({}).toArray(function (err, result) {
             res.send(result);
@@ -103,7 +127,7 @@ mongo.connect(config.server.mongoAddress, function (err, client) {
 
     app.get('/findImages', function (req, res) {
         let collName = req.query.collection;
-        let album= req.query.album;
+        let album = req.query.album;
         let obj = {
             name: album
         };
@@ -120,12 +144,12 @@ mongo.connect(config.server.mongoAddress, function (err, client) {
         let filename = req.file.filename;
         let name = req.body.name;
         let collName = req.body.collection;
-        let path= "./images/" + collName;
+        let path = "./images/" + collName;
         let id = req.body.id;
         let collection = db.collection(collName);
-        var myquery = {'_id':ObjectID(id)};
-        var newvalues = { $set: {name: name, cityImage: path + "/" + filename} };
-        collection.updateOne(myquery, newvalues, function(err, res) {
+        var myquery = {'_id': ObjectID(id)};
+        var newvalues = {$set: {name: name, cityImage: path + "/" + filename}};
+        collection.updateOne(myquery, newvalues, function (err, res) {
             if (err) throw err;
         });
     });
@@ -135,13 +159,13 @@ mongo.connect(config.server.mongoAddress, function (err, client) {
 
         let filename = req.file.filename;
         let title = req.body.title;
-        let text= req.body.text;
-        let path= "images/storyImages/main";
+        let text = req.body.text;
+        let path = "images/storyImages/main";
         let id = req.body.id;
         let collection = db.collection("stories");
-        var myquery = {'_id':ObjectID(id)};
-        var newvalues = { $set: {title: title, text: text, image: path + "/" + filename} };
-        collection.updateOne(myquery, newvalues, function(err, res) {
+        var myquery = {'_id': ObjectID(id)};
+        var newvalues = {$set: {title: title, text: text, image: path + "/" + filename}};
+        collection.updateOne(myquery, newvalues, function (err, res) {
             if (err) throw err;
         });
     });
@@ -151,12 +175,12 @@ mongo.connect(config.server.mongoAddress, function (err, client) {
 
         let id = req.query.id;
         let name = req.query.name;
-        let text= req.query.text;
+        let text = req.query.text;
 
         let collection = db.collection("reviews");
-        var myquery = {'_id':ObjectID(id)};
-        var newvalues = { $set: {name: name, text: text} };
-        collection.updateOne(myquery, newvalues, function(err, res) {
+        var myquery = {'_id': ObjectID(id)};
+        var newvalues = {$set: {name: name, text: text}};
+        collection.updateOne(myquery, newvalues, function (err, res) {
             if (err) throw err;
         });
     });
@@ -165,20 +189,20 @@ mongo.connect(config.server.mongoAddress, function (err, client) {
     app.post("/updateAbout", upload.single("image"), function (req, res) {
         let filename = req.file.filename;
         let name = req.body.name;
-        let text= req.body.text;
-        let path= "./images";
+        let text = req.body.text;
+        let path = "./images";
         let id = req.body.id;
-        let mission= req.body.mission;
+        let mission = req.body.mission;
         let collection = db.collection("about");
         var myquery = {'_id': new ObjectID(id)};
-        var newvalues = { $set: {name: name, image: path + "/" + filename, text: text, mission: mission} };
-        collection.updateOne(myquery, newvalues, function(err, res) {
+        var newvalues = {$set: {name: name, image: path + "/" + filename, text: text, mission: mission}};
+        collection.updateOne(myquery, newvalues, function (err, res) {
             if (err) throw err;
         });
     });
 
 
-    app.get('/findContact', function (req,res) {
+    app.get('/findContact', function (req, res) {
         let coll = db.collection("contact");
         coll.find({}).toArray(function (err, result) {
             res.send(result);
@@ -189,13 +213,13 @@ mongo.connect(config.server.mongoAddress, function (err, client) {
 
         let id = req.query.id;
         let facebook = req.query.facebook;
-        let email= req.query.email;
-        let phone= req.query.phone;
+        let email = req.query.email;
+        let phone = req.query.phone;
 
         let collection = db.collection("contact");
-        var myquery = {'_id':ObjectID(id)};
-        var newvalues = { $set: {facebook: facebook, email: email, phone: phone} };
-        collection.updateOne(myquery, newvalues, function(err, res) {
+        var myquery = {'_id': ObjectID(id)};
+        var newvalues = {$set: {facebook: facebook, email: email, phone: phone}};
+        collection.updateOne(myquery, newvalues, function (err, res) {
             if (err) throw err;
         });
     });
@@ -204,13 +228,13 @@ mongo.connect(config.server.mongoAddress, function (err, client) {
 
         let filename = req.file.filename;
         let title = req.body.title;
-        let text= req.body.text;
-        let path= "images/storyImages/main";
+        let text = req.body.text;
+        let path = "images/storyImages/main";
 
         let collection = db.collection("stories");
 
-        var newvalues = {title: title, text: text, image: path + "/" + filename} ;
-        collection.insertOne(newvalues, function(err, res) {
+        var newvalues = {title: title, text: text, image: path + "/" + filename};
+        collection.insertOne(newvalues, function (err, res) {
             if (err) throw err;
         });
     });
@@ -220,13 +244,13 @@ mongo.connect(config.server.mongoAddress, function (err, client) {
 
         let filename = req.file.filename;
         let title = req.body.title;
-        let text= req.body.text;
-        let path= "images/storyImages/main";
+        let text = req.body.text;
+        let path = "images/storyImages/main";
         let id = req.body.id;
         let collection = db.collection("stories");
-        var myquery = {'_id':new ObjectID(id)};
-        var newvalues = { $set: {title: title, text: text, image: path + "/" + filename} };
-        collection.insertOne(myquery, newvalues, function(err, res) {
+        var myquery = {'_id': new ObjectID(id)};
+        var newvalues = {$set: {title: title, text: text, image: path + "/" + filename}};
+        collection.insertOne(myquery, newvalues, function (err, res) {
             if (err) throw err;
         });
     });
@@ -240,7 +264,7 @@ mongo.connect(config.server.mongoAddress, function (err, client) {
         let collection = db.collection("reviews");
 
         var newvalues = {name: name, text: text};
-        collection.insertOne(newvalues, function(err, res) {
+        collection.insertOne(newvalues, function (err, res) {
             if (err) throw err;
 
         });
@@ -251,7 +275,7 @@ mongo.connect(config.server.mongoAddress, function (err, client) {
 
         let album = req.query.album;
 
-        db.createCollection(album, function(err, res) {
+        db.createCollection(album, function (err, res) {
             if (err) throw err;
 
         });
@@ -266,7 +290,7 @@ mongo.connect(config.server.mongoAddress, function (err, client) {
         let album = req.query.album;
 
 
-        db.collection.remove(album, function(err, res) {
+        db.collection.remove(album, function (err, res) {
             if (err) throw err;
 
         });
@@ -278,9 +302,9 @@ mongo.connect(config.server.mongoAddress, function (err, client) {
 
         let id = req.query.id;
         let collection = db.collection("stories");
-        var myquery = {'_id':new ObjectID(id)};
+        var myquery = {'_id': new ObjectID(id)};
 
-        collection.deleteOne(myquery, function(err, res) {
+        collection.deleteOne(myquery, function (err, res) {
             if (err) throw err;
 
         });
@@ -291,9 +315,9 @@ mongo.connect(config.server.mongoAddress, function (err, client) {
 
         let id = req.query.id;
         let collection = db.collection("reviews");
-        var myquery = {'_id':new ObjectID(id)};
+        var myquery = {'_id': new ObjectID(id)};
 
-        collection.remove (myquery, function(err, res) {
+        collection.remove(myquery, function (err, res) {
             if (err) throw err;
 
         });
@@ -303,11 +327,11 @@ mongo.connect(config.server.mongoAddress, function (err, client) {
     app.get("/deleteCity", function (req, res) {
 
         let id = req.query.id;
-        let album= req.query.album;
+        let album = req.query.album;
         let collection = db.collection(album);
-        var myquery = {'_id':new ObjectID(id)};
+        var myquery = {'_id': new ObjectID(id)};
 
-        collection.deleteOne (myquery, function(err, res) {
+        collection.deleteOne(myquery, function (err, res) {
             if (err) throw err;
 
         });
@@ -333,26 +357,25 @@ mongo.connect(config.server.mongoAddress, function (err, client) {
     });
 
 
-
-    app.get('/postMessage', function (req,res){
-        let collection= "contactFormMessages";
-        let firstName= req.query.firstName;
-        let lastName= req.query.lastName;
-        let phone= req.query.phone;
-        let email= req.query.email;
-        let message= req.query.message
-        if (firstName == undefined || phone == undefined){
+    app.get('/postMessage', function (req, res) {
+        let collection = "contactFormMessages";
+        let firstName = req.query.firstName;
+        let lastName = req.query.lastName;
+        let phone = req.query.phone;
+        let email = req.query.email;
+        let message = req.query.message
+        if (firstName == undefined || phone == undefined) {
             res.send("First Name and Phone Number Required");
             return;
         }
-        let obj={
+        let obj = {
             "firstName": firstName,
             "lastName": lastName,
             "phone": phone,
             "email": email,
             "message": message
         };
-        let coll= db.collection(collection);
+        let coll = db.collection(collection);
         coll.insertOne(obj);
         res.send();
 
@@ -364,7 +387,7 @@ mongo.connect(config.server.mongoAddress, function (err, client) {
             }
         });
 
-        let sendText = '<p>Name: ' + firstName +" " + lastName +'</p></n><p>Phone: ' + phone +'</p></n><p>Email: ' +email +'</p></n> Message: ' +message +'</p>';
+        let sendText = '<p>Name: ' + firstName + " " + lastName + '</p></n><p>Phone: ' + phone + '</p></n><p>Email: ' + email + '</p></n> Message: ' + message + '</p>';
 
         var mailOptions = {
             from: config.mail.from,
@@ -373,7 +396,7 @@ mongo.connect(config.server.mongoAddress, function (err, client) {
             html: sendText
         };
 
-        transporter.sendMail(mailOptions, function(error, info){
+        transporter.sendMail(mailOptions, function (error, info) {
             if (error) {
                 console.log(error);
             } else {
