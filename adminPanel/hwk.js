@@ -1,6 +1,22 @@
 let app = angular.module("AngApp",[]);
 let url= "http://tactravels.com:3000";
 
+
+function urltoFile(url, filename, mimeType) {
+    mimeType = mimeType || (url.match(/^data:([^;]+);/) || '')[1];
+    return (fetch(url)
+            .then(function (res) {
+                return res.arrayBuffer();
+            })
+            .then(function (buf) {
+                return new File([buf], filename, {type: mimeType});
+            })
+    );
+}
+
+let globalCollection= "";
+let globalCity= "";
+
 app.controller("AngContr", function ($scope, request, $rootScope) {
 
 
@@ -79,6 +95,7 @@ $scope.rightBar= false;
 
 
     $scope.findImages= function(collection) {
+        globalCollection= collection;
         $scope.collection= collection;
         request.collectionRequest(collection, function (data) {
             $scope.cities = data;
@@ -88,17 +105,7 @@ $scope.rightBar= false;
 
     }
 
-    function urltoFile(url, filename, mimeType) {
-        mimeType = mimeType || (url.match(/^data:([^;]+);/) || '')[1];
-        return (fetch(url)
-                .then(function (res) {
-                    return res.arrayBuffer();
-                })
-                .then(function (buf) {
-                    return new File([buf], filename, {type: mimeType});
-                })
-        );
-    }
+
 
     $scope.saveCityData= function(name, image, id){  //function that called by click "save"
         let strImage = image;
@@ -342,6 +349,7 @@ $scope.cityModal= true;
 
 
     $scope.showCityImages= function(city, collection, id){
+       globalCity= city;
         $scope.imageBar= true;
         $scope.city= city;
         $scope.collection= collection;

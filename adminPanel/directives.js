@@ -73,7 +73,7 @@ app.factory("fileReader", function($q, $log) {
 });
 
 
-app.directive("imgUpload",function($http,$compile){
+app.directive("imgUpload",function($http,$compile, request){
     return {
         restrict : 'AE',
         scope : {
@@ -166,9 +166,10 @@ app.directive("imgUpload",function($http,$compile){
 
             scope.updateNewImage= function(data){
 
-                let strImage = image;
+                let strImage = data.src;
                 let filename = "image";
-                let city= data.
+                let city= globalCity;
+                let collection= globalCollection;
 
 
                 urltoFile(strImage, filename).then(function (imageFile) {
