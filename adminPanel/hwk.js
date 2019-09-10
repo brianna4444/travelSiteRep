@@ -368,4 +368,10 @@ app.controller("AngContr", function ($scope, request, $rootScope) {
 
     }
 
+
+    $scope.deleteCityImage= function(collection, id, index){
+        $scope.city.images.splice(index,1);
+        request.deleteCityImage(collection, id, index );
+    }
+
 })

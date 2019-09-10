@@ -268,7 +268,16 @@ app.factory('request', function ($http) {
             })
         },
 
+    deleteCityImage: function (collection, id, index ) {
 
+
+            $http({
+                method: 'GET',
+                url: "http://tactravels.com:3000/deleteCityImage?collection=" + collection + "&id=" + id+ "&index=" + index
+            })
+
+
+    }
 
 
 

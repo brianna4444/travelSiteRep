@@ -83,6 +83,7 @@
         <div class="row mt-2" ng-repeat="image in city.images">
 
             <img ng-src="{{image}}">
+            <button ng-click="deleteCityImage(collection, city._id, $index)">delete</button>
         </div>
         <h2>Image upload</h2>
         <div>

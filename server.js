@@ -408,5 +408,18 @@ mongo.connect(config.server.mongoAddress,{ useNewUrlParser: true }, function (er
         });
 
     })
+
+    app.get("/deleteCityImage", function (req, res) {
+
+        let index = req.query.index;
+        let collName = req.query.collection;
+        let id = req.query.id;
+        let collection = db.collection(collName);
+        var myquery = {'_id':ObjectID(id)};
+        var newvalues = { $pop: {"images": index * -1} };
+        collection.updateOne(myquery, newvalues, function(err, res) {
+            if (err) throw err;
+        });
+    });
 });
 
