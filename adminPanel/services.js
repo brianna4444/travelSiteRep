@@ -250,7 +250,6 @@ app.factory('request', function ($http) {
                 url: "http://tactravels.com:3000/deleteCity?id=" + id + "&album=" + album
             })
 
-
         },
 
         updateImages: function (file, city, collection, id) {
@@ -260,7 +259,7 @@ app.factory('request', function ($http) {
             fd.append('city', city);
             fd.append('id', id);
             fd.append("image", file);  //suppose to be last
-            $http.post("http://tactravels.com:3000/updateImages", fd, {  //put http://tactravels.com:3000/updateAlbum instead there
+            $http.post("http://localhost:3000/updateImages", fd, {  //put http://tactravels.com:3000/updateAlbum instead there
                 withCredentials: true,
                 headers: {'Content-Type': undefined},
                 transformRequest: angular.identity,

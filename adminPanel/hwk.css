@@ -83,4 +83,20 @@ float: right - moves elements on right side of parent element
     background-color: white;
 }
 
+.list-album-element-right{
+    text-align: right;
+}
 
+.add-album-button{
+    width: 100%;
+    left: 0;
+    margin-left: 0;
+}
+
+.city-card{
+    width: 26rem;
+    margin-bottom: 1rem;
+}
+.city-card img{
+    height: 20rem
+}

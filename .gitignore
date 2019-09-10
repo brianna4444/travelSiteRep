@@ -5,6 +5,6 @@
 
 config\.json
 
-node_modules/
+images/
 
-\node_modules/
+node_modules/
