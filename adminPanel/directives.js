@@ -155,25 +155,17 @@ app.directive("imgUpload",function($http,$compile, request){
                 uploadFile(e,'drop');
             });
 
-           /* scope.upload=function(obj){
-                $http({method:scope.method,url:scope.url,data: obj.data,
-                    headers: {'Content-Type': undefined},transformRequest: angular.identity
-                }).success(function(data){
-
-                });
-            }*/
-
-
             scope.updateNewImage= function(data){
 
                 let strImage = data.src;
                 let filename = "image";
                 let city= globalCity;
-                let collection= globalCollection;
+                let collection = globalCollection;
+                let id = globalAlbumId;
 
 
                 urltoFile(strImage, filename).then(function (imageFile) {
-                    request.updateImages(imageFile, city, collection);
+                    request.updateImages(imageFile, city, collection, id);
 
                 });
 

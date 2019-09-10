@@ -64,7 +64,7 @@ app.listen(port, function () {
 
 app.get('/admin', function (req, res) {
     if (checkIfAdmin(req)){
-        res.sendfile(__dirname + '/adminPanel/admin.html');
+        res.sendFile(__dirname + '/adminPanel/admin.html');
     }
     else{
         let ip = getIp(req);
@@ -80,14 +80,18 @@ function getIp(req){
 }
 
 function checkIfAdmin(req){
-    let ip = getIp(req);
-    return allowIps.includes(ip);
+    //let ip = getIp(req);
+    //return allowIps.includes(ip);
+    return true;
 }
 
-mongo.connect(config.server.mongoAddress, function (err, client) {
+mongo.connect(config.server.mongoAddress,{ useNewUrlParser: true }, function (err, client) {
     if (err) {
         console.log("cant connect to server");
         return;
+    }
+    else {
+        console.log("connected to DB");
     }
 
 
@@ -319,7 +323,6 @@ mongo.connect(config.server.mongoAddress, function (err, client) {
 
         collection.remove(myquery, function (err, res) {
             if (err) throw err;
-
         });
         res.send("success");
     });
