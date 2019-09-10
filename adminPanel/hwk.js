@@ -158,6 +158,7 @@ app.controller("AngContr", function ($scope, request, $rootScope) {
         urltoFile(strImage, filename).then(function (imageFile) {
             request.updateStory(imageFile, id, title, text);
             $scope.showStoriesTab();
+
         });
     }
 
@@ -305,8 +306,8 @@ app.controller("AngContr", function ($scope, request, $rootScope) {
     $scope.addAlbum = function () {
         $scope.albumModal = true;
     }
-    $scope.saveNewAlbum = function () {
-        request.addNewAlbum();
+    $scope.saveNewAlbum = function (album) {
+        request.addNewAlbum(album);
         $scope.showAlbumsTab();
         $scope.modal = false;
     }

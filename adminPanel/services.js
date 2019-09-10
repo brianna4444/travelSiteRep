@@ -169,8 +169,6 @@ app.factory('request', function ($http) {
 
         addNewAlbum: function (album) {
 
-            let fd = {};
-            fd["album"] = album;
 
 
             $http({
