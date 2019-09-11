@@ -222,15 +222,12 @@ app.factory('request', function ($http) {
 
         },
 
-        deleteAlbum: function (album) {
+        deleteAlbum: function (collection) {
 
-            let fd = {};
-
-            fd["album"] = album;
 
             $http({
                 method: 'GET',
-                url: "http://tactravels.com:3000/deleteAlbum?album=" + album
+                url: "http://tactravels.com:3000/deleteAlbum?collection=" + collection
             })
 
 

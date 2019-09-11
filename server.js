@@ -291,10 +291,10 @@ mongo.connect(config.server.mongoAddress,{ useNewUrlParser: true }, function (er
      */
     app.get("/deleteAlbum", function (req, res) {
 
-        let album = req.query.album;
+        let collection = req.query.collection;
 
 
-        db.collection.remove(album, function (err, res) {
+        db.collection.remove(collection, function (err, res) {
             if (err) throw err;
 
         });

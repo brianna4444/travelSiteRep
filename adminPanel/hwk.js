@@ -112,6 +112,7 @@ app.controller("AngContr", function ($scope, request, $rootScope) {
         urltoFile(strImage, filename).then(function (imageFile) {
             request.updateAlbum(imageFile, name, id, collection);
         });
+        alert("Changes saved!");
     }
 
     $scope.storeImage = "";
@@ -309,10 +310,10 @@ app.controller("AngContr", function ($scope, request, $rootScope) {
     $scope.saveNewAlbum = function (album) {
         request.addNewAlbum(album);
         $scope.showAlbumsTab();
-        $scope.modal = false;
+        $scope.albumModal = false;
     }
-    $scope.deleteAlbum = function (id) {
-        request.deleteAlbum(id);
+    $scope.deleteAlbum = function (collection) {
+        request.deleteAlbum(collection);
         $scope.showAlbumsTab();
     }
 
@@ -322,11 +323,12 @@ app.controller("AngContr", function ($scope, request, $rootScope) {
     $scope.saveNewCity = function (album, name, cityImage, images) {
         request.addNewCity(album, name, cityImage, images);
         $scope.showAlbumsTab();
-        $scope.modal = false;
+        $scope.closeModal();
     }
-    $scope.deleteCity = function (album, id) {
+    $scope.deleteCity = function (album, id, index) {
         request.deleteCity(album, id);
         $scope.showAlbumsTab();
+        $scope.cities.splice(index,1);
     }
 
     $scope.closeModal = function () {
