@@ -2,10 +2,9 @@ Stories:
 - must reload to see new result
 
 Albums:
-- add new album not saving in mongodb
-- add new city
-- delete album
-- haiti added but not showing
+- add new city not saving in mongodb or on page
+- delete album not working
+- new album not reloading on page even when click reload
 - redo collectionNames variable so that collection names save in collections array not in the variable collectionNames
 
 Review:
