@@ -159,7 +159,7 @@ mongo.connect(config.server.mongoAddress,{ useNewUrlParser: true }, function (er
     });
 
 
-    app.post("/updateStory", upload.single("image"), function (req, res) {
+    app.post("/updateStory", upload.single("image"), function (req, response) {
 
         let filename = req.file.filename;
         let title = req.body.title;
@@ -171,7 +171,9 @@ mongo.connect(config.server.mongoAddress,{ useNewUrlParser: true }, function (er
         var newvalues = {$set: {title: title, text: text, image: path + "/" + filename}};
         collection.updateOne(myquery, newvalues, function (err, res) {
             if (err) throw err;
+            response.send("");
         });
+
     });
 
 

@@ -26,18 +26,18 @@ app.factory('request', function ($http) {
             })
         },
 
-        updateStory: function (file, id, title, text) {
+        updateStory: function (file, id, title, text, callback) {
             let fd = new FormData();
             fd.append("title", title);
             fd.append('text', text);
             fd.append('id', id);
             fd.append("image", file);  //suppose to be last
             $http.post("http://tactravels.com:3000/updateStory", fd, {  //put http://tactravels.com:3000/updateAlbum instead there
-                withCredentials: true,
-                headers: {'Content-Type': undefined},
-                transformRequest: angular.identity,
-            }).then(function (data) {
-                console.log(data);
+               // withCredentials: true,
+                //headers: {'Content-Type': undefined},
+                //transformRequest: angular.identity,
+            }).then(function () {
+                callback();
             })
         },
 
@@ -67,10 +67,6 @@ app.factory('request', function ($http) {
 
         updateReview: function (id, name, text) {
 
-            let fd = {};
-            fd["id"] = id;
-            fd["name"] = name;
-            fd["text"] = text;
 
             $http({
                 method: 'GET',

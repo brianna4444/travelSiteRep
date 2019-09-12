@@ -158,8 +158,8 @@ app.controller("AngContr", function ($scope, request, $rootScope) {
         let filename = "image";
 
         urltoFile(strImage, filename).then(function (imageFile) {
-            request.updateStory(imageFile, id, title, text);
-            $scope.showStoriesTab();
+            request.updateStory(imageFile, id, title, text, $scope.showStoriesTab);
+
 
         });
     }
