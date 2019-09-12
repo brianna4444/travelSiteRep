@@ -99,6 +99,7 @@ app.controller("AngContr", function ($scope, request, $rootScope) {
         request.collectionRequest(collection, function (data) {
             $scope.cities = data;
             $scope.rightBar = true;
+            $scope.imageBar = false;
         })
 
 
