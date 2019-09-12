@@ -1,0 +1,18 @@
+Stories:
+- must reload to see new result
+
+Albums:
+- add new album not saving in mongodb
+- add new city
+- delete album
+- haiti added but not showing
+- redo collectionNames variable so that collection names save in collections array not in the variable collectionNames
+
+Review:
+- must reload to see new result
+
+About:
+- check after real mongo connected
+
+Contact:
+- check after real mongo connected
