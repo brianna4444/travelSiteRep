@@ -286,7 +286,7 @@ app.controller("AngContr", function ($scope, request, $rootScope) {
         let filename = "image";
 
         urltoFile(strImage, filename).then(function (imageFile) {
-            request.addNewStory(title, text, imageFile);
+            request.addNewStory(title, text, imageFile, $scope.showStoriesTab);
             $scope.showStoriesTab();
         });
 
