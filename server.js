@@ -23,7 +23,7 @@ var storage = multer.diskStorage({
 
             cb(null, __dirname + "/images/storyImages/main")
         } else if (req.originalUrl == "/addNewCity") {
-            let collName = req.body.collection;
+            let collName = req.body.album;
             let path = "/images/" + collName;
             cb(null, __dirname + path)
         } else if (req.originalUrl == "/updateAbout") {
@@ -247,22 +247,24 @@ mongo.connect(config.server.mongoAddress,{ useNewUrlParser: true }, function (er
     });
 
 
-    app.post("/addNewCity", upload.single("image"), function (req, res) {
+    app.post("/addNewCity", upload.single("image"), function (req, response) {
 
+        let album= req.body.album;
         let filename = req.file.filename;
-        let title = req.body.title;
-        let text = req.body.text;
-        let path = "images/storyImages/main";
-        let id = req.body.id;
-        let collection = db.collection("stories");
-        var myquery = {'_id': new ObjectID(id)};
-        var newvalues = {$set: {title: title, text: text, image: path + "/" + filename}};
-        collection.insertOne(myquery, newvalues, function (err, res) {
+        let name = req.body.name;
+
+        let path = "./images/" + album;
+
+        let collection = db.collection(album);
+
+        var newvalues =  {name: name, cityImage: path + "/" + filename, images: []};
+        collection.insertOne( newvalues, function (err, res) {
             if (err) throw err;
+            response.send("success");
         });
     });
 
-    app.get("/addNewReview", function (req, res) {
+    app.get("/addNewReview", function (req, response) {
 
         let name = req.query.name;
         let text = req.query.text;
@@ -273,12 +275,12 @@ mongo.connect(config.server.mongoAddress,{ useNewUrlParser: true }, function (er
         var newvalues = {name: name, text: text};
         collection.insertOne(newvalues, function (err, res) {
             if (err) throw err;
-
+            response.send("success");
         });
-        res.send("success");
+
     });
 
-    app.get("/addNewAlbum", function (req, res) {
+    app.get("/addNewAlbum", function (req, response) {
 
         let album = req.query.album;
 
@@ -286,7 +288,7 @@ mongo.connect(config.server.mongoAddress,{ useNewUrlParser: true }, function (er
             if (err) throw err;
 
         });
-        res.send("success");
+        response.send("success");
     });
 
     /*

@@ -147,44 +147,44 @@ app.factory('request', function ($http) {
             });
         },
 
-        addNewCity: function (album, name, file, files) {
+        addNewCity: function (album, name, file, callback) {
             let fd = new FormData();
             fd.append('album', album);
             fd.append("name", name);
 
-            fd.append("file", file);
-            fd.append("files", files);//suppose to be last
+            fd.append("image", file);
+
             $http.post("http://tactravels.com:3000/addNewCity", fd, {  //put http://tactravels.com:3000/updateAlbum instead there
                 withCredentials: true,
                 headers: {'Content-Type': undefined},
                 transformRequest: angular.identity,
             }).then(function (data) {
-                console.log(data);
+               callback();
             })
         },
 
-        addNewAlbum: function (album) {
+        addNewAlbum: function (album, callback) {
 
 
 
             $http({
                 method: 'GET',
                 url: "http://tactravels.com:3000/addNewAlbum?album=" + album
-            })
+            }).then(function(data) {
+                callback();
+            });
 
 
         },
 
-        addNewReview: function (name, text) {
+        addNewReview: function (name, text, callback) {
 
-            let fd = {};
-
-            fd["name"] = name;
-            fd["text"] = text;
 
             $http({
                 method: 'GET',
                 url: "http://tactravels.com:3000/addNewReview?name=" + name + "&text=" + text
+            }).then(function (data) {
+                callback();
             })
 
 

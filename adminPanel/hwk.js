@@ -22,7 +22,7 @@ let globalAlbumId = "";
 app.controller("AngContr", function ($scope, request, $rootScope) {
 
 
-    $scope.collectionNames = ["jamaicaBtn", "mexicoBtn", "dominicanRepublicBtn", "cruiseBtn"];
+
 
     $scope.albumTab = false;
     $scope.storyTab = false;
@@ -259,8 +259,8 @@ app.controller("AngContr", function ($scope, request, $rootScope) {
 
     }
     $scope.saveNewReview = function (name, text) {
-        request.addNewReview(name, text);
-        $scope.showReviewsTab();
+        request.addNewReview(name, text, $scope.showReviewsTab);
+
         $scope.modal = false;
     }
 
@@ -287,7 +287,7 @@ app.controller("AngContr", function ($scope, request, $rootScope) {
 
         urltoFile(strImage, filename).then(function (imageFile) {
             request.addNewStory(title, text, imageFile, $scope.showStoriesTab);
-            $scope.showStoriesTab();
+
         });
 
 
@@ -309,8 +309,8 @@ app.controller("AngContr", function ($scope, request, $rootScope) {
         $scope.albumModal = true;
     }
     $scope.saveNewAlbum = function (album) {
-        request.addNewAlbum(album);
-        $scope.showAlbumsTab();
+        request.addNewAlbum(album, $scope.showAlbumsTab);
+
         $scope.albumModal = false;
     }
     $scope.deleteAlbum = function (collection) {
@@ -318,18 +318,24 @@ app.controller("AngContr", function ($scope, request, $rootScope) {
         $scope.showAlbumsTab();
     }
 
-    $scope.addCity = function () {
+    $scope.addCity = function (collection) {
+        $scope.collection= collection;
         $scope.cityModal = true;
     }
-    $scope.saveNewCity = function (album, name, cityImage, images) {
-        request.addNewCity(album, name, cityImage, images);
-        $scope.showAlbumsTab();
+    $scope.saveNewCity = function (name, cityImage) {
+        let strImage = cityImage;
+        let filename = "image";
+        urltoFile(strImage, filename).then(function (imageFile) {
+
+           request.addNewCity($scope.collection, name, imageFile, $scope.showAlbumsTab)
+        });
+
         $scope.closeModal();
     }
     $scope.deleteCity = function (album, id, index) {
         request.deleteCity(album, id);
         $scope.showAlbumsTab();
-        $scope.cities.splice(index,1);
+        $scope.cities.splice(index, 1);
     }
 
     $scope.closeModal = function () {
@@ -373,9 +379,9 @@ app.controller("AngContr", function ($scope, request, $rootScope) {
     }
 
 
-    $scope.deleteCityImage= function(collection, id, index){
-        $scope.city.images.splice(index,1);
-        request.deleteCityImage(collection, id, index );
+    $scope.deleteCityImage = function (collection, id, index) {
+        $scope.city.images.splice(index, 1);
+        request.deleteCityImage(collection, id, index);
     }
 
 })

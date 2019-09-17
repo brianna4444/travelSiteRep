@@ -48,7 +48,7 @@
                         <span class="col-7">{{collection}}</span>
                     </div>
                     <div class="col-md-8 list-album-element-right">
-                        <button class="btn btn-info" ng-click="addCity()">add City</button>
+                        <button class="btn btn-info" ng-click="addCity(collection)">add City</button>
                         <button class="btn btn-primary" ng-click="findImages(collection)">show albums</button>
                         <button class="btn btn-danger" ng-click="delete()">X</button>
                     </div>
@@ -112,7 +112,7 @@
             </div>
         </div>
         <div class="row">
-            <button class="col-12 btn btn-success" ng-click="saveNewCity( newCity.name, newCity.cityImage)">save
+            <button class="col-12 btn btn-success" ng-click="saveNewCity(newCity.name, newCity.cityImage)">save
             </button>
             <button class="col-12 btn btn-danger" ng-click="closeModal()">cancel</button>
 
