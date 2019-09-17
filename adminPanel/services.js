@@ -132,7 +132,7 @@ app.factory('request', function ($http) {
 
 
         },
-        addNewStory: function (title, text, file) {
+        addNewStory: function (title, text, file, callback) {
             let fd = new FormData();
             fd.append('title', title);
             fd.append("text", text);
@@ -143,8 +143,8 @@ app.factory('request', function ($http) {
                 headers: {'Content-Type': undefined},
                 transformRequest: angular.identity,
             }).then(function (data) {
-                console.log(data);
-            })
+                callback();
+            });
         },
 
         addNewCity: function (album, name, file, files) {
