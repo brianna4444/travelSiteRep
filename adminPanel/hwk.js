@@ -74,9 +74,9 @@ app.controller("AngContr", function ($scope, request, $rootScope) {
     }
 
 
-    $scope.showAlbums = function (index) {
+    $scope.showAlbums = function () {
         $scope.showAlbum = true;
-        $scope.albums = $scope.data[index].albums;
+        request.show
     }
 
     $scope.showImageModule = function (index) {
@@ -120,6 +120,7 @@ app.controller("AngContr", function ($scope, request, $rootScope) {
 
 
     $scope.showAlbumsTab = function () {
+        $scope.showAlbums();
         $scope.storyTab = false;
         $scope.albumTab = true;
         $scope.reviewTab = false;
