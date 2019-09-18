@@ -111,7 +111,7 @@ mongo.connect(config.server.mongoAddress,{ useNewUrlParser: true }, function (er
     app.get('/findAlbums', function (req, response) {
 
 
-        db.listCollections({name: {$nin: ['stories', 'reviews', 'contact', 'about']}.toArray(function (err, result) {
+        db.listCollections({name: {$nin: ['stories', 'reviews', 'contact', 'about']}}).toArray(function (err, result) {
             response.send(result.name);
         })
 
