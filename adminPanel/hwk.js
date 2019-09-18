@@ -75,8 +75,12 @@ app.controller("AngContr", function ($scope, request, $rootScope) {
 
 
     $scope.showAlbums = function () {
-        $scope.showAlbum = true;
-        request.show
+
+        request.albumRequest($scope.showAlbumsTab, function (data) {
+            $scope.albums = data;
+
+
+        })
     }
 
     $scope.showImageModule = function (index) {

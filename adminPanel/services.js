@@ -11,6 +11,21 @@ app.factory('request', function ($http) {
                 callback(data.data);
             })
         },
+
+
+        albumRequest: function (callback){
+            $http({
+                method: "GET",
+                url: "http://tactravels.com:3000/findAlbums",
+                params: {}
+            }).then(function (data) {
+                callback(data.data);
+            })
+
+        },
+
+
+
         updateAlbum: function (file, name, id, collection) {
             let fd = new FormData();
             fd.append("name", name);
