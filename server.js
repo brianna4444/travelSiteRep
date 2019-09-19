@@ -112,7 +112,8 @@ mongo.connect(config.server.mongoAddress,{ useNewUrlParser: true }, function (er
 
 
         db.listCollections({name: {$nin: ['stories', 'reviews', 'contact', 'about']}}).toArray(function (err, result) {
-            response.send(result.name);
+
+            response.send(result);
         })
 
     });

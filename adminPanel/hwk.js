@@ -77,7 +77,9 @@ app.controller("AngContr", function ($scope, request, $rootScope) {
     $scope.showAlbums = function () {
 
         request.albumRequest($scope.showAlbumsTab, function (data) {
-            $scope.albums = data;
+            for (let i=0; i<data.length; i++){
+                $scope.albums.push(data[i].name);
+            }
 
 
         })
