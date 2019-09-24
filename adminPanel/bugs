@@ -3,8 +3,9 @@
 Albums:
 
 - delete album not working
-- new album not reloading on page even when click reload
-- redo collectionNames variable so that collection names save in collections array not in the variable collectionNames
+- change name of album
+
+
 
 
 About:

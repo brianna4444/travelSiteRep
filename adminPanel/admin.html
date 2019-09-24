@@ -45,12 +45,12 @@
                  data-toggle="list" role="tab" aria-controls="home">
                 <div class="row">
                     <div class="col-md-4">
-                        <span class="col-7">{{collection}}</span>
+                        <span class="col-7">{{collection.name}}</span>
                     </div>
                     <div class="col-md-8 list-album-element-right">
-                        <button class="btn btn-info" ng-click="addCity(collection)">add City</button>
-                        <button class="btn btn-primary" ng-click="findImages(collection)">show albums</button>
-                        <button class="btn btn-danger" ng-click="delete()">X</button>
+                        <button class="btn btn-info" ng-click="addCity(collection.collName)">add City</button>
+                        <button class="btn btn-primary" ng-click="findImages(collection.collName)">show albums</button>
+                        <button class="btn btn-danger" ng-click="delete(collection._id, $index)">X</button>
                     </div>
                 </div>
             </div>
@@ -66,13 +66,13 @@
             <div class="card-body">
                 <input class="form-control" ng-model="city.name">
                 <p class="card-text">There may be information about city</p>
-                <a href="#" class="btn btn-primary" ng-click="showCityImages(city, collection, city._id)">Show city images</a>
+                <a href="#" class="btn btn-primary" ng-click="showCityImages(city, collection.collName, city._id)">Show city images</a>
             </div>
             <ul class="list-group list-group-flush">
                 <li class="list-group-item">
                     <button class="btn btn-success" ng-click="saveCityData(city.name, city.cityImage, city._id)">save changes
                     </button>
-                    <button class="btn btn-danger" ng-click="deleteCity(collection, city._id, $index)">delete city</button>
+                    <button class="btn btn-danger" ng-click="deleteCity(collection.collName, city._id, $index)">delete city</button>
                 </li>
             </ul>
         </div>
@@ -83,7 +83,7 @@
         <div class="row mt-2" ng-repeat="image in city.images">
 
             <img ng-src="{{image}}">
-            <button ng-click="deleteCityImage(collection, city._id, $index)">delete</button>
+            <button ng-click="deleteCityImage(collection.collName, city._id, $index)">delete</button>
         </div>
         <h2>Image upload</h2>
         <div>
@@ -123,7 +123,7 @@
     <div ng-if="deleteModal" class="row" id="deleteModal">
         <p class="col-12">Are you sure you want to delete?</p>
         <button ng-click="closeDeleteModal()" class=" btn btn-info col-6">cancel</button>
-        <button ng-click="deleteAlbum(collection)" class="btn btn-danger col-6">delete</button>
+        <button ng-click="deleteAlbum(collection._id)" class="btn btn-danger col-6">delete</button>
     </div>
 </div>
 

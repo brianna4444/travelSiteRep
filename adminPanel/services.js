@@ -233,14 +233,15 @@ app.factory('request', function ($http) {
 
         },
 
-        deleteAlbum: function (collection) {
+        deleteAlbum: function (id, collection, callback) {
 
 
             $http({
                 method: 'GET',
-                url: "http://tactravels.com:3000/deleteAlbum?collection=" + collection
+                url: "http://tactravels.com:3000/deleteAlbum?id=" + id + "&collection=" + collection
+            }).then(function (data) {
+                callback();
             })
-
 
         },
 

@@ -110,8 +110,8 @@ mongo.connect(config.server.mongoAddress,{ useNewUrlParser: true }, function (er
 
     app.get('/findAlbums', function (req, response) {
 
-
-        db.listCollections({name: {$nin: ['stories', 'reviews', 'contact', 'about']}}).toArray(function (err, result) {
+        let coll = db.collection("albums");
+        coll.find({}).toArray(function (err, result) {
 
             response.send(result);
         })
@@ -293,27 +293,42 @@ mongo.connect(config.server.mongoAddress,{ useNewUrlParser: true }, function (er
     app.get("/addNewAlbum", function (req, response) {
 
         let album = req.query.album;
+        let obj= {
+            name: album,
+            collName: album
+        }
+        let dir = './images/' + album;
 
+        if (!fs.existsSync(dir)){
+            fs.mkdirSync(dir);
+        }
+        let coll = db.collection("albums");
+        coll.insertOne(obj, function (err, res){
+            if (err) throw err;
+        });
         db.createCollection(album, function (err, res) {
             if (err) throw err;
-
         });
+
         response.send("success");
     });
 
     /*
     do it by sending id as you did with others
      */
-    app.get("/deleteAlbum", function (req, res) {
+    app.get("/deleteAlbum", function (req, rsepones) {
 
-        let collection = req.query.collection;
+        let id = req.query.id;
+        let collName= req.query.collection;
+        let collection = db.collection("albums");
+        let myquery = {'_id': new ObjectID(id)};
 
-
-        db.collection.remove(collection, function (err, res) {
+        collection.removeOne(myquery, function (err, res) {
             if (err) throw err;
 
         });
-        res.send("success");
+
+        response.send("success");
     });
 
 

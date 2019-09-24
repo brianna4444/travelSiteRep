@@ -50,7 +50,8 @@ app.controller("AngContr", function ($scope, request, $rootScope) {
     $scope.review = {};
     $scope.about = {};
     $scope.contact = {};
-
+    $scope.albumIndex=0;
+    $scope.albumName="";
     $scope.modal = false;
     $scope.albumModal = false;
     $scope.cityModal = false;
@@ -77,9 +78,9 @@ app.controller("AngContr", function ($scope, request, $rootScope) {
     $scope.showAlbums = function () {
 
         request.albumRequest( function (data) {
-            for (let i=0; i<data.length; i++){
-                $scope.albums.push(data[i].name);
-            }
+
+                $scope.albums=data;
+
 
 
         })
@@ -271,7 +272,8 @@ app.controller("AngContr", function ($scope, request, $rootScope) {
         $scope.modal = false;
     }
 
-    $scope.delete = function () {
+    $scope.delete = function (albumName, index) {
+        $scope.albumIndex= index;
         $scope.deleteModal = true;
     }
 
@@ -320,9 +322,10 @@ app.controller("AngContr", function ($scope, request, $rootScope) {
 
         $scope.albumModal = false;
     }
-    $scope.deleteAlbum = function (collection) {
-        request.deleteAlbum(collection);
-        $scope.showAlbumsTab();
+    $scope.deleteAlbum = function ( id) {
+        request.deleteAlbum($scope.albumName, id ,  $scope.showAlbumsTab);
+    $scope.albums.splice($scope.albumIndex, 1);
+$scope.deleteModal= false;
     }
 
     $scope.addCity = function (collection) {
