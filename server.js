@@ -28,15 +28,15 @@ var storage = multer.diskStorage({
             cb(null, __dirname + path)
         } else if (req.originalUrl == "/updateAbout") {
 
-            cb(null, __dirname+ "/images")
+            cb(null, __dirname + "/images")
         }
-        else if (req.originalUrl == "/updateImages"){
-            let collName= req.body.collection;
-            let city= req.body.city;
-            let path= "/images/" + collName + "/"+ city;
-            cb(null, __dirname+ path)
+        else if (req.originalUrl == "/updateImages") {
+            let collName = req.body.collection;
+            let city = req.body.city;
+            let path = "/images/" + collName + "/" + city;
+            cb(null, __dirname + path)
         }
-        else{                           //You can add any other if else for your different request
+        else {                           //You can add any other if else for your different request
 
             cb(null, __dirname + '/uploads')
         }
@@ -57,35 +57,34 @@ app.use('/adminPanel', express.static(__dirname + '/adminPanel/'));
 app.use('/images', express.static(__dirname + '/images/'));
 
 
-
 app.listen(port, function () {
     console.log("server is working")
 });
 
 app.get('/admin', function (req, res) {
-    if (checkIfAdmin(req)){
+    if (checkIfAdmin(req)) {
         res.sendFile(__dirname + '/adminPanel/admin.html');
     }
-    else{
+    else {
         let ip = getIp(req);
-        res.send("access denied from "+ ip);
+        res.send("access denied from " + ip);
     }
 });
 
-function getIp(req){
+function getIp(req) {
     let unparsedIps = (req.headers['x-forwarded-for'] || req.connection.remoteAddress).split(',')[0].trim();
     let ips = unparsedIps.split(':');
-    let ip = ips[ips.length-1];
+    let ip = ips[ips.length - 1];
     return ip;
 }
 
-function checkIfAdmin(req){
+function checkIfAdmin(req) {
     let ip = getIp(req);
     return allowIps.includes(ip);
     //return true;
 }
 
-mongo.connect(config.server.mongoAddress,{ useNewUrlParser: true }, function (err, client) {
+mongo.connect(config.server.mongoAddress, {useNewUrlParser: true}, function (err, client) {
     if (err) {
         console.log("cant connect to server");
         return;
@@ -259,7 +258,7 @@ mongo.connect(config.server.mongoAddress,{ useNewUrlParser: true }, function (er
 
     app.post("/addNewCity", upload.single("image"), function (req, response) {
 
-        let album= req.body.album;
+        let album = req.body.album;
         let filename = req.file.filename;
         let name = req.body.name;
 
@@ -267,8 +266,8 @@ mongo.connect(config.server.mongoAddress,{ useNewUrlParser: true }, function (er
 
         let collection = db.collection(album);
 
-        var newvalues =  {name: name, cityImage: path + "/" + filename, images: []};
-        collection.insertOne( newvalues, function (err, res) {
+        var newvalues = {name: name, cityImage: path + "/" + filename, images: []};
+        collection.insertOne(newvalues, function (err, res) {
             if (err) throw err;
             response.send("success");
         });
@@ -293,17 +292,17 @@ mongo.connect(config.server.mongoAddress,{ useNewUrlParser: true }, function (er
     app.get("/addNewAlbum", function (req, response) {
 
         let album = req.query.album;
-        let obj= {
+        let obj = {
             name: album,
             collName: album
         }
         let dir = './images/' + album;
 
-        if (!fs.existsSync(dir)){
+        if (!fs.existsSync(dir)) {
             fs.mkdirSync(dir);
         }
         let coll = db.collection("albums");
-        coll.insertOne(obj, function (err, res){
+        coll.insertOne(obj, function (err, res) {
             if (err) throw err;
         });
         db.createCollection(album, function (err, res) {
@@ -319,7 +318,7 @@ mongo.connect(config.server.mongoAddress,{ useNewUrlParser: true }, function (er
     app.get("/deleteAlbum", function (req, response) {
 
         let id = req.query.id;
-        let collName= req.query.collection;
+        let collName = req.query.collection;
         let collection = db.collection("albums");
         let myquery = {'_id': new ObjectID(id)};
 
@@ -327,9 +326,11 @@ mongo.connect(config.server.mongoAddress,{ useNewUrlParser: true }, function (er
             if (err) throw err;
 
         });
-db.collection.remove(collName, function (err,res) {
-    if (err) throw err;
-})
+        db.collection(collName).drop(function (err, res) {
+            if (err) throw err;
+
+
+        })
         response.send("success");
     });
 
@@ -373,7 +374,7 @@ db.collection.remove(collName, function (err,res) {
         res.send("success");
     });
 
-    app.get("/test", function(req,res){
+    app.get("/test", function (req, res) {
         res.send("test");
     })
 
@@ -381,12 +382,12 @@ db.collection.remove(collName, function (err,res) {
         let filename = req.file.filename;
         let city = req.body.city;
         let collName = req.body.collection;
-        let path= "images/" + collName + "/"+ city;
+        let path = "images/" + collName + "/" + city;
         let id = req.body.id;
         let collection = db.collection(collName);
-        var myquery = {'_id':ObjectID(id)};
-        var newvalues = { $addToSet: {"images": path + "/" + filename} };
-        collection.updateOne(myquery, newvalues, function(err, res) {
+        var myquery = {'_id': ObjectID(id)};
+        var newvalues = {$addToSet: {"images": path + "/" + filename}};
+        collection.updateOne(myquery, newvalues, function (err, res) {
             if (err) throw err;
         });
     });
@@ -447,14 +448,29 @@ db.collection.remove(collName, function (err,res) {
         let collName = req.query.collection;
         let id = req.query.id;
         let collection = db.collection(collName);
-        var myQuery = {'_id':ObjectID(id)};
-        let imageNumber = "images."+index;
-        let removeQuery = { $set: {} };
+        var myQuery = {'_id': ObjectID(id)};
+        let imageNumber = "images." + index;
+        let removeQuery = {$set: {}};
         removeQuery['$set'][imageNumber] = null;
-        collection.updateOne(myQuery,removeQuery, function(err, res) {
+        collection.updateOne(myQuery, removeQuery, function (err, res) {
             if (err) throw err;
-            collection.updateOne(myQuery, { $pull:{"images": null}});
+            collection.updateOne(myQuery, {$pull: {"images": null}});
         });
     });
+
+    app.get("/updateAlbumName", function (req,response) {
+        let collName= req.query.collection;
+        let newName= req.query.name;
+        let collection= db.collection("albums");
+        let myQuery= {"collName": collName};
+        let newQuery= {$set: {"name": newName}};
+        collection.updateOne(myQuery, newQuery, function (err, res) {
+            if (err) throw err;
+            response.send();
+        })
+
+
+
+    })
 });
 

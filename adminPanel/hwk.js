@@ -35,7 +35,7 @@ app.controller("AngContr", function ($scope, request, $rootScope) {
     $scope.showAlbum = false;
     $scope.showModule = false;
 
-    $scope.albums = "";
+    $scope.albums = [];
     $scope.number;
     $scope.newObj = {name: "", image: ""};
 
@@ -272,10 +272,11 @@ app.controller("AngContr", function ($scope, request, $rootScope) {
         $scope.modal = false;
     }
 
-    $scope.delete = function (index, collection, id) {
+    $scope.delete = function (index) {
         $scope.albumIndex= index;
         $scope.deleteModal = true;
-        
+
+
 
     }
 
@@ -324,8 +325,8 @@ app.controller("AngContr", function ($scope, request, $rootScope) {
 
         $scope.albumModal = false;
     }
-    $scope.deleteAlbum = function ( id, collection) {
-        request.deleteAlbum(collection, id ,  $scope.showAlbumsTab);
+    $scope.deleteAlbum = function () {
+        request.deleteAlbum($scope.albums[$scope.albumIndex].collName, $scope.albums[$scope.albumIndex]._id,  $scope.showAlbumsTab);
     $scope.albums.splice($scope.albumIndex, 1);
 $scope.deleteModal= false;
     }
@@ -394,6 +395,10 @@ $scope.deleteModal= false;
     $scope.deleteCityImage = function (collection, id, index) {
         $scope.city.images.splice(index, 1);
         request.deleteCityImage(collection, id, index);
+    }
+
+    $scope.updateAlbumName=function(collName, newName){
+        request.updateAlbumName(collName, newName);
     }
 
 })

@@ -44,12 +44,14 @@
             <div ng-repeat="collection in albums" class="row list-group-item list-group-item-action"
                  data-toggle="list" role="tab" aria-controls="home">
                 <div class="row">
-                    <div class="col-md-4">
-                        <span class="col-7">{{collection.name}}</span>
+                    <div class="col-md-4 pl-0 ml-0" >
+
+                            <input  ng-model="collection.name" ng-change="updateAlbumName(collection.collName, collection.name)">
+
                     </div>
                     <div class="col-md-8 list-album-element-right">
                         <button class="btn btn-info" ng-click="addCity(collection.collName)">add City</button>
-                        <button class="btn btn-primary" ng-click="findImages(collection.collName)">show albums</button>
+                        <button class="btn btn-primary" ng-click="findImages(collection.collName)">show cities</button>
                         <button class="btn btn-danger" ng-click="delete($index, collection.collName, collection._id)">X</button>
                     </div>
                 </div>

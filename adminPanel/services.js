@@ -233,7 +233,7 @@ app.factory('request', function ($http) {
 
         },
 
-        deleteAlbum: function (id, collection, callback) {
+        deleteAlbum: function (collection, id, callback) {
 
 
             $http({
@@ -284,7 +284,15 @@ app.factory('request', function ($http) {
             })
 
 
-    }
+    },
+
+        updateAlbumName: function (collName, newName) {
+
+            $http({
+                method: 'GET',
+                url: "http://tactravels.com:3000/updateAlbumName?collection=" + collName + "&name=" + newName
+            })
+        }
 
 
 
