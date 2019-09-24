@@ -21,7 +21,27 @@ function moveSlow(id, time) {
 }
 
 
-function addGallery(id) {
+function addGallery(collName) {
+
+    $.ajax({
+        type: "GET",
+        url: url + "/findCities",
+        data: {
+            'collection': collName
+
+
+        },
+        success: function (data) {
+
+            showCityCard(data, id);
+
+        }
+    });
+
+
+
+
+
 
     let child = $('#destinationButtons').children();
 
@@ -175,24 +195,10 @@ loadData();
 let reviews = [];
 let stories = [];
 let about={};
+let albums=[];
 
 
 function getData() {
-
-
-
-
-
-   /* $.getJSON("reviewData.json", function (data) {
-        $.each(data, function (key, val) {
-            reviews.push(val);
-
-        });
-
-        changeReview(reviews);
-        addReviewInfo(reviews[0].name, reviews[0].text);
-        choseNavDot(0);
-    })*/
 
 
     $.ajax( {
@@ -244,6 +250,19 @@ success: function (data){
 
         }
     })
+
+    $.ajax({
+        type: 'GET',
+        url: url + "/findAlbum",
+        success: function (data){
+            $.each(data, function (key, val) {
+                albums.push(val);
+
+            })
+
+        }
+    })
+
 
 }
 

@@ -93,17 +93,10 @@
             <h1 class="destinationName">Destination Gallery</h1>
         </div>
     </div>
-    <div id="destinationButtons" class="row destinationBtns">
-        <button id="cruiseBtn" class="destinationBtn buttonHoverEffect" onclick="addGallery('cruiseBtn')">Cruises
+    <div id="destinationButtons" class="row destinationBtns" ng-repeat="album in albums">
+        <button class="destinationBtn buttonHoverEffect" onclick="addGallery(album.collName)">{{album.name}}
         </button>
-        <button id="jamaicaBtn" class="destinationBtn buttonHoverEffect" onclick="addGallery('jamaicaBtn')">Jamaica
-        </button>
-        <button id="mexicoBtn" class="destinationBtn buttonHoverEffect" onclick="addGallery('mexicoBtn')">Mexico
-        </button>
-        <button id="dominicanRepublicBtn" class="destinationBtn buttonHoverEffect"
-                onclick="addGallery('dominicanRepublicBtn')">
-            Dominican Republic
-        </button>
+
 
     </div>
     <div id="imgSection" class="row imageSection">
