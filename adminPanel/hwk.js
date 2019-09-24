@@ -272,9 +272,11 @@ app.controller("AngContr", function ($scope, request, $rootScope) {
         $scope.modal = false;
     }
 
-    $scope.delete = function (albumName, index) {
+    $scope.delete = function (index, collection, id) {
         $scope.albumIndex= index;
         $scope.deleteModal = true;
+        
+
     }
 
     $scope.deleteReview = function (id) {
@@ -322,8 +324,8 @@ app.controller("AngContr", function ($scope, request, $rootScope) {
 
         $scope.albumModal = false;
     }
-    $scope.deleteAlbum = function ( id) {
-        request.deleteAlbum($scope.albumName, id ,  $scope.showAlbumsTab);
+    $scope.deleteAlbum = function ( id, collection) {
+        request.deleteAlbum(collection, id ,  $scope.showAlbumsTab);
     $scope.albums.splice($scope.albumIndex, 1);
 $scope.deleteModal= false;
     }

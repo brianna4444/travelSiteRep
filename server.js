@@ -316,7 +316,7 @@ mongo.connect(config.server.mongoAddress,{ useNewUrlParser: true }, function (er
     /*
     do it by sending id as you did with others
      */
-    app.get("/deleteAlbum", function (req, rsepones) {
+    app.get("/deleteAlbum", function (req, response) {
 
         let id = req.query.id;
         let collName= req.query.collection;
@@ -327,7 +327,9 @@ mongo.connect(config.server.mongoAddress,{ useNewUrlParser: true }, function (er
             if (err) throw err;
 
         });
-
+db.collection.remove(collName, function (err,res) {
+    if (err) throw err;
+})
         response.send("success");
     });
 

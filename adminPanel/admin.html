@@ -50,7 +50,7 @@
                     <div class="col-md-8 list-album-element-right">
                         <button class="btn btn-info" ng-click="addCity(collection.collName)">add City</button>
                         <button class="btn btn-primary" ng-click="findImages(collection.collName)">show albums</button>
-                        <button class="btn btn-danger" ng-click="delete(collection._id, $index)">X</button>
+                        <button class="btn btn-danger" ng-click="delete($index, collection.collName, collection._id)">X</button>
                     </div>
                 </div>
             </div>
@@ -123,7 +123,7 @@
     <div ng-if="deleteModal" class="row" id="deleteModal">
         <p class="col-12">Are you sure you want to delete?</p>
         <button ng-click="closeDeleteModal()" class=" btn btn-info col-6">cancel</button>
-        <button ng-click="deleteAlbum(collection._id)" class="btn btn-danger col-6">delete</button>
+        <button ng-click="deleteAlbum(collection._id, collection.collName )" class="btn btn-danger col-6">delete</button>
     </div>
 </div>
 
