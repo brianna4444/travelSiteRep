@@ -471,6 +471,11 @@ mongo.connect(config.server.mongoAddress, {useNewUrlParser: true}, function (err
 
 
 
-    })
+    });
+
+
+
+
+
 });
 

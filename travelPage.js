@@ -1,18 +1,10 @@
+
+let app = angular.module("AngApp", []);
 let url= "http://tactravels.com:3000";
 
 
 
-$(document).ready(function () {
 
-    $("#cruiseBtn").css("backgroundColor", "orange");
-    let div = $("#imgSection");
-    div.html("Coming Soon!");
-
-    addGallery("cruiseBtn");
-
-
-
-});
 
 function moveSlow(id, time) {
     $('html,body').animate({
@@ -25,7 +17,7 @@ function addGallery(collName) {
 
     $.ajax({
         type: "GET",
-        url: url + "/findCities",
+        url: url + "/findCity",
         data: {
             'collection': collName
 
@@ -33,7 +25,7 @@ function addGallery(collName) {
         },
         success: function (data) {
 
-            showCityCard(data, id);
+            showCityCard(data, collName);
 
         }
     });
@@ -50,8 +42,8 @@ function addGallery(collName) {
     }
 
 
-    $('#' + id).css("background-color", "orange");
-    findCity(id);
+    $('#' + collName).css("background-color", "orange");
+    findCity(collName);
 
 }
 
@@ -113,6 +105,21 @@ function showCityCard(data, id) {
     listDiv[0].appendChild(div);
     }
 }
+
+function showDestinationBtns(){
+    let listDiv= $("#destinationButtons");
+    for (let i=0; i<albums.length; i++){
+        let button= document.createElement("button");
+        button.className= "destinationBtn buttonHoverEffect";
+        button.onclick = function () {
+            addGallery(albums[i].collName)};
+        button.html= albums[i].name;
+        listDiv.append(button);
+    }
+
+}
+
+
 
 function findImages(cityName, id) {
     $.ajax({
@@ -195,229 +202,230 @@ loadData();
 let reviews = [];
 let stories = [];
 let about={};
-let albums=[];
 
 
-function getData() {
+
+    let albums = [];
 
 
-    $.ajax( {
-        type: 'GET',
-        url: url+ "/findReview",
-        success: function(data) {
-            $.each(data, function (key, val) {
-                reviews.push(val);
+    function getData() {
 
+
+        $.ajax({
+            type: 'GET',
+            url: url + "/findReview",
+            success: function (data) {
+                $.each(data, function (key, val) {
+                    reviews.push(val);
+
+                });
+
+                changeReview(reviews);
+                addReviewInfo(reviews[0].name, reviews[0].text);
+                choseNavDot(0);
+            }
+        })
+
+        $.ajax({
+            type: 'GET',
+            url: url + "/findStory",
+            success: function (data) {
+                $.each(data, function (key, val) {
+                    stories.push(val);
+
+                })
+                changeStory(stories);
+                addStoryInfo(stories[0].title, stories[0].text, stories[0].image);
+                choseDot(0);
+            }
+        })
+
+        $.ajax({
+            type: 'GET',
+            url: url + "/findAbout",
+            success: function (data) {
+
+                showAbout(data[0].name, data[0].image, data[0].text, data[0].mission);
+
+            }
+        })
+
+
+        $.ajax({
+            type: 'GET',
+            url: url + "/findContact",
+            success: function (data) {
+
+                showContact(data[0].facebook, data[0].email, data[0].phone);
+
+            }
+        })
+
+        $.ajax({
+            type: 'GET',
+            url: url + "/findAlbums",
+            success: function (data) {
+
+                albums.push(data);
+                showDestinationBtns();
+            }
+
+        })
+    }
+
+        getData();
+
+
+        function changeReview(arr) {
+            let div = $('#circle');
+            for (let i = 0; i < arr.length; i++) {
+
+                let circle = document.createElement("i");
+                circle.className = "fa fa-circle btn navDots";
+
+                circle.onclick = function () {
+                    addReviewInfo(reviews[i].name, reviews[i].text);
+                    choseNavDot(i);
+                };
+                div.append(circle);
+
+            }
+        }
+
+
+        function addReviewInfo(name, text) {
+
+            $('#nameClient').fadeOut("slow", function () {
+                $('#nameClient').empty();
+                $('#nameClient').append(name);
+                $('#nameClient').fadeIn("slow", function () {
+
+                });
             });
 
-            changeReview(reviews);
-            addReviewInfo(reviews[0].name, reviews[0].text);
-            choseNavDot(0);
+            $('#reviewClient').fadeOut("slow", function () {
+                $('#reviewClient').empty();
+                $('#reviewClient').append(text);
+                $('#reviewClient').fadeIn("slow", function () {
+
+                });
+            });
         }
-    })
 
-    $.ajax({
-        type: 'GET',
-        url: url + "/findStory",
-success: function (data){
-    $.each(data, function (key, val) {
-        stories.push(val);
 
-    })
-    changeStory(stories);
-    addStoryInfo(stories[0].title, stories[0].text, stories[0].image);
-    choseDot(0);
-}
-    })
+        function choseDot(num) {
+            let dots = $('#dots').children();           //chose all dots, which are child of #dots
+            for (let i = 0; i < dots.length; i++) {                //remove all orange dots
+                dots[i].classList.remove('chosenDot');
+            }
+            let dot = dots[num];        //chose necessary dot
+            dot.classList.add('chosenDot');     //make it orange
+        }
 
-    $.ajax({
-        type: 'GET',
-        url: url + "/findAbout",
-        success: function (data){
+        function choseNavDot(num) {
+            let dots = $('#circle').children();           //chose all dots, which are child of #dots
+            for (let i = 0; i < dots.length; i++) {                //remove all orange dots
+                dots[i].classList.remove('chosenNavDot');
+            }
+            let dot = dots[num];        //chose necessary dot
+            dot.classList.add('chosenNavDot');     //make it orange
+        }
 
-            showAbout(data[0].name, data[0].image, data[0].text, data[0].mission);
+
+        function changeStory(arr) {
+            let dotsDiv = $('#dots');
+            for (let i = 0; i < arr.length; i++) {
+                let circle = document.createElement("i");
+                circle.className = "fa fa-circle btn navDots";
+                circle.onclick = function () {
+                    addStoryInfo(stories[i].title, stories[i].text, stories[i].image);
+                    choseDot(i);
+                    $('#story').scrollTop(0);
+                };
+                dotsDiv.append(circle);
+
+            }
+
 
         }
-    })
 
+        function setListeneers() {
+            $('#story').hover(function () {
+                let status = $(this).css('overflow-y');
+                if (status == "auto") {
+                    $(this).css('overflow-y', 'hidden');
+                } else {
+                    $(this).css('overflow-y', 'auto');
+                }
+            });
+        };
 
-    $.ajax({
-        type: 'GET',
-        url: url + "/findContact",
-        success: function (data){
+        function addStoryInfo(title, text, image) {
+            $('#story').fadeOut("slow", function () {
+                $('#story').empty();
+                $('#story').append(text);
+                $('#story').fadeIn("slow", function () {
 
-            showContact(data[0].facebook, data[0].email, data[0].phone);
+                });
+            });
+            $('#title').fadeOut("slow", function () {
+                $('#title').empty();
+                $('#title').append(title);
+                $('#title').fadeIn("slow", function () {
 
+                });
+            });
+            let back = $('.infoSection');
+            back.addClass('hideBackground');
+            back.css("background", "url(" + image + ")");
         }
-    })
 
-    $.ajax({
-        type: 'GET',
-        url: url + "/findAlbum",
-        success: function (data){
-            $.each(data, function (key, val) {
-                albums.push(val);
+        setListeneers();
+
+
+        function showAbout(name, image, text, mission) {
+
+
+            $('#mission').text(mission);
+            $('#nameImage').attr("src", image);
+            $('#name').text(name);
+            $('#text').text(text);
+        }
+
+
+        function showContact(facebook, email, phone) {
+
+
+            $('#facebook').text(facebook);
+            $('#email').text(email);
+            $('#phone').text(phone);
+        }
+
+        function sendMessage() {
+            let firstName = $('#form_name').val();
+            let lastName = $('#form_lastname').val();
+            let email = $('#form_email').val();
+            let phone = $('#form_tel').val();
+            let message = $('#form_message').val();
+            $.ajax({
+                type: "GET",
+                url: url + "/postMessage",
+                data: {
+                    'collection': "contactFormMessages",
+                    'firstName': firstName,
+                    'lastName': lastName,
+                    'email': email,
+                    'phone': phone,
+                    'message': message
+
+                },
+                success: function (data) {
+                    alert("Message Sent");
+                    $('.buttonSend').attr("disabled")
+                }
 
             })
 
         }
-    })
 
 
-}
-
-getData();
-
-
-function changeReview(arr) {
-    let div = $('#circle');
-    for (let i = 0; i < arr.length; i++) {
-
-        let circle = document.createElement("i");
-        circle.className = "fa fa-circle btn navDots";
-
-        circle.onclick = function () {
-            addReviewInfo(reviews[i].name, reviews[i].text);
-            choseNavDot(i);
-        };
-        div.append(circle);
-
-    }
-}
-
-
-function addReviewInfo(name, text) {
-
-    $('#nameClient').fadeOut("slow", function () {
-        $('#nameClient').empty();
-        $('#nameClient').append(name);
-        $('#nameClient').fadeIn("slow", function () {
-
-        });
-    });
-
-    $('#reviewClient').fadeOut("slow", function () {
-        $('#reviewClient').empty();
-        $('#reviewClient').append(text);
-        $('#reviewClient').fadeIn("slow", function () {
-
-        });
-    });
-}
-
-
-function choseDot(num) {
-    let dots = $('#dots').children();           //chose all dots, which are child of #dots
-    for (let i = 0; i < dots.length; i++) {                //remove all orange dots
-        dots[i].classList.remove('chosenDot');
-    }
-    let dot = dots[num];        //chose necessary dot
-    dot.classList.add('chosenDot');     //make it orange
-}
-
-function choseNavDot(num) {
-    let dots = $('#circle').children();           //chose all dots, which are child of #dots
-    for (let i = 0; i < dots.length; i++) {                //remove all orange dots
-        dots[i].classList.remove('chosenNavDot');
-    }
-    let dot = dots[num];        //chose necessary dot
-    dot.classList.add('chosenNavDot');     //make it orange
-}
-
-
-function changeStory(arr) {
-    let dotsDiv = $('#dots');
-    for (let i = 0; i < arr.length; i++) {
-        let circle = document.createElement("i");
-        circle.className = "fa fa-circle btn navDots";
-        circle.onclick = function () {
-            addStoryInfo(stories[i].title, stories[i].text, stories[i].image);
-            choseDot(i);
-            $('#story').scrollTop(0);
-        };
-        dotsDiv.append(circle);
-
-    }
-
-
-}
-
-function setListeneers() {
-    $('#story').hover(function () {
-        let status = $(this).css('overflow-y');
-        if (status == "auto") {
-            $(this).css('overflow-y', 'hidden');
-        } else {
-            $(this).css('overflow-y', 'auto');
-        }
-    });
-};
-
-function addStoryInfo(title, text, image) {
-    $('#story').fadeOut("slow", function () {
-        $('#story').empty();
-        $('#story').append(text);
-        $('#story').fadeIn("slow", function () {
-
-        });
-    });
-    $('#title').fadeOut("slow", function () {
-        $('#title').empty();
-        $('#title').append(title);
-        $('#title').fadeIn("slow", function () {
-
-        });
-    });
-    let back = $('.infoSection');
-    back.addClass('hideBackground');
-    back.css("background", "url(" + image + ")");
-}
-
-setListeneers();
-
-
-function showAbout(name, image, text,mission){
-
-
-    $('#mission').text(mission);
-    $('#nameImage').attr("src", image);
-    $('#name').text(name);
-    $('#text').text(text);
-}
-
-
-function showContact(facebook, email, phone){
-
-
-
-    $('#facebook').text(facebook);
-    $('#email').text(email);
-    $('#phone').text(phone);
-}
-
-function sendMessage(){
-    let firstName= $('#form_name').val();
-    let lastName= $('#form_lastname').val();
-    let email= $('#form_email').val();
-    let phone= $('#form_tel').val();
-    let message= $('#form_message').val();
-    $.ajax({
-        type: "GET",
-        url: url + "/postMessage",
-        data: {
-            'collection': "contactFormMessages",
-            'firstName': firstName,
-            'lastName': lastName,
-            'email': email,
-            'phone': phone,
-            'message': message
-
-        },
-        success: function(data){
-            alert("Message Sent");
-            $('.buttonSend').attr("disabled")
-        }
-
-    })
-
-}
