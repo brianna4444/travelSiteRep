@@ -112,8 +112,11 @@ function showDestinationBtns(){
         let button= document.createElement("button");
         button.className= "destinationBtn buttonHoverEffect";
         button.onclick = function () {
-            addGallery(albums[i].collName)};
-        button.html= albums[i].name;
+            addGallery(albums[i].collName);
+            button.setAttribute("style", "background-color: orange;");
+        };
+
+        button.innerHTML= albums[i].name;
         listDiv.append(button);
     }
 
@@ -270,6 +273,14 @@ let about={};
 })
 
                 showDestinationBtns();
+                let divBtns= document.getElementById("destinationButtons");
+                let albumBtns= divBtns.childNodes;
+                let firstBtn= albumBtns[1];
+
+                addGallery(albums[0].collName);
+
+                firstBtn.setAttribute("style", "background-color: orange;");
+                console.log(firstBtn);
             }
 
         })
