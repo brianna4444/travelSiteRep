@@ -265,8 +265,10 @@ let about={};
             type: 'GET',
             url: url + "/findAlbums",
             success: function (data) {
+                $.each(data, function (key,val){
+                    albums.push(val);
+})
 
-                albums.push(data);
                 showDestinationBtns();
             }
 
