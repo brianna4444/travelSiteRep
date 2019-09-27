@@ -1,10 +1,4 @@
-
-let app = angular.module("AngApp", []);
 let url= "http://tactravels.com:3000";
-
-
-
-
 
 function moveSlow(id, time) {
     $('html,body').animate({

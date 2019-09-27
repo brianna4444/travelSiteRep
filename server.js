@@ -5,7 +5,6 @@ let port = config.server.port;
 let fs = require('fs');
 let mongo = require("mongodb").MongoClient;
 let ObjectID = require('mongodb').ObjectID;
-let mongodb = require("mongodb");
 let cors = require("cors");
 let nodemailer = require('nodemailer');
 let multer = require('multer');
@@ -29,14 +28,12 @@ var storage = multer.diskStorage({
         } else if (req.originalUrl == "/updateAbout") {
 
             cb(null, __dirname + "/images")
-        }
-        else if (req.originalUrl == "/updateImages") {
+        } else if (req.originalUrl == "/updateImages") {
             let collName = req.body.collection;
             let city = req.body.city;
             let path = "/images/" + collName + "/" + city;
             cb(null, __dirname + path)
-        }
-        else {                           //You can add any other if else for your different request
+        } else {                           //You can add any other if else for your different request
 
             cb(null, __dirname + '/uploads')
         }
@@ -64,8 +61,7 @@ app.listen(port, function () {
 app.get('/admin', function (req, res) {
     if (checkIfAdmin(req)) {
         res.sendFile(__dirname + '/adminPanel/admin.html');
-    }
-    else {
+    } else {
         let ip = getIp(req);
         res.send("access denied from " + ip);
     }
@@ -80,16 +76,15 @@ function getIp(req) {
 
 function checkIfAdmin(req) {
     let ip = getIp(req);
-    return allowIps.includes(ip);
-    //return true;
+    //return allowIps.includes(ip);
+    return true;
 }
 
 mongo.connect(config.server.mongoAddress, {useNewUrlParser: true}, function (err, client) {
     if (err) {
         console.log("cant connect to server");
         return;
-    }
-    else {
+    } else {
         console.log("connected to DB");
     }
 
@@ -458,23 +453,19 @@ mongo.connect(config.server.mongoAddress, {useNewUrlParser: true}, function (err
         });
     });
 
-    app.get("/updateAlbumName", function (req,response) {
-        let collName= req.query.collection;
-        let newName= req.query.name;
-        let collection= db.collection("albums");
-        let myQuery= {"collName": collName};
-        let newQuery= {$set: {"name": newName}};
+    app.get("/updateAlbumName", function (req, response) {
+        let collName = req.query.collection;
+        let newName = req.query.name;
+        let collection = db.collection("albums");
+        let myQuery = {"collName": collName};
+        let newQuery = {$set: {"name": newName}};
         collection.updateOne(myQuery, newQuery, function (err, res) {
             if (err) throw err;
             response.send();
         })
 
 
-
     });
-
-
-
 
 
 });
