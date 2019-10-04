@@ -1,4 +1,4 @@
-let url= "http://tactravels.com:3000";
+let url= "https://tactravels.com:3000";
 
 function moveSlow(id, time) {
     $('html,body').animate({
