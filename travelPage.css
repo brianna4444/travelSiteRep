@@ -585,3 +585,7 @@ cursor: pointer;
     background-color: yellow !important;
 
 }
+
+.createdBy{
+    color: white
+}
