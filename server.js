@@ -5,15 +5,27 @@ let port = config.server.port;
 let fs = require('fs');
 let mongo = require("mongodb").MongoClient;
 let ObjectID = require('mongodb').ObjectID;
-let mongodb = require("mongodb");
 let cors = require("cors");
 let nodemailer = require('nodemailer');
 let multer = require('multer');
 
+let http = require('http');
+let https = require('https');
+
+//ssl credentials for https
+
+let privateKey = fs.readFileSync(config.server.sslKeyPath, 'utf8');
+let certificate = fs.readFileSync(config.server.sslCertPath, 'utf8');
+let chain = fs.readFileSync(config.server.sslChainPath, 'utf8');
+let httpsCredentials = {
+    key: privateKey,
+    cert: certificate,
+    ca: chain
+};
 //config part
 let allowIps = config.admin.ips;
 
-var storage = multer.diskStorage({
+let storage = multer.diskStorage({
     destination: function (req, file, cb) {
         if (req.originalUrl == "/updateAlbum" || req.originalUrl == "/addNewAlbum") {
             let collName = req.body.collection;
@@ -29,14 +41,12 @@ var storage = multer.diskStorage({
         } else if (req.originalUrl == "/updateAbout") {
 
             cb(null, __dirname + "/images")
-        }
-        else if (req.originalUrl == "/updateImages") {
+        } else if (req.originalUrl == "/updateImages") {
             let collName = req.body.collection;
             let city = req.body.city;
             let path = "/images/" + collName + "/" + city;
             cb(null, __dirname + path)
-        }
-        else {                           //You can add any other if else for your different request
+        } else {                           //You can add any other if else for your different request
 
             cb(null, __dirname + '/uploads')
         }
@@ -48,7 +58,7 @@ var storage = multer.diskStorage({
     }
 });
 
-var upload = multer({storage: storage})
+let upload = multer({storage: storage})
 
 app.use(cors());
 
@@ -57,15 +67,16 @@ app.use('/adminPanel', express.static(__dirname + '/adminPanel/'));
 app.use('/images', express.static(__dirname + '/images/'));
 
 
-app.listen(port, function () {
-    console.log("server is working")
-});
+let httpServer = http.createServer(app);
+httpServer.listen(port+1);
+
+let httpsServer = https.createServer(httpsCredentials, app);
+httpsServer.listen(port);
 
 app.get('/admin', function (req, res) {
     if (checkIfAdmin(req)) {
         res.sendFile(__dirname + '/adminPanel/admin.html');
-    }
-    else {
+    } else {
         let ip = getIp(req);
         res.send("access denied from " + ip);
     }
@@ -80,16 +91,15 @@ function getIp(req) {
 
 function checkIfAdmin(req) {
     let ip = getIp(req);
-    return allowIps.includes(ip);
-    //return true;
+    //return allowIps.includes(ip);
+    return true;
 }
 
 mongo.connect(config.server.mongoAddress, {useNewUrlParser: true}, function (err, client) {
     if (err) {
         console.log("cant connect to server");
         return;
-    }
-    else {
+    } else {
         console.log("connected to DB");
     }
 
@@ -458,23 +468,19 @@ mongo.connect(config.server.mongoAddress, {useNewUrlParser: true}, function (err
         });
     });
 
-    app.get("/updateAlbumName", function (req,response) {
-        let collName= req.query.collection;
-        let newName= req.query.name;
-        let collection= db.collection("albums");
-        let myQuery= {"collName": collName};
-        let newQuery= {$set: {"name": newName}};
+    app.get("/updateAlbumName", function (req, response) {
+        let collName = req.query.collection;
+        let newName = req.query.name;
+        let collection = db.collection("albums");
+        let myQuery = {"collName": collName};
+        let newQuery = {$set: {"name": newName}};
         collection.updateOne(myQuery, newQuery, function (err, res) {
             if (err) throw err;
             response.send();
         })
 
 
-
     });
-
-
-
 
 
 });
