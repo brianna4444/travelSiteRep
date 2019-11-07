@@ -67,6 +67,10 @@ app.controller("AngContr", function ($scope, request, $rootScope) {
     $scope.imageBar = false;
     $scope.city = {};
 
+    $rootScope.addImageToList= function(image){
+        $scope.city.images.push(image)
+    }
+
 
     $scope.goBack = function () {
         if ($scope.showAlbum === true) {
@@ -100,7 +104,7 @@ app.controller("AngContr", function ($scope, request, $rootScope) {
     }
 
 
-    $scope.findImages = function (collection) {
+    $scope.findCities = function (collection) {
         globalCollection = collection;
         $scope.collection = collection;
         request.collectionRequest(collection, function (data) {
@@ -340,10 +344,13 @@ $scope.deleteModal= false;
         let filename = "image";
         urltoFile(strImage, filename).then(function (imageFile) {
 
-           request.addNewCity($scope.collection, name, imageFile, $scope.showAlbumsTab)
+           request.addNewCity($scope.collection, name, imageFile, function (){
+               $scope.findCities($scope.collection)
+           })
         });
 
         $scope.closeModal();
+
     }
     $scope.deleteCity = function (album, id, index) {
         request.deleteCity(album, id);

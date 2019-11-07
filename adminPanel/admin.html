@@ -51,7 +51,7 @@
                     </div>
                     <div class="col-md-8 list-album-element-right">
                         <button class="btn btn-info" ng-click="addCity(collection.collName)">add City</button>
-                        <button class="btn btn-primary" ng-click="findImages(collection.collName)">show cities</button>
+                        <button class="btn btn-primary" ng-click="findCities(collection.collName)">show cities</button>
                         <button class="btn btn-danger" ng-click="delete($index, collection.collName, collection._id)">X</button>
                     </div>
                 </div>
@@ -68,7 +68,7 @@
             <div class="card-body">
                 <input class="form-control" ng-model="city.name">
                 <p class="card-text">There may be information about city</p>
-                <a href="#" class="btn btn-primary" ng-click="showCityImages(city, collection.collName, city._id)">Show city images</a>
+                <a href="#" class="btn btn-primary" ng-click="showCityImages(city, collection, city._id)">Show city images</a>
             </div>
             <ul class="list-group list-group-flush">
                 <li class="list-group-item">
@@ -85,7 +85,7 @@
         <div class="row mt-2" ng-repeat="image in city.images">
 
             <img ng-src="{{image}}">
-            <button ng-click="deleteCityImage(collection.collName, city._id, $index)">delete</button>
+            <button ng-click="deleteCityImage(collection, city._id, $index)">delete</button>
         </div>
         <h2>Image upload</h2>
         <div>

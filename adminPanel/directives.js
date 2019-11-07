@@ -1,21 +1,21 @@
-app.directive("ngFileSelect", function(fileReader, $timeout, $rootScope) {
+app.directive("ngFileSelect", function (fileReader, $timeout, $rootScope) {
     return {
         scope: {
             ngModel: '='
         },
-        link: function($scope, el) {
+        link: function ($scope, el) {
             function getFile(file) {
 
                 fileReader.readAsDataUrl(file, $scope)
-                    .then(function(result) {
-                        $timeout(function() {
+                    .then(function (result) {
+                        $timeout(function () {
                             $scope.ngModel = result;
-                            $rootScope.storeImage= file;
+                            $rootScope.storeImage = file;
                         });
                     });
             }
 
-            el.bind("change", function(e) {
+            el.bind("change", function (e) {
                 var file = (e.srcElement || e.target).files[0];
                 getFile(file);
 
@@ -24,25 +24,25 @@ app.directive("ngFileSelect", function(fileReader, $timeout, $rootScope) {
     };
 });
 
-app.factory("fileReader", function($q, $log) {
-    var onLoad = function(reader, deferred, scope) {
-        return function() {
-            scope.$apply(function() {
+app.factory("fileReader", function ($q, $log) {
+    var onLoad = function (reader, deferred, scope) {
+        return function () {
+            scope.$apply(function () {
                 deferred.resolve(reader.result);
             });
         };
     };
 
-    var onError = function(reader, deferred, scope) {
-        return function() {
-            scope.$apply(function() {
+    var onError = function (reader, deferred, scope) {
+        return function () {
+            scope.$apply(function () {
                 deferred.reject(reader.result);
             });
         };
     };
 
-    var onProgress = function(reader, scope) {
-        return function(event) {
+    var onProgress = function (reader, scope) {
+        return function (event) {
             scope.$broadcast("fileProgress", {
                 total: event.total,
                 loaded: event.loaded
@@ -50,7 +50,7 @@ app.factory("fileReader", function($q, $log) {
         };
     };
 
-    var getReader = function(deferred, scope) {
+    var getReader = function (deferred, scope) {
         var reader = new FileReader();
         reader.onload = onLoad(reader, deferred, scope);
         reader.onerror = onError(reader, deferred, scope);
@@ -58,7 +58,7 @@ app.factory("fileReader", function($q, $log) {
         return reader;
     };
 
-    var readAsDataURL = function(file, scope) {
+    var readAsDataURL = function (file, scope) {
         var deferred = $q.defer();
 
         var reader = getReader(deferred, scope);
@@ -73,117 +73,123 @@ app.factory("fileReader", function($q, $log) {
 });
 
 
-app.directive("imgUpload",function($http,$compile, request){
+app.directive("imgUpload", function ($http, $compile, request, $rootScope) {
     return {
-        restrict : 'AE',
-        scope : {
-            url : "@",
-            method : "@"
+        restrict: 'AE',
+        scope: {
+            url: "@",
+            method: "@"
         },
-        template : 	'<input class="fileUpload" type="file" multiple />'+
-            '<div class="dropzone">'+
-            '<p class="msg">Click or Drag and Drop files to upload</p>'+
-            '</div>'+
-            '<button class="btn" ng-click="uploadAllCityImages()">upload all</button>'+
-            '<div class="preview clearfix">'+
-            '<div class="previewData clearfix" ng-repeat="data in previewData track by $index">'+
-            '<img src={{data.src}}>'+
-            '<div class="previewDetails">'+
-            '<div class="detail"><b>Name : </b>{{data.name}}</div>'+
-            '<div class="detail"><b>Type : </b>{{data.type}}</div>'+
-            '<div class="detail"><b>Size : </b> {{data.size}}</div>'+
-            '</div>'+
-            '<div class="previewControls">'+
-            '<span ng-click="updateNewImage(data)" class="circle upload">'+
-            '<i class="fa fa-check"></i>'+
-            '</span>'+
-            '<span ng-click="remove(data)" class="circle remove">'+
-            '<i class="fa fa-close"></i>'+
-            '</span>'+
-            '</div>'+
-            '</div>'+
+        template: '<input class="fileUpload" type="file" multiple />' +
+            '<div class="dropzone">' +
+            '<p class="msg">Click or Drag and Drop files to upload</p>' +
+            '</div>' +
+            '<button class="btn" ng-click="uploadAllCityImages()">upload all</button>' +
+            '<div class="preview clearfix">' +
+            '<div class="previewData clearfix" ng-repeat="data in previewData track by $index">' +
+            '<img src={{data.src}}>' +
+            '<div class="previewDetails">' +
+            '<div class="detail"><b>Name : </b>{{data.name}}</div>' +
+            '<div class="detail"><b>Type : </b>{{data.type}}</div>' +
+            '<div class="detail"><b>Size : </b> {{data.size}}</div>' +
+            '</div>' +
+            '<div class="previewControls">' +
+            '<span ng-click="updateNewImage(data)" class="circle upload">' +
+            '<i class="fa fa-check"></i>' +
+            '</span>' +
+            '<span ng-click="remove(data)" class="circle remove">' +
+            '<i class="fa fa-close"></i>' +
+            '</span>' +
+            '</div>' +
+            '</div>' +
             '</div>',
-        link : function(scope,elem,attrs){
+        link: function (scope, elem, attrs) {
             var formData = new FormData();
             scope.previewData = [];
 
-            function previewFile(file){
+            function previewFile(file) {
                 var reader = new FileReader();
-                var obj = new FormData().append('file',file);
-                reader.onload=function(data){
+                var obj = new FormData().append('file', file);
+                reader.onload = function (data) {
                     var src = data.target.result;
-                    var size = ((file.size/(1024*1024)) > 1)? (file.size/(1024*1024)) + ' mB' : (file.size/		1024)+' kB';
-                    scope.$apply(function(){
-                        scope.previewData.push({'name':file.name,'size':size,'type':file.type,
-                            'src':src,'data':obj});
+                    var size = ((file.size / (1024 * 1024)) > 1) ? (file.size / (1024 * 1024)) + ' mB' : (file.size / 1024) + ' kB';
+                    scope.$apply(function () {
+                        scope.previewData.push({
+                            'name': file.name, 'size': size, 'type': file.type,
+                            'src': src, 'data': obj
+                        });
                     });
                     console.log(scope.previewData);
                 }
                 reader.readAsDataURL(file);
             }
 
-            function uploadFile(e,type){
+            function uploadFile(e, type) {
                 e.preventDefault();
                 var files = "";
-                if(type == "formControl"){
+                if (type == "formControl") {
                     files = e.target.files;
-                } else if(type === "drop"){
+                } else if (type === "drop") {
                     files = e.originalEvent.dataTransfer.files;
                 }
-                for(var i=0;i<files.length;i++){
+                for (var i = 0; i < files.length; i++) {
                     var file = files[i];
-                    if(file.type.indexOf("image") !== -1){
+                    if (file.type.indexOf("image") !== -1) {
                         previewFile(file);
                     } else {
                         alert(file.name + " is not supported");
                     }
                 }
             }
-            elem.find('.fileUpload').bind('change',function(e){
-                uploadFile(e,'formControl');
+
+            elem.find('.fileUpload').bind('change', function (e) {
+                uploadFile(e, 'formControl');
             });
 
-            elem.find('.dropzone').bind("click",function(e){
+            elem.find('.dropzone').bind("click", function (e) {
                 $compile(elem.find('.fileUpload'))(scope).trigger('click');
             });
 
-            elem.find('.dropzone').bind("dragover",function(e){
+            elem.find('.dropzone').bind("dragover", function (e) {
                 e.preventDefault();
             });
 
-            elem.find('.dropzone').bind("drop",function(e){
-                uploadFile(e,'drop');
+            elem.find('.dropzone').bind("drop", function (e) {
+                uploadFile(e, 'drop');
             });
 
-            scope.updateNewImage= function(data){
+            scope.remove = function (data) {
+                var index = scope.previewData.indexOf(data);
+                scope.previewData.splice(index, 1);
+            };
+
+            scope.updateNewImage = function (data) {
 
                 let strImage = data.src;
                 let filename = "image";
-                let city= globalCity;
+                let city = globalCity;
                 let collection = globalCollection;
                 let id = globalAlbumId;
 
 
                 urltoFile(strImage, filename).then(function (imageFile) {
                     request.updateImages(imageFile, city, collection, id);
+$rootScope.addImageToList(strImage);
+                    scope.remove(data);
 
                 });
 
 
+            };
 
-            scope.remove=function(data){
-                var index= scope.previewData.indexOf(data);
-                scope.previewData.splice(index,1);
-            }
-        }
-
-        scope.uploadAllCityImages= function () {
-                for (let i=0; i<scope.previewData.length; i++){
+            scope.uploadAllCityImages = function () {
+                for (let i = 0; i < scope.previewData.length; i++) {
                     scope.updateNewImage(scope.previewData[i]);
 
                 }
-                scope.previewData=[];
+                scope.previewData = [];
 
+            }
         }
     }
-}});
+});

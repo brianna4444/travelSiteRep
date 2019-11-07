@@ -34,6 +34,7 @@ var storage = multer.diskStorage({
             let collName = req.body.collection;
             let city = req.body.city;
             let path = "/images/" + collName + "/" + city;
+            checkFolderExist(__dirname + path);
             cb(null, __dirname + path)
         }
         else {                           //You can add any other if else for your different request
@@ -84,6 +85,14 @@ function checkIfAdmin(req) {
     //return true;
 }
 
+function checkFolderExist(path){
+    let answer= fs.existsSync(path);
+    if (answer== false){
+        fs.mkdirSync(path)
+    }
+
+}
+
 mongo.connect(config.server.mongoAddress, {useNewUrlParser: true}, function (err, client) {
     if (err) {
         console.log("cant connect to server");
@@ -96,13 +105,14 @@ mongo.connect(config.server.mongoAddress, {useNewUrlParser: true}, function (err
 
     let db = client.db(config.server.database);
 
-    app.get('/findCity', function (req, res) {
+    app.get('/findCity', function (req, response) {
         let collName = req.query.collection;
         let obj = {};
 
         let coll = db.collection(collName);
         coll.find(obj).toArray(function (err, result) {
-            res.send(result);
+            response.status(200);
+            response.send(result);
         });
 
     });
@@ -111,34 +121,37 @@ mongo.connect(config.server.mongoAddress, {useNewUrlParser: true}, function (err
 
         let coll = db.collection("albums");
         coll.find({}).toArray(function (err, result) {
-
+            response.status(200);
             response.send(result);
         })
 
     });
 
-    app.get('/findStory', function (req, res) {
+    app.get('/findStory', function (req, response) {
         let coll = db.collection("stories");
         coll.find({}).toArray(function (err, result) {
-            res.send(result);
+            response.status(200);
+            response.send(result);
         })
     });
 
-    app.get('/findReview', function (req, res) {
+    app.get('/findReview', function (req, response) {
         let coll = db.collection("reviews");
         coll.find({}).toArray(function (err, result) {
-            res.send(result);
+            response.status(200);
+            response.send(result);
         })
     });
 
-    app.get('/findAbout', function (req, res) {
+    app.get('/findAbout', function (req, response) {
         let coll = db.collection("about");
         coll.find({}).toArray(function (err, result) {
-            res.send(result);
+            response.status(200);
+            response.send(result);
         })
     });
 
-    app.get('/findImages', function (req, res) {
+    app.get('/findImages', function (req, response) {
         let collName = req.query.collection;
         let album = req.query.album;
         let obj = {
@@ -147,13 +160,14 @@ mongo.connect(config.server.mongoAddress, {useNewUrlParser: true}, function (err
 
         let coll = db.collection(collName);
         coll.find(obj).toArray(function (err, result) {
-            res.send(result);
+            response.status(200);
+            response.send(result);
         });
 
     });
 
 
-    app.post("/updateAlbum", upload.single("image"), function (req, res) {
+    app.post("/updateAlbum", upload.single("image"), function (req, response) {
         let filename = req.file.filename;
         let name = req.body.name;
         let collName = req.body.collection;
@@ -164,6 +178,8 @@ mongo.connect(config.server.mongoAddress, {useNewUrlParser: true}, function (err
         var newvalues = {$set: {name: name, cityImage: path + "/" + filename}};
         collection.updateOne(myquery, newvalues, function (err, res) {
             if (err) throw err;
+            response.status(200);
+            response.send("");
         });
     });
 
@@ -180,13 +196,14 @@ mongo.connect(config.server.mongoAddress, {useNewUrlParser: true}, function (err
         response.send("");
         collection.updateOne(myquery, newvalues, function (err, res) {
             if (err) throw err;
+            response.status(200);
             response.send("");
         });
 
     });
 
 
-    app.get("/updateReview", function (req, res) {
+    app.get("/updateReview", function (req, response) {
 
         let id = req.query.id;
         let name = req.query.name;
@@ -197,11 +214,13 @@ mongo.connect(config.server.mongoAddress, {useNewUrlParser: true}, function (err
         var newvalues = {$set: {name: name, text: text}};
         collection.updateOne(myquery, newvalues, function (err, res) {
             if (err) throw err;
+            response.status(200);
+            response.send("");
         });
     });
 
 
-    app.post("/updateAbout", upload.single("image"), function (req, res) {
+    app.post("/updateAbout", upload.single("image"), function (req, response) {
         let filename = req.file.filename;
         let name = req.body.name;
         let text = req.body.text;
@@ -213,18 +232,21 @@ mongo.connect(config.server.mongoAddress, {useNewUrlParser: true}, function (err
         var newvalues = {$set: {name: name, image: path + "/" + filename, text: text, mission: mission}};
         collection.updateOne(myquery, newvalues, function (err, res) {
             if (err) throw err;
+            response.status(200);
+            response.send("");
         });
     });
 
 
-    app.get('/findContact', function (req, res) {
+    app.get('/findContact', function (req, response) {
         let coll = db.collection("contact");
         coll.find({}).toArray(function (err, result) {
-            res.send(result);
+            response.status(200);
+            response.send(result);
         })
     });
 
-    app.get("/updateContact", function (req, res) {
+    app.get("/updateContact", function (req, response) {
 
         let id = req.query.id;
         let facebook = req.query.facebook;
@@ -236,6 +258,8 @@ mongo.connect(config.server.mongoAddress, {useNewUrlParser: true}, function (err
         var newvalues = {$set: {facebook: facebook, email: email, phone: phone}};
         collection.updateOne(myquery, newvalues, function (err, res) {
             if (err) throw err;
+            response.status(200);
+            response.send("");
         });
     });
 
@@ -251,6 +275,7 @@ mongo.connect(config.server.mongoAddress, {useNewUrlParser: true}, function (err
         var newvalues = {title: title, text: text, image: path + "/" + filename};
         collection.insertOne(newvalues, function (err, res) {
             if (err) throw err;
+            response.status(200);
             response.send("");
         });
     });
@@ -269,7 +294,8 @@ mongo.connect(config.server.mongoAddress, {useNewUrlParser: true}, function (err
         var newvalues = {name: name, cityImage: path + "/" + filename, images: []};
         collection.insertOne(newvalues, function (err, res) {
             if (err) throw err;
-            response.send("success");
+            response.status(200);
+            response.send("");
         });
     });
 
@@ -284,7 +310,8 @@ mongo.connect(config.server.mongoAddress, {useNewUrlParser: true}, function (err
         var newvalues = {name: name, text: text};
         collection.insertOne(newvalues, function (err, res) {
             if (err) throw err;
-            response.send("success");
+            response.status(200);
+            response.send("");
         });
 
     });
@@ -307,9 +334,11 @@ mongo.connect(config.server.mongoAddress, {useNewUrlParser: true}, function (err
         });
         db.createCollection(album, function (err, res) {
             if (err) throw err;
+            response.status(200);
+            response.send("");
         });
 
-        response.send("success");
+
     });
 
     /*
@@ -329,13 +358,14 @@ mongo.connect(config.server.mongoAddress, {useNewUrlParser: true}, function (err
         db.collection(collName).drop(function (err, res) {
             if (err) throw err;
 
-
+            response.status(200);
+            response.send("");
         })
-        response.send("success");
+
     });
 
 
-    app.get("/deleteStory", function (req, res) {
+    app.get("/deleteStory", function (req, response) {
 
         let id = req.query.id;
         let collection = db.collection("stories");
@@ -343,12 +373,13 @@ mongo.connect(config.server.mongoAddress, {useNewUrlParser: true}, function (err
 
         collection.deleteOne(myquery, function (err, res) {
             if (err) throw err;
-
+            response.status(200);
+            response.send("");
         });
-        res.send("success");
+
     });
 
-    app.get("/deleteReview", function (req, res) {
+    app.get("/deleteReview", function (req, response) {
 
         let id = req.query.id;
         let collection = db.collection("reviews");
@@ -356,11 +387,13 @@ mongo.connect(config.server.mongoAddress, {useNewUrlParser: true}, function (err
 
         collection.remove(myquery, function (err, res) {
             if (err) throw err;
+            response.status(200);
+            response.send("");
         });
-        res.send("success");
+
     });
 
-    app.get("/deleteCity", function (req, res) {
+    app.get("/deleteCity", function (req, response) {
 
         let id = req.query.id;
         let album = req.query.album;
@@ -369,16 +402,17 @@ mongo.connect(config.server.mongoAddress, {useNewUrlParser: true}, function (err
 
         collection.deleteOne(myquery, function (err, res) {
             if (err) throw err;
-
+            response.status(200);
+            response.send("");
         });
-        res.send("success");
+
     });
 
     app.get("/test", function (req, res) {
         res.send("test");
     })
 
-    app.post("/updateImages", upload.single("image"), function (req, res) {
+    app.post("/updateImages", upload.single("image"), function (req, response) {
         let filename = req.file.filename;
         let city = req.body.city;
         let collName = req.body.collection;
@@ -389,6 +423,8 @@ mongo.connect(config.server.mongoAddress, {useNewUrlParser: true}, function (err
         var newvalues = {$addToSet: {"images": path + "/" + filename}};
         collection.updateOne(myquery, newvalues, function (err, res) {
             if (err) throw err;
+            response.status(200);
+            response.send("");
         });
     });
 
@@ -442,7 +478,7 @@ mongo.connect(config.server.mongoAddress, {useNewUrlParser: true}, function (err
 
     })
 
-    app.get("/deleteCityImage", function (req, res) {
+    app.get("/deleteCityImage", function (req, response) {
 
         let index = req.query.index;
         let collName = req.query.collection;
@@ -455,7 +491,10 @@ mongo.connect(config.server.mongoAddress, {useNewUrlParser: true}, function (err
         collection.updateOne(myQuery, removeQuery, function (err, res) {
             if (err) throw err;
             collection.updateOne(myQuery, {$pull: {"images": null}});
+            response.status(200);
+            response.send("deleted");
         });
+
     });
 
     app.get("/updateAlbumName", function (req,response) {
@@ -466,6 +505,7 @@ mongo.connect(config.server.mongoAddress, {useNewUrlParser: true}, function (err
         let newQuery= {$set: {"name": newName}};
         collection.updateOne(myQuery, newQuery, function (err, res) {
             if (err) throw err;
+            response.status(200);
             response.send();
         })
 
