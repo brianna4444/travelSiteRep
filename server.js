@@ -329,14 +329,13 @@ mongo.connect(config.server.mongoAddress, {useNewUrlParser: true}, function (err
             fs.mkdirSync(dir);
         }
         let coll = db.collection("albums");
-        coll.insertOne(obj, function (err, res) {
-            if (err) throw err;
-        });
-        db.createCollection(album, function (err, res) {
+        var newvalues = {name: name, text: text};
+        collection.insertOne(newvalues, function (err, res) {
             if (err) throw err;
             response.status(200);
             response.send("");
         });
+
 
 
     });

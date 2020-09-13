@@ -1,6 +1,6 @@
 let app = angular.module("AngApp", []);
-//let url = "http://tactravels.com:3000";
-let url = "localhost:3000";
+let url = "http://tactravels.com:3000";
+//let url = "localhost:3000";
 
 
 function urltoFile(url, filename, mimeType) {
